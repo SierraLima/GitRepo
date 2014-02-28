@@ -1,0 +1,4 @@
+ # Block External Access
+<Directory "/.git/">
+deny from all
+</Directory>
