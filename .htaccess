@@ -1,4 +1,2 @@
- # Block External Access
-<Directory "/.git/">
-deny from all
-</Directory>
+RedirectMatch 404 /\.git
+
