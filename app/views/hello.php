@@ -1,5 +1,14 @@
 <!doctype html>
 <html lang="en">
+	<?php
+	if(DB::connection()->getDatabaseName())
+	{
+		echo "conncted sucessfully to database ".DB::connection()->getDatabaseName();
+	}
+	else {
+		echo "problem with the database";
+	}
+	?>
 <head>
 	<meta charset="UTF-8">
 	<title>Laravel PHP Framework</title>
