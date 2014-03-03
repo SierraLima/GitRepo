@@ -1,5 +1,6 @@
-<?php include("header.php"); ?>
-<?php include("menu.php"); ?>
+@extends('layouts.master')
+
+@section('content')
 
 <style type="text/css">
 input[type=text], input[type=password] { width: 200px; }
@@ -34,5 +35,4 @@ input[type=text], input[type=password] { width: 200px; }
 		</fieldset>
 	</form>
 
-<?php include("copyright.php"); ?>
-<?php include("footer.php"); ?>
+@stop

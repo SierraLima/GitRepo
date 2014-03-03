@@ -1,5 +1,6 @@
-<?php include("header.php"); ?>
-<?php include("menu.php"); ?>
+@extends('layouts.master')
+
+@section('content')
 
 <style type="text/css">
 .left-table {
@@ -179,5 +180,4 @@
 
 	</div>
 
-<?php include("copyright.php"); ?>
-<?php include("footer.php"); ?>
+@stop

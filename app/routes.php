@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
 
-	return View::make('home');
-});
+Route::controller('users', 'UsersController');
+Route::controller('/', 'HomeController'); // must be last

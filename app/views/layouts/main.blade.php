@@ -10,9 +10,10 @@
 
     <title>Teezy.co | Accueil</title>
 
-<link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ URL::asset('css/jumbotron.css') }}" rel="stylesheet">
-<link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
+
+{{ HTML::style('css/bootstrap.min.css') }}
+{{ HTML::style('css/jumbotron.css') }}
+{{ HTML::style('css/style.css') }}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,17 +33,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">Teezy</a>
+          <a class="navbar-brand" href="{{ action('HomeController@getIndex'); }}">Teezy</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Accueil</a></li>
-            <li><a href="register.php">Inscription</a></li>
-            <li><a href="login.php">Connexion</a></li>
-            <li><a href="profile.php">Profil</a></li>
+            <li class="active">{{ HTML::link('/', 'Accueil') }}</li>
+            <li>{{ HTML::link('users/register', 'Inscription') }}</li>
+            <li>{{ HTML::link('users/login', 'Connexion') }}</li>
+            <li>{{ HTML::link('users/profile', 'Profil') }}</li>
             <li><a href="#">Aide</a></li>
           </ul>
-          <form class="navbar-form navbar-right" role="form" action="search.php">
+          <form class="navbar-form navbar-right" role="form" action="{{ action('SearchController@getIndex'); }}">
             <div class="form-group">
 		<div class="left-inner-addon ">
 			<span class="glyphicon glyphicon-search"></span>
@@ -56,17 +57,7 @@
     </div>
 
 
-        <div class="container">
-            @yield('content')
-        </div>
-
-
-
-
-
-
-
-
+	@yield('content')
 
       <hr>
 
