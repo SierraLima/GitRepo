@@ -3,7 +3,7 @@
 	<?php
 	if(DB::connection()->getDatabaseName())
 	{
-		echo "conncted sucessfully to database ".DB::connection()->getDatabaseName();
+		echo "connwcted sucessfully to database ".DB::connection()->getDatabaseName();
 	}
 	else {
 		echo "problem with the database";
