@@ -12,5 +12,6 @@
 */
 
 
+Route::controller('teetime', 'TeetimeController');
 Route::controller('users', 'UsersController');
 Route::controller('/', 'HomeController'); // must be last

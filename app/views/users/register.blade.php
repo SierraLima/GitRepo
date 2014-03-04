@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" style="padding-top:48px;">
+<legend>Inscription</legend>
 {{ Form::open(array('url'=>'users/create', 'class'=>'form-signup')) }}
-    <h2 class="form-signup-heading">Please Register</h2>
  
     <ul>
         @foreach($errors->all() as $error)

@@ -32,21 +32,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{-- action('HomeController@getIndex'); --}}">Teezy</a>
+          <a class="navbar-brand" href="{{ URL::action('HomeController@getIndex') }}">Teezy</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
 
             <li class="{{Request::path() == '/' ? 'active' : '';}}">{{ HTML::link('/', 'Accueil') }}</li>
 		@if(!Auth::check())
-		    <li class="{{Request::path() == 'users/register' ? 'active' : '';}}">{{ HTML::link('users/register', 'Register') }}</li>   
-		    <li class="{{Request::path() == 'users/login' ? 'active' : '';}}">{{ HTML::link('users/login', 'Login') }}</li>   
+		    <li class="{{Request::path() == 'users/register' ? 'active' : '';}}">{{ HTML::link('users/register', 'Inscription') }}</li>   
+		    <li class="{{Request::path() == 'users/login' ? 'active' : '';}}">{{ HTML::link('users/login', 'Connexion') }}</li>   
 		@else
-		    <li>{{ HTML::link('users/logout', 'logout') }}</li>
+		    <li>{{ HTML::link('users/logout', 'Déconnexion') }}</li>
             	<li class="{{Request::path() == 'users/profile' ? 'active' : '';}}">{{ HTML::link('users/profile', 'Profil') }}</li>
 		@endif
           </ul>
-          <form class="navbar-form navbar-right" role="form" action="">
+          <form class="navbar-form navbar-right" role="form" action="{{ URL::action('TeetimeController@getSearch') }}">
             <div class="form-group">
 		<div class="left-inner-addon ">
 			<span class="glyphicon glyphicon-search"></span>
@@ -59,11 +59,9 @@
       </div>
     </div>
 
-    <div class="container">
         @if(Session::has('message'))
             <p class="alert">{{ Session::get('message') }}</p>
         @endif
-    </div>
 
 {{ $content }}
 

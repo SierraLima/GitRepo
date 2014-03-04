@@ -1,4 +1,3 @@
-<div class="container">
-<h1>Profile</h1>
- 
-<p>Welcome to your profile. You rock!</p>
+<div class="container" style="padding-top:48px;">
+<legend>Profil</legend>
+<p>Bienvenue dans votre profil.</p>
