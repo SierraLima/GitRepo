@@ -6,7 +6,7 @@ class UsersController extends BaseController {
 
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
-		$this->beforeFilter('auth', array('only'=>array('getDashboard')));
+		$this->beforeFilter('auth', array('only'=>array('getProfile')));
 
 	}
 
@@ -48,7 +48,7 @@ class UsersController extends BaseController {
 	public function postSignin() {
 
 		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
-			return Redirect::to('users/dashboard')->with('message', 'You are now logged in!');
+			return Redirect::to('users/profile')->with('message', 'You are now logged in!');
 		} else {
 			return Redirect::to('users/login')
 				->with('message', 'Your username/password combination was incorrect')
@@ -56,8 +56,8 @@ class UsersController extends BaseController {
 		}
 	}
 
-	public function getDashboard() {
-		$this->layout->content = View::make('users.dashboard');
+	public function getProfile() {
+		$this->layout->content = View::make('users.profile');
 
 
 	}
