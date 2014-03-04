@@ -15,10 +15,12 @@ class HomeController extends BaseController {
 	|
 	*/
 
+	protected $layout = "layouts.main";
+
 	// routed from GET request to /users
 	public function getIndex()
 	{
-		return View::make('home');
+		$this->layout->content = View::make('home');
 	}
 
 }
