@@ -25,7 +25,11 @@ class UsersController extends BaseController {
 			$user->firstname = Input::get('firstname');
 			$user->lastname = Input::get('lastname');
 			$user->email = Input::get('email');
+			$user->birthday = Input::get('year') . "-" . Input::get('month') . "-" . Input::get('day');
+			$user->country = Input::get('country');
+			$user->licence = Input::get('licence');
 			$user->password = Hash::make(Input::get('password'));
+
 			$user->save();
 
 			return Redirect::to('users/login')->with('message', 'Thanks for registering!');
@@ -39,7 +43,6 @@ class UsersController extends BaseController {
 		}
 
 	}
-
 
 	public function getLogin() {
 		$this->layout->content = View::make('users.login');
@@ -58,8 +61,6 @@ class UsersController extends BaseController {
 
 	public function getProfile() {
 		$this->layout->content = View::make('users.profile');
-
-
 	}
 
 	public function getLogout() {

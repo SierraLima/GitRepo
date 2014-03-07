@@ -59,11 +59,11 @@
       </div>
     </div>
 
-        @if(Session::has('message'))
-            <p class="alert">{{ Session::get('message') }}</p>
-        @endif
+        <!-- @if(Session::has('message')) -->
+	<!-- <div class="alert alert&#45;danger">{{ Session::get('message') }}</div> -->
+        <!-- @endif -->
 
-{{ $content }}
+	{{ $content }}
 
       <hr>
 

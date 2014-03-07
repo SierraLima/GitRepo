@@ -31,43 +31,134 @@ class ExampleTest extends TestCase {
 		Artisan::call('migrate');
 	}
 
-	/**
-	 * A basic functional test example.
-	 *
-	 * @return void
-	 */
-	public function testBasicExample()
+	public function testApplicationIsRunning()
 	{
 		$crawler = $this->client->request('GET', '/');
 		$this->assertTrue($this->client->getResponse()->isOk());
 	}
 
-	/**
-	 * Username is required
-	 */
 	public function testUserCreationWorks()
 	{
 		// Create a new User
 		$user = new User;
-		$user->firstname = "lala";
-		$user->lastname = "phil";
+		$user->firstname = "John";
+		$user->lastname = "Doe";
 		$user->email = "test@test.ch";
-		$user->licence = "2013-12-27";
-		$user->birthday = "2013-12-27";
-		$user->password = "password";
-		$user->country = "switzerland";
+		$user->licence = "Blabla";
+		$user->birthday = "2012-12-12";
+		$user->password = Hash::make("password");
+		$user->country = "CH";
+
+		// User should save
+		$this->assertTrue($user->save());
+	}
+
+	public function testUserValidationWorks()
+	{
+		$validator = Validator::make(
+			array(
+				'firstname' => 'John',
+				'lastname' => 'Doe',
+				'email' => 'test@test.ch',
+				'licence' => 'Blabla',
+				'day' => '12',
+				'month' => '12',
+				'year' => '2012',
+				'password' => 'password',
+				'password_confirmation' => 'password',
+				'country' => 'CH'
+			),
+			User::$rules
+		);
+
+		if($validator->fails())
+			echo $validator->messages();
+
+		$this->assertTrue($validator->passes());
+
+	}
+
+	public function testEmailIsRequired()
+	{
+		$validator = Validator::make(
+			array(
+				'firstname' => 'John',
+				'lastname' => 'Doe',
+				'email' => '',
+				'licence' => 'Blabla',
+				'day' => '12',
+				'month' => '12',
+				'year' => '2012',
+				'password' => 'password',
+				'password_confirmation' => 'password',
+				'country' => 'CH'
+			),
+			User::$rules
+		);
+
+		$this->assertTrue($validator->fails());
+
+	}
+
+
+	public function testLoginWorks()
+	{
+		// Create a new User
+		$user = new User;
+		$user->firstname = "John";
+		$user->lastname = "Doe";
+		$user->email = "test2@test.ch";
+		$user->licence = "Blabla";
+		$user->birthday = "2012-12-12";
+		$user->password = Hash::make("password");
+		$user->country = "CH";
 
 		// User should save
 		$this->assertTrue($user->save());
 
-		// // Save the errors
-		// $errors = $user->errors()->all();
-                //
-		// // There should be 1 error
-		// $this->assertCount(1, $errors);
-                //
-		// // The username error should be set
-		// $this->assertEquals($errors[0], "The username field is required.");
+		// should login
+		$credentials = array(
+			'email' => 'test2@test.ch',
+			'password' => 'password',
+		);
+
+		$this->assertTrue(Auth::attempt($credentials));
+	}
+
+	public function testLoginFails()
+	{
+		$credentials = array(
+			'email' => 'test@test.ch',
+			'password' => 'password',
+		);
+
+		// we try to login with a user we did not create
+		$this->assertFalse(Auth::attempt($credentials));
+	}
+
+	public function testLoginWithWrongPasswordFails()
+	{
+		// Create a new User
+		$user = new User;
+		$user->firstname = "John";
+		$user->lastname = "Doe";
+		$user->email = "test2@test.ch";
+		$user->licence = "Blabla";
+		$user->birthday = "2012-12-12";
+		$user->password = Hash::make("password");
+		$user->country = "CH";
+
+		// User should save
+		$this->assertTrue($user->save());
+
+		// should login
+		$credentials = array(
+			'email' => 'test2@test.ch',
+			'password' => 'password2',
+		);
+
+		$this->assertFalse(Auth::attempt($credentials));
+
 	}
 
 
