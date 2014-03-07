@@ -1,6 +1,6 @@
 <?php
 
-class TeetimeController extends BaseController {
+class TeetimesController extends BaseController {
 
 	protected $layout = "layouts.main";
 

@@ -12,7 +12,17 @@ class CreateGolfclubsTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('golfclubs', function(Blueprint $table) {
+			$table->increments('id');
+			$table->string('name', 20);
+			$table->string('address', 20);
+			$table->string('email', 100)->unique();
+			$table->string('password', 64);
+			$table->string('place', 20);
+			$table->text('description');
+			$table->string('phonenumber', 20);
+			$table->timestamps();
+		});
 	}
 
 	/**
@@ -22,7 +32,7 @@ class CreateGolfclubsTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('golfclubs');
 	}
 
 }
