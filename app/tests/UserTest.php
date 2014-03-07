@@ -1,6 +1,6 @@
 <?php
 
-class USerTest extends TestCase {
+class UserTest extends TestCase {
 
 	/**
 	 * Default preparation for each test
