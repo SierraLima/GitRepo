@@ -32,18 +32,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ URL::action('HomeController@getIndex') }}">Teezy Intranet</a>
+          <a class="navbar-brand" href="{{ URL::action('GolfClubsController@getIndex') }}">Teezy Intranet</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
 
-            <li class="@if(Request::path() == '/' || Request::path() == 'index') active @endif">{{ HTML::link('/', 'Accueil') }}</li>
+            <li class="@if(Request::path() == 'golfclubs' || Request::path() == 'golfclubs/index') active @endif">{{ HTML::link('golfclubs/', 'Accueil') }}</li>
 		@if(!Auth::check())
-		    <li class="{{Request::path() == 'admin/register' ? 'active' : '';}}">{{ HTML::link('admin/register', 'Inscription') }}</li>   
-		    <li class="{{Request::path() == 'admin/login' ? 'active' : '';}}">{{ HTML::link('admin/login', 'Connexion') }}</li>   
+		    <li class="{{Request::path() == 'golfclubs/register' ? 'active' : '';}}">{{ HTML::link('golfclubs/register', 'Inscription') }}</li>   
+		    <li class="{{Request::path() == 'golfclubs/login' ? 'active' : '';}}">{{ HTML::link('golfclubs/login', 'Connexion') }}</li>   
 		@else
-		    <li>{{ HTML::link('users/logout', 'Déconnexion') }}</li>
-            	<li class="{{Request::path() == 'admin/profile' ? 'active' : '';}}">{{ HTML::link('admin/profile', 'Profil') }}</li>
+		    <li>{{ HTML::link('golfclubs/logout', 'Déconnexion') }}</li>
+            	<li class="{{Request::path() == 'golfclubs/profile' ? 'active' : '';}}">{{ HTML::link('golfclubs/profile', 'Profil') }}</li>
 		@endif
           </ul>
         </div><!--/.nav-collapse -->

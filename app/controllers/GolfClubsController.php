@@ -18,8 +18,38 @@ class GolfClubsController extends BaseController {
 	/**
 	 * return register page
 	 */
+	public function getIndex() {
+		$this->layout->content = View::make('admin.index');
+	}
+	/**
+	 * return register page
+	 */
 	public function getRegister() {
 		$this->layout->content = View::make('admin.register');
+	}
+
+	/**
+	 * return login page
+	 */
+	public function getLogin() {
+		$this->layout->content = View::make('admin.login');
+	}
+
+
+	/**
+	 * return profile page
+	 */
+	public function getProfile() {
+		$this->layout->content = View::make('admin.profile');
+	}
+
+	/**
+	 * return logout page
+	 */
+	public function getLogout() {
+
+		Auth::logout();
+		return Redirect::to('admin/login')->with('message', 'Your are now logged out!');
 	}
 	
 	/**
@@ -52,12 +82,6 @@ class GolfClubsController extends BaseController {
 
 	}
 
-	/**
-	 * return login page
-	 *
-	public function getLogin() {
-		$this->layout->content = View::make('users.login');
-	}
 
 	/**
 	 * action of register the form
@@ -73,21 +97,7 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
-	/**
-	 * return profile page
-	 *
-	public function getProfile() {
-		$this->layout->content = View::make('users.profile');
-	}
+	 */
 
-	/**
-	 * return logout page
-	 *
-	public function getLogout() {
-
-		Auth::logout();
-		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
-
-	}*/
 
 }
