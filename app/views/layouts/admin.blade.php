@@ -32,29 +32,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ URL::action('HomeController@getIndex') }}">Teezy</a>
+          <a class="navbar-brand" href="{{ URL::action('HomeController@getIndex') }}">Teezy Intranet</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
 
             <li class="@if(Request::path() == '/' || Request::path() == 'index') active @endif">{{ HTML::link('/', 'Accueil') }}</li>
 		@if(!Auth::check())
-		    <li class="{{Request::path() == 'users/register' ? 'active' : '';}}">{{ HTML::link('users/register', 'Inscription') }}</li>   
-		    <li class="{{Request::path() == 'users/login' ? 'active' : '';}}">{{ HTML::link('users/login', 'Connexion') }}</li>   
+		    <li class="{{Request::path() == 'admin/register' ? 'active' : '';}}">{{ HTML::link('admin/register', 'Inscription') }}</li>   
+		    <li class="{{Request::path() == 'admin/login' ? 'active' : '';}}">{{ HTML::link('admin/login', 'Connexion') }}</li>   
 		@else
 		    <li>{{ HTML::link('users/logout', 'Déconnexion') }}</li>
-            	<li class="{{Request::path() == 'users/profile' ? 'active' : '';}}">{{ HTML::link('users/profile', 'Profil') }}</li>
+            	<li class="{{Request::path() == 'admin/profile' ? 'active' : '';}}">{{ HTML::link('admin/profile', 'Profil') }}</li>
 		@endif
           </ul>
-          <form class="navbar-form navbar-right" role="form" action="{{ URL::action('TeetimesController@getSearch') }}">
-            <div class="form-group">
-		<div class="left-inner-addon ">
-			<span class="glyphicon glyphicon-search"></span>
-			<i class="icon-user"></i>
-			<input type="text" placeholder="Où voulez-vous jouer ?" class="form-control" size="25" />
-		</div>
-            </div>
-          </form>
         </div><!--/.nav-collapse -->
       </div>
     </div>
