@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
 
-            <li class="{{Request::path() == '/' ? 'active' : '';}}">{{ HTML::link('/', 'Accueil') }}</li>
+            <li class="@if(Request::path() == '/' || Request::path() == 'index') active @endif">{{ HTML::link('/', 'Accueil') }}</li>
 		@if(!Auth::check())
 		    <li class="{{Request::path() == 'users/register' ? 'active' : '';}}">{{ HTML::link('users/register', 'Inscription') }}</li>   
 		    <li class="{{Request::path() == 'users/login' ? 'active' : '';}}">{{ HTML::link('users/login', 'Connexion') }}</li>   

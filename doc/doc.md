@@ -55,12 +55,11 @@ Azure and this is when we realized that we could create a virtual machine
 running Linux. This is what we have done. We chose Ubuntu Server and installed 
 Apache and MySQL on it.
 
-
 ## Migrations
 
 `php artisan migrate` runs what Laravel calls migrations. Each migration 
 contains a modification made to the database. Running them all is necessary to 
-use the website.
+create the database and to use the website.
 
 ## Connect to the server
 
@@ -70,7 +69,9 @@ machine. The password is tfW7LiHK5chSfr
 ## Tests
 
 The tests are located in `app/tests`. To run the suite, type 
-`/vendor/bin/phpunit` at the root of the code source on a Linux machine.
+`/vendor/bin/phpunit` at the root of the code source on a Linux machine. SQLite 
+is currently not installed on the virtual machine therefore the tests must be 
+runned locally.
 
 ## MySQL login
 

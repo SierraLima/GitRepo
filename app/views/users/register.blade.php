@@ -9,7 +9,6 @@
 				<li>{{ $error }}</li>
 			@endforeach
 		</ul>
-		 
 		<div class="form-group">
 			{{ Form::text('firstname', null, array('class'=>'form-control', 'placeholder'=>'First Name')) }}
 		</div>
@@ -24,7 +23,6 @@
 			{{ Form::selectRange('month', 1, 12, null, array('class'=>'form-control')) }}
 			{{ Form::selectRange('year', 1900, 2014, null, array('class'=>'form-control')) }}
 		</div>
-
 		<div class="form-group">
 			{{ Form::select('country', array('CH'=>'Switzerland', 'FR'=>'France'), null, array('class'=>'form-control')) }}
 		</div>
