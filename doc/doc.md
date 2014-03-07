@@ -81,11 +81,10 @@ under the `mysql` section starting at line 55.
 
 ![Use cases](img/use-cases.png)
 
-## TODO
+## Views
 
-- excel sheet agile : product backlog, release plan, burn down, release plan, 
-daily meetings, retrospective
-- description dossiers laravel (includes etc.)
+The main layout of the site is located in `app/views/layouts/main.blade.php`. 
+All other pages extend this layout.
 
 ## Sources
 
