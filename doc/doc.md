@@ -1,10 +1,10 @@
-## Introduction
+## Introduction
 
 The goal of this project is to develop a website that allows its visitors to 
 easily reserve a golf play (a tee-time) in golf clubs in Switzerland, using the 
 SCRUM methodology.
 
-## Specifications
+## Specifications
 
 Mandatory functionalities:
 
@@ -55,31 +55,37 @@ Azure and this is when we realized that we could create a virtual machine
 running Linux. This is what we have done. We chose Ubuntu Server and installed 
 Apache and MySQL on it.
 
-## migrations
 
-php artisan migrate
+## Migrations
 
-## connect to the server
+`php artisan migrate` runs what Laravel calls migrations. Each migration 
+contains a modification made to the database. Running them all is necessary to 
+use the website.
 
-ssh azureuser@teezy-vm.cloudapp.net
-password : tfW7LiHK5chSfr
+## Connect to the server
 
-## tests
+To connect the server type `ssh azureuser@teezy-vm.cloudapp.net` on a Linux 
+machine. The password is tfW7LiHK5chSfr
 
-/vendor/bin/phpunit in teezy-linux/
+## Tests
+
+The tests are located in `app/tests`. To run the suite, type 
+`/vendor/bin/phpunit` at the root of the code source on a Linux machine.
 
 ## MySQL login
 
-username : root
-password : jc0WFdiIjiLX2h
+The database credentials are located in the file `app/config/database.php` 
+under the `mysql` section starting at line 55.
+
+![Architecture](img/architecture.png)
+
+![Use cases](img/use-cases.png)
 
 ## TODO
 
 - excel sheet agile : product backlog, release plan, burn down, release plan, 
 daily meetings, retrospective
-- architecture
 - description dossiers laravel (includes etc.)
-- use case (user types : unidentified, patients, doctors)
 
 ## Sources
 
