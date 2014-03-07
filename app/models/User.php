@@ -5,6 +5,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
+	// define validation rules
 	public static $rules = array(
 		'firstname'=>'required|alpha|min:2',
 		'lastname'=>'required|alpha|min:2',

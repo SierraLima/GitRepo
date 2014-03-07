@@ -4,23 +4,34 @@ class UsersController extends BaseController {
 
 	protected $layout = "layouts.main";
 
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
 		$this->beforeFilter('auth', array('only'=>array('getProfile')));
 
 	}
 
+	/**
+	 * return register page
+	 */
 	public function getRegister() {
 		$this->layout->content = View::make('users.register');
 	}
-
+	
+	/**
+	 * Validate the form of register
+	 */
 	public function postCreate() {
 
 		$validator = Validator::make(Input::all(), User::$rules);
 
 		if ($validator->passes()) {
+				
 			// validation has passed, save user in DB
-
 			$user = new User;
 			$user->firstname = Input::get('firstname');
 			$user->lastname = Input::get('lastname');
@@ -34,20 +45,23 @@ class UsersController extends BaseController {
 
 			return Redirect::to('users/login')->with('message', 'Thanks for registering!');
 
-
-
 		} else {
 			// validation has failed, display error messages    
 			return Redirect::to('users/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
-
 		}
 
 	}
 
+	/**
+	 * return login page
+	 */
 	public function getLogin() {
 		$this->layout->content = View::make('users.login');
 	}
 
+	/**
+	 * action of register the form
+	 */
 	public function postSignin() {
 
 		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
@@ -59,16 +73,21 @@ class UsersController extends BaseController {
 		}
 	}
 
+	/**
+	 * return profile page
+	 */
 	public function getProfile() {
 		$this->layout->content = View::make('users.profile');
 	}
 
+	/**
+	 * return logout page
+	 */
 	public function getLogout() {
 
 		Auth::logout();
 		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
 
 	}
-
 
 }

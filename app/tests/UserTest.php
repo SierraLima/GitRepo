@@ -1,6 +1,6 @@
 <?php
 
-class ExampleTest extends TestCase {
+class USerTest extends TestCase {
 
 	/**
 	 * Default preparation for each test
@@ -110,7 +110,7 @@ class ExampleTest extends TestCase {
 		$user->email = "test2@test.ch";
 		$user->licence = "Blabla";
 		$user->birthday = "2012-12-12";
-		$user->password = Hash::make("password");
+		$user->password = Hash::make("password"); // crypt password
 		$user->country = "CH";
 
 		// User should save
@@ -145,7 +145,7 @@ class ExampleTest extends TestCase {
 		$user->email = "test2@test.ch";
 		$user->licence = "Blabla";
 		$user->birthday = "2012-12-12";
-		$user->password = Hash::make("password");
+		$user->password = Hash::make("password"); // crypt password
 		$user->country = "CH";
 
 		// User should save
@@ -160,6 +160,5 @@ class ExampleTest extends TestCase {
 		$this->assertFalse(Auth::attempt($credentials));
 
 	}
-
 
 }
