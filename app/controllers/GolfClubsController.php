@@ -12,14 +12,13 @@ class GolfClubsController extends BaseController {
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
 		$this->beforeFilter('auth', array('only'=>array('getProfile')));
-
 	}
 
 	/**
 	 * return register page
 	 */
 	public function getIndex() {
-		$this->layout->content = View::make('admin.index');
+		$this->layout->content = View::make('admin.home');
 	}
 	/**
 	 * return register page
@@ -32,7 +31,7 @@ class GolfClubsController extends BaseController {
 	 * return login page
 	 */
 	public function getLogin() {
-		$this->layout->content = View::make('admin.login');
+		$this->layout->content = View::make('login');
 	}
 
 
@@ -49,55 +48,55 @@ class GolfClubsController extends BaseController {
 	public function getLogout() {
 
 		Auth::logout();
-		return Redirect::to('admin/login')->with('message', 'Your are now logged out!');
+		return Redirect::to('login')->with('message', 'Your are now logged out!');
 	}
 	
-	/**
+	/*
 	 * Validate the form of register
+	 */
 	 
 	public function postCreate() {
 
-		$validator = Validator::make(Input::all(), User::$rules);
+		$validator = Validator::make(Input::all(), GolfClub::$rules);
 
 		if ($validator->passes()) {
 				
 			// validation has passed, save user in DB
-			$user = new User;
-			$user->firstname = Input::get('firstname');
-			$user->lastname = Input::get('lastname');
-			$user->email = Input::get('email');
-			$user->birthday = Input::get('year') . "-" . Input::get('month') . "-" . Input::get('day');
-			$user->country = Input::get('country');
-			$user->licence = Input::get('licence');
-			$user->password = Hash::make(Input::get('password'));
+			$golfclub = new GolfClub;
 
-			$user->save();
+			$golfclub->name = Input::get('name');
+			$golfclub->email = Input::get('email');
+			$golfclub->address = Input::get('address');
+			$golfclub->place = Input::get('place');
+			$golfclub->phonenumber = Input::get('phonenumber');
+			$golfclub->description = Input::get('description');
+			$golfclub->password = Hash::make(Input::get('password'));
+			$golfclub->save();
 
-			return Redirect::to('users/login')->with('message', 'Thanks for registering!');
+			return Redirect::to('golfclubs')->with('message', 'Thanks for registering!');
 
 		} else {
 			// validation has failed, display error messages    
-			return Redirect::to('users/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+			return Redirect::to('golfclubs/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
 
 	}
 
 
-	/**
+	/*
 	 * action of register the form
-	 *
+	 */
 	public function postSignin() {
 
 		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
-			return Redirect::to('users/profile')->with('message', 'You are now logged in!');
+			return Redirect::to('golfclubs')->with('message', 'You are now logged in!');
 		} else {
-			return Redirect::to('users/login')
+			return Redirect::to('golfclubs/login')
 				->with('message', 'Your username/password combination was incorrect')
 				->withInput();
 		}
 	}
 
-	 */
 
 
 }

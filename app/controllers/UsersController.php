@@ -43,7 +43,7 @@ class UsersController extends BaseController {
 
 			$user->save();
 
-			return Redirect::to('users/login')->with('message', 'Thanks for registering!');
+			return Redirect::to('login')->with('message', 'Thanks for registering!');
 
 		} else {
 			// validation has failed, display error messages    
@@ -56,7 +56,7 @@ class UsersController extends BaseController {
 	 * return login page
 	 */
 	public function getLogin() {
-		$this->layout->content = View::make('users.login');
+		$this->layout->content = View::make('login');
 	}
 
 	/**
@@ -67,7 +67,7 @@ class UsersController extends BaseController {
 		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
 			return Redirect::to('users/profile')->with('message', 'You are now logged in!');
 		} else {
-			return Redirect::to('users/login')
+			return Redirect::to('login')
 				->with('message', 'Your username/password combination was incorrect')
 				->withInput();
 		}
@@ -86,7 +86,7 @@ class UsersController extends BaseController {
 	public function getLogout() {
 
 		Auth::logout();
-		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
+		return Redirect::to('login')->with('message', 'Your are now logged out!');
 
 	}
 
