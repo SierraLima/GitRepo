@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav">
 
             <li class="@if(Request::path() == '/' || Request::path() == 'index') active @endif">{{ HTML::link('/', 'Accueil') }}</li>
-		@if(!Auth::check())
+		@if(!Auth::user()->check())
 		    <li class="{{Request::path() == 'users/register' ? 'active' : '';}}">{{ HTML::link('users/register', 'Inscription') }}</li>   
 		    <li class="{{Request::path() == 'users/login' ? 'active' : '';}}">{{ HTML::link('users/login', 'Connexion') }}</li>   
 		@else
@@ -59,9 +59,9 @@
       </div>
     </div>
 
-        <!-- @if(Session::has('message')) -->
-	<!-- <div class="alert alert&#45;danger">{{ Session::get('message') }}</div> -->
-        <!-- @endif -->
+        @if(Session::has('message'))
+	<div class="alert alert-danger">{{ Session::get('message') }}</div>
+        @endif
 
 	{{ $content }}
 

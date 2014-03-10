@@ -13,9 +13,9 @@ return array(
 	|
 	| Supported: "database", "eloquent"
 	|
-	*/
+	 */
 
-	'driver' => 'eloquent',
+	//'driver' => 'eloquent',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,9 +26,9 @@ return array(
 	| Eloquent model should be used to retrieve your users. Of course, it
 	| is often just the "User" model but you may use whatever you like.
 	|
-	*/
+	 */
 
-	'model' => 'User',
+	//'model' => 'User',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,9 +39,22 @@ return array(
 	| table should be used to retrieve your users. We have chosen a basic
 	| default value but you may easily change it to any table you like.
 	|
-	*/
+	 */
 
-	'table' => 'users',
+	//'table' => 'users',
+
+
+	// using a multiauth plugin
+	'multi' => array(
+		'golfclub' => array(
+			'driver' => 'eloquent',
+			'model' => 'GolfClub'
+		),
+		'user' => array(
+			'driver' => 'database',
+			'table' => 'users'
+		)
+	),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -56,7 +69,7 @@ return array(
 	| considered valid. This security feature keeps tokens short-lived so
 	| they have less time to be guessed. You may change this as needed.
 	|
-	*/
+	 */
 
 	'reminder' => array(
 

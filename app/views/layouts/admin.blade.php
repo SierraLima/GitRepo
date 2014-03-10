@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav">
 
             <li class="@if(Request::path() == 'golfclubs' || Request::path() == 'golfclubs/index') active @endif">{{ HTML::link('golfclubs/', 'Accueil') }}</li>
-		@if(!Auth::check())
+		@if(!Auth::golfclub()->check())
 		    <li class="{{Request::path() == 'golfclubs/register' ? 'active' : '';}}">{{ HTML::link('golfclubs/register', 'Inscription') }}</li>   
 		    <li class="{{Request::path() == 'golfclubs/login' ? 'active' : '';}}">{{ HTML::link('golfclubs/login', 'Connexion') }}</li>   
 		@else
@@ -50,9 +50,9 @@
       </div>
     </div>
 
-        <!-- @if(Session::has('message')) -->
-	<!-- <div class="alert alert&#45;danger">{{ Session::get('message') }}</div> -->
-        <!-- @endif -->
+        @if(Session::has('message'))
+	<div class="alert alert-danger">{{ Session::get('message') }}</div>
+        @endif
 
 	{{ $content }}
 

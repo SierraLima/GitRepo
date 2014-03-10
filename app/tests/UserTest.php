@@ -31,12 +31,6 @@ class UserTest extends TestCase {
 		Artisan::call('migrate');
 	}
 
-	public function testApplicationIsRunning()
-	{
-		$crawler = $this->client->request('GET', '/');
-		$this->assertTrue($this->client->getResponse()->isOk());
-	}
-
 	public function testUserCreationWorks()
 	{
 		// Create a new User
@@ -122,7 +116,7 @@ class UserTest extends TestCase {
 			'password' => 'password',
 		);
 
-		$this->assertTrue(Auth::attempt($credentials));
+		$this->assertTrue(Auth::user()->attempt($credentials));
 	}
 
 	public function testLoginFails()
@@ -133,7 +127,7 @@ class UserTest extends TestCase {
 		);
 
 		// we try to login with a user we did not create
-		$this->assertFalse(Auth::attempt($credentials));
+		$this->assertFalse(Auth::user()->attempt($credentials));
 	}
 
 	public function testLoginWithWrongPasswordFails()
@@ -157,7 +151,7 @@ class UserTest extends TestCase {
 			'password' => 'password2',
 		);
 
-		$this->assertFalse(Auth::attempt($credentials));
+		$this->assertFalse(Auth::user()->attempt($credentials));
 
 	}
 

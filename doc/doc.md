@@ -87,6 +87,10 @@ under the `mysql` section starting at line 55.
 The main layout of the site is located in `app/views/layouts/main.blade.php`. 
 All other pages extend this layout.
 
+## TODO
+
+https://github.com/ollieread/multiauth
+
 ## Sources
 
 - http://code.tutsplus.com/tutorials/authentication-with-laravel-4--net-35593

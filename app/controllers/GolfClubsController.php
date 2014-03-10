@@ -31,7 +31,7 @@ class GolfClubsController extends BaseController {
 	 * return login page
 	 */
 	public function getLogin() {
-		$this->layout->content = View::make('login');
+		$this->layout->content = View::make('admin.login');
 	}
 
 
@@ -47,8 +47,8 @@ class GolfClubsController extends BaseController {
 	 */
 	public function getLogout() {
 
-		Auth::logout();
-		return Redirect::to('login')->with('message', 'Your are now logged out!');
+		Auth::golfclub()->logout();
+		return Redirect::to('golfclubs/login')->with('message', 'Your are now logged out!');
 	}
 	
 	/*
@@ -88,7 +88,7 @@ class GolfClubsController extends BaseController {
 	 */
 	public function postSignin() {
 
-		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
+		if (Auth::golfclub()->attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
 			return Redirect::to('golfclubs')->with('message', 'You are now logged in!');
 		} else {
 			return Redirect::to('golfclubs/login')
