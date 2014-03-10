@@ -126,29 +126,29 @@ class GolfClub extends TestCase {
 	// 	$this->assertFalse(Auth::golfclub()->attempt($credentials));
 	// }
         //
-	public function testLoginWithWrongPasswordFails()
-	{
-		// Create a golf club
-		$golfclub = new GolfClub;
-		$golfclub->name = "Golf Club de Sion";
-		$golfclub->address = "Rue du golf 1";
-		$golfclub->email = "golf2@club.ch";
-		$golfclub->password = Hash::make("password"); // crypt password
-		$golfclub->place = "Sion";
-		$golfclub->description = "Le meilleur club du Valais";
-		$golfclub->phonenumber = "0790000000";
-
-		// Golf club should save
-		$this->assertTrue($golfclub->save());
-
-		// should login
-		$credentials = array(
-			'email' => 'golf2@club.ch',
-			'password' => 'password2',
-		);
-
-		$this->assertFalse(Auth::golfclub()->attempt($credentials));
-
-	}
+	// public function testLoginWithWrongPasswordFails()
+	// {
+	// 	// Create a golf club
+	// 	$golfclub = new GolfClub;
+	// 	$golfclub->name = "Golf Club de Sion";
+	// 	$golfclub->address = "Rue du golf 1";
+	// 	$golfclub->email = "golf2@club.ch";
+	// 	$golfclub->password = Hash::make("password"); // crypt password
+	// 	$golfclub->place = "Sion";
+	// 	$golfclub->description = "Le meilleur club du Valais";
+	// 	$golfclub->phonenumber = "0790000000";
+        //
+	// 	// Golf club should save
+	// 	$this->assertTrue($golfclub->save());
+        //
+	// 	// should login
+	// 	$credentials = array(
+	// 		'email' => 'golf2@club.ch',
+	// 		'password' => 'password2',
+	// 	);
+        //
+	// 	$this->assertFalse(Auth::golfclub()->attempt($credentials));
+        //
+	// }
 
 }
