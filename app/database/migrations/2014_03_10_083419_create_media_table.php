@@ -12,11 +12,17 @@ class CreateMediaTable extends Migration {
 	 */
 	public function up()
 	{
+
 		Schema::create('media', function(Blueprint $table) {
+			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('url', 50);
-			$table->foreign('fk_idgolfclub')->references('id')->on('golfclubs');
+			$table->unsignedInteger('fk_idgolfclub');
 			$table->timestamps();
+		});
+
+		Schema::table('media', function($table) {
+			$table->foreign('fk_idgolfclub')->references('id')->on('golfclubs');
 		});
 	}
 
@@ -27,7 +33,7 @@ class CreateMediaTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('media');
+		Schema::dropIfExists('media');
 	}
 
 }

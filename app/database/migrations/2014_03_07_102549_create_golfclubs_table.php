@@ -32,7 +32,7 @@ class CreateGolfclubsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('golfclubs');
+		Schema::dropIfExists('golfclubs');
 	}
 
 }
