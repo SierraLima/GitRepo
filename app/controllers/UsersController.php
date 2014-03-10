@@ -77,7 +77,12 @@ class UsersController extends BaseController {
 	 * return profile page
 	 */
 	public function getProfile() {
-		$this->layout->content = View::make('users.profile');
+		if(Auth::user()->check()) {
+			$this->layout->content = View::make('users.profile');
+		}
+		else {
+			return Redirect::to('index')->with('message', 'Your are not authorized to see this page!');
+		}
 	}
 
 	/**

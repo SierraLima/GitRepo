@@ -43,7 +43,8 @@
 		    <li class="{{Request::path() == 'golfclubs/login' ? 'active' : '';}}">{{ HTML::link('golfclubs/login', 'Connexion') }}</li>   
 		@else
 		    <li>{{ HTML::link('golfclubs/logout', 'Déconnexion') }}</li>
-            	<li class="{{Request::path() == 'golfclubs/profile' ? 'active' : '';}}">{{ HTML::link('golfclubs/profile', 'Profil') }}</li>
+            	    <li class="{{Request::path() == 'golfclubs/profile' ? 'active' : '';}}">{{ HTML::link('golfclubs/profile', 'Profil') }}</li>
+		    <li class="{{Request::path() == 'golfclubs/gallery' ? 'active' : '';}}">{{ HTML::link('golfclubs/gallery', 'Gallerie') }}</li>   
 		@endif
           </ul>
         </div><!--/.nav-collapse -->
