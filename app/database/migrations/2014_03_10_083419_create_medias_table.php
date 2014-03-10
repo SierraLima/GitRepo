@@ -12,7 +12,12 @@ class CreateMediaTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('media', function(Blueprint $table) {
+			$table->increments('id');
+			$table->string('url', 50);
+			$table->foreign('fk_idgolfclub')->references('id')->on('golfclubs');
+			$table->timestamps();
+		});
 	}
 
 	/**
@@ -22,7 +27,7 @@ class CreateMediaTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('media')
 	}
 
 }
