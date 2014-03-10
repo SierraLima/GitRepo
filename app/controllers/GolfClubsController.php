@@ -39,7 +39,24 @@ class GolfClubsController extends BaseController {
 	 * return profile page
 	 */
 	public function getProfile() {
-		$this->layout->content = View::make('admin.profile');
+		if(Auth::golfclub()->check()) {
+			$this->layout->content = View::make('admin.profile');
+		}
+		else {
+			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
+	}
+
+	/**
+	 * return gallery
+	 */
+	public function getGallery() {
+		if(Auth::golfclub()->check()) {
+			$this->layout->content = View::make('admin.gallery');
+		}
+		else {
+			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
 	}
 
 	/**
