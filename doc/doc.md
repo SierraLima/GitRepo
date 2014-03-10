@@ -85,14 +85,26 @@ under the `mysql` section starting at line 55.
 ## Views
 
 The main layout of the site is located in `app/views/layouts/main.blade.php`. 
-All other pages extend this layout.
+All other pages shown to clients extend this layout.
 
-## TODO
+The layout for the administration part is located in 
+`app/views/layouts/admin.blade.php`. The other views this site uses are in 
+`app/views/admin`.
 
-https://github.com/ollieread/multiauth
+## Multi Auth
+
+Since Laravel only allows to have one type of users, which we used in our case 
+for the golfers, we had to find how we could be able to allow golf clubs to 
+have access (register, login, logout) to the site but with another database 
+table. We found a plug-in from Ollie Read that does just that. We simply had to 
+rename some methods (`Auth::attempt()` becomes `Auth::golfclub()->attempt()` 
+for instance) and change `app/config/auth.php`. Further modifications need to 
+be done to Laravel to allow password reminders. For more information see Ollie 
+Read's page on GitHub.
 
 ## Sources
 
+- https://github.com/ollieread/multiauth
 - http://code.tutsplus.com/tutorials/authentication-with-laravel-4--net-35593
 - http://culttt.com/2013/05/20/getting-started-with-testing-laravel-4-models/
 - http://bigbitecreative.com/deploying-laravel-4-azure/

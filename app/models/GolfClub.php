@@ -7,14 +7,14 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 
 	// define validation rules
 	public static $rules = array(
-		'name'=>'required|alpha',
-		'address'=>'required|alpha_num',
+		'name'=>'required',
+		'address'=>'required',
 		'email'=>'required|email|unique:golfclubs',
 		'password'=>'required|alpha_num|between:6,12|confirmed',
 		'password_confirmation'=>'required|alpha_num|between:6,12',
-		'place' => 'required|alpha_num',
-		'description' => 'alpha_num',
-		'phonenumber' => 'required|alpha_num'
+		'place' => 'required',
+		'description' => '',
+		'phonenumber' => 'required'
 	);
 
 	/**
