@@ -52,8 +52,11 @@ class GolfClubsController extends BaseController {
 	 * return gallery
 	 */
 	public function getGallery() {
+
+		$media = Auth::golfclub()->get()->media;
+
 		if(Auth::golfclub()->check()) {
-			$this->layout->content = View::make('admin.gallery');
+			$this->layout->content = View::make('admin.gallery')->with('media', $media);
 		}
 		else {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
@@ -122,7 +125,7 @@ class GolfClubsController extends BaseController {
 		$file = Input::file('image');
 		$destinationPath = 'upload/';
 		$extension = $file->getClientOriginalExtension();
-		$filename = sha1(time()).'.'.$extension; // $file->getClientOriginalName();
+		$filename = sha1(time()).'.'.$extension;
 		Input::file('image')->move($destinationPath, $filename);
 		
 		$media->url = $destinationPath.$filename;
