@@ -64,7 +64,7 @@ create the database and to use the website.
 ## Connect to the server
 
 To connect the server type `ssh azureuser@teezy-vm.cloudapp.net` on a Linux 
-machine. The password is tfW7LiHK5chSfr
+machine. Use PuTTY on Windows. The password is tfW7LiHK5chSfr
 
 ## Tests
 
@@ -87,7 +87,7 @@ under the `mysql` section starting at line 55.
 The main layout of the site is located in `app/views/layouts/main.blade.php`. 
 All other pages shown to clients extend this layout.
 
-The layout for the administration part is located in 
+The main layout for the administration part is located in 
 `app/views/layouts/admin.blade.php`. The other views this site uses are in 
 `app/views/admin`.
 

@@ -68,17 +68,17 @@ class GolfClubsController extends BaseController {
 		Auth::golfclub()->logout();
 		return Redirect::to('golfclubs/login')->with('message', 'Your are now logged out!');
 	}
-	
+
 	/*
 	 * Validate the form of register
 	 */
-	 
+
 	public function postCreate() {
 
 		$validator = Validator::make(Input::all(), GolfClub::$rules);
 
 		if ($validator->passes()) {
-				
+
 			// validation has passed, save user in DB
 			$golfclub = new GolfClub;
 
@@ -113,6 +113,26 @@ class GolfClubsController extends BaseController {
 				->with('message', 'Your username/password combination was incorrect')
 				->withInput();
 		}
+	}
+
+	public function postUpload() {
+
+		// validation has passed, save picture in the DB
+		$media = new Media;
+		$file = Input::file('image');
+		$destinationPath = 'upload/';
+		$extension = $file->getClientOriginalExtension();
+		$filename = sha1(time()).'.'.$extension; // $file->getClientOriginalName();
+		Input::file('image')->move($destinationPath, $filename);
+		
+		$media->url = $destinationPath.$filename;
+		$media->fk_idgolfclub = Auth::golfclub()->get()->id;
+
+		if($media->save())
+			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
+		else
+			return Redirect::to('golfclubs/gallery')->with('message', 'An error occured.');
+
 	}
 
 
