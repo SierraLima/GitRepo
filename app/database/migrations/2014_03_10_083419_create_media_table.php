@@ -21,6 +21,7 @@ class CreateMediaTable extends Migration {
 			$table->timestamps();
 		});
 
+		// the table has to be created before we can add a foreign key reference
 		Schema::table('media', function($table) {
 			$table->foreign('fk_idgolfclub')->references('id')->on('golfclubs');
 		});
