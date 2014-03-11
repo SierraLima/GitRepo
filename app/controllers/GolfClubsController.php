@@ -140,7 +140,7 @@ class GolfClubsController extends BaseController {
 		$media = new Media;
 
 
-		$file = Input::file('image') || Request::instance()->getContent()->image;
+		$file = Input::file('image') || Request::instance()->getContent()->image;
 		$destinationPath = 'upload/';
 		$extension = $file->getClientOriginalExtension();
 
