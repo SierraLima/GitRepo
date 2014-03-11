@@ -20,6 +20,7 @@ class GolfClubsController extends BaseController {
 	public function getIndex() {
 		$this->layout->content = View::make('admin.home');
 	}
+	
 	/**
 	 * return register page
 	 */

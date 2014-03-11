@@ -7,7 +7,6 @@ class Media extends Eloquent implements UserInterface, RemindableInterface {
 
 	// define validation rules
 	public static $rules = array(
-		
 	);
 
 	/**
