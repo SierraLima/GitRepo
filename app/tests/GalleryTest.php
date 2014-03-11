@@ -1,4 +1,5 @@
 <?php
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class GalleryTest extends TestCase {
 
