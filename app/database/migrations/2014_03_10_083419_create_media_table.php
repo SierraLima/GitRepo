@@ -16,7 +16,7 @@ class CreateMediaTable extends Migration {
 		Schema::create('media', function(Blueprint $table) {
 			$table->engine = 'InnoDB';
 			$table->increments('id');
-			$table->string('url', 50);
+			$table->string('url', 100);
 			$table->unsignedInteger('fk_idgolfclub');
 			$table->timestamps();
 		});
