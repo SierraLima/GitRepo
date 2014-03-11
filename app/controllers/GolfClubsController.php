@@ -139,8 +139,7 @@ class GolfClubsController extends BaseController {
 		// validation has passed, save picture in the DB
 		$media = new Media;
 
-
-		$file = Input::file('image') || Request::instance()->getContent()->image;
+		$file = Input::file('image');
 		$destinationPath = 'upload/';
 		$extension = $file->getClientOriginalExtension();
 

@@ -43,11 +43,10 @@ class GalleryTest extends TestCase {
 			$mimeType
 		);
 
-		$this -> call (
-			'POST', 
-			'golfclubs/upload', 
-			array('image' => $file)
-		);
+
+		$response = $this->post('GolfClubController@upload', array(
+			'image' => $file
+		));
 
 		$this->assertResponseOk();
 	}
