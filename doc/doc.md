@@ -66,6 +66,9 @@ create the database and to use the website.
 To connect the server type `ssh azureuser@teezy-vm.cloudapp.net` on a Linux 
 machine. Use PuTTY on Windows. The password is tfW7LiHK5chSfr
 
+When connecting to the server, the number of security updates available is 
+shown. Type `sudo apt-get update` to run the update.
+
 ## Tests
 
 The tests are located in `app/tests`. To run the suite, type 

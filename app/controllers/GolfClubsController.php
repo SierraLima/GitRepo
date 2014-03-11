@@ -74,8 +74,13 @@ class GolfClubsController extends BaseController {
 	public function getDelete($id) {
 
 		if (Auth::golfclub()->check()) {
+			// deleting the db record
 			$picture = Media::find($id);
 			$picture->delete();
+
+			// deleting the actual file
+			$url = public_path().'/'.$picture->url;
+			File::delete($url);
 			return Redirect::to('golfclubs/gallery')->with('message', 'The picture has been deleted.');
 		}
 		else {
@@ -136,11 +141,16 @@ class GolfClubsController extends BaseController {
 		$file = Input::file('image');
 		$destinationPath = 'upload/';
 		$extension = $file->getClientOriginalExtension();
-		$filename = sha1(time()).'.'.$extension;
-		Input::file('image')->move($destinationPath, $filename);
 
-		$media->url = $destinationPath.$filename;
-		$media->golf_club_id = Auth::golfclub()->get()->id;
+		if($extension=='jpg'||$extension=='png'||$extension=='gif'||$extension=='jpeg') {
+
+			$filename = sha1(time()).'.'.$extension;
+			Input::file('image')->move($destinationPath, $filename);
+
+			$media->url = $destinationPath.$filename;
+			$media->golf_club_id = Auth::golfclub()->get()->id;
+
+		}
 
 		if($media->save())
 			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
