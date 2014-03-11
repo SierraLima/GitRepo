@@ -40,12 +40,8 @@ class GalleryTest extends TestCase {
 		$file = new UploadedFile(
 			$path . $filename, 
 			$filename,
-			$mimeType,
-			filesize($path.$filename),
-			UPLOAD_ERR_OK,
-			true
+			$mimeType
 		);
-
 
 		$this -> call (
 			'POST', 
