@@ -32,11 +32,13 @@ class GalleryTest extends TestCase {
 		Artisan::call('migrate');
 	}
 
+
 	public function testPhotoUploadIsWorking() {
+
+		// loading the image
 		$path = app_path().'/tests/';
 		$filename = "test.jpg";
 		$mimeType = "image/jpeg";
-
 		$file = new UploadedFile(
 			$path . $filename, 
 			$filename,
@@ -44,11 +46,16 @@ class GalleryTest extends TestCase {
 		);
 
 
-		$response = $this->post('GolfClubController@upload', array(
-			'image' => $file
-		));
+		$mock = Mockery::mock('GolfClubsController');
+		$mock->shouldReceive('upload')->andReturn('foo');
+		$this->app->instance('GolfClubsController', $mock);
 
-		$this->assertResponseOk();
+		Input::replace(['image' => $file]); // populate the querystring
+		$response = $this->call('GET', 'upload');
+
+		$this->assertEquals('foo', $response->getOriginalContent());
+
+
 	}
 
 
