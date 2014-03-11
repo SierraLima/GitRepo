@@ -20,7 +20,7 @@ class GolfClubsController extends BaseController {
 	public function getIndex() {
 		$this->layout->content = View::make('admin.home');
 	}
-	
+
 	/**
 	 * return register page
 	 */
@@ -53,9 +53,8 @@ class GolfClubsController extends BaseController {
 	 */
 	public function getGallery() {
 
-		$media = Auth::golfclub()->get()->media;
-
-		if(Auth::golfclub()->check()) {
+		if (Auth::golfclub()->check()) {
+			$media = Auth::golfclub()->get()->media;
 			$this->layout->content = View::make('admin.gallery')->with('media', $media);
 		}
 		else {
@@ -70,6 +69,18 @@ class GolfClubsController extends BaseController {
 
 		Auth::golfclub()->logout();
 		return Redirect::to('golfclubs/login')->with('message', 'Your are now logged out!');
+	}
+
+	public function getDelete($id) {
+
+		if (Auth::golfclub()->check()) {
+			$picture = Media::find($id);
+			$picture->delete();
+			return Redirect::to('golfclubs/gallery')->with('message', 'The picture has been deleted.');
+		}
+		else {
+			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
 	}
 
 	/*
@@ -127,9 +138,9 @@ class GolfClubsController extends BaseController {
 		$extension = $file->getClientOriginalExtension();
 		$filename = sha1(time()).'.'.$extension;
 		Input::file('image')->move($destinationPath, $filename);
-		
+
 		$media->url = $destinationPath.$filename;
-		$media->fk_idgolfclub = Auth::golfclub()->get()->id;
+		$media->golf_club_id = Auth::golfclub()->get()->id;
 
 		if($media->save())
 			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');

@@ -17,13 +17,13 @@ class CreateMediaTable extends Migration {
 			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('url', 100);
-			$table->unsignedInteger('fk_idgolfclub');
+			$table->unsignedInteger('golf_club_id');
 			$table->timestamps();
 		});
 
 		// the table has to be created before we can add a foreign key reference
 		Schema::table('media', function($table) {
-			$table->foreign('fk_idgolfclub')->references('id')->on('golfclubs');
+			$table->foreign('golf_club_id')->references('id')->on('golfclubs');
 		});
 	}
 

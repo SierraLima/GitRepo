@@ -14,26 +14,13 @@ img { max-width: 200px; height: auto; }
 	</thead>
 
 	<tbody>
-		<tr>
-			<td><img src="http://liguesud.federationdefense.fr/wp-content/uploads/2014/02/Golf-ligue.jpg"/></td>
-			<td><a href="#">Effacer</a></td>
-		</tr>
-		<tr>
-			<td><img src="http://liguesud.federationdefense.fr/wp-content/uploads/2014/02/Golf-ligue.jpg"/></td>
-			<td><a href="#">Effacer</a></td>
-		</tr>
-		<tr>
-			<td><img src="http://liguesud.federationdefense.fr/wp-content/uploads/2014/02/Golf-ligue.jpg"/></td>
-			<td><a href="#">Effacer</a></td>
-		</tr>
-		<tr>
-			<td><img src="http://liguesud.federationdefense.fr/wp-content/uploads/2014/02/Golf-ligue.jpg"/></td>
-			<td><a href="#">Effacer</a></td>
-		</tr>
-		<tr>
-			<td><img src="http://liguesud.federationdefense.fr/wp-content/uploads/2014/02/Golf-ligue.jpg"/></td>
-			<td><a href="#">Effacer</a></td>
-		</tr>
+		@foreach ($media as $picture)
+			<tr>
+				<td><img src="<?php echo URL::to('/').'/'.$picture->url ?>"/></td>
+				<td><a href="<?php echo URL::to('golfclubs').'/delete/'.$picture->id ?>">Effacer</a></td>
+			</tr>
+		@endforeach
+
 	</tbody>
 </table>
 

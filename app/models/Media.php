@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Media {
+class Media extends Eloquent {
 
 	// define validation rules
 	public static $rules = array(
@@ -15,15 +15,15 @@ class Media {
 	 * @var string
 	 */
 	protected $table = 'media';
-	
+
 	/**
 	 * Foreign key about golf clubs
 	 *
 	 * @return foreign
 	 */
 	public function post()
-    {
-        return $this->belongsTo('golfclubs');
-    }
+	{
+		return $this->belongsTo('golfclubs');
+	}
 
 }
