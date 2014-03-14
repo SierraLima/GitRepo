@@ -55,8 +55,6 @@ class GalleryTest extends TestCase {
 
 		$this->assertEquals('foo', $response->getOriginalContent());
 
-
 	}
-
 
 }
