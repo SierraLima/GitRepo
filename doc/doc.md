@@ -55,6 +55,10 @@ Azure and this is when we realized that we could create a virtual machine
 running Linux. This is what we have done. We chose Ubuntu Server and installed 
 Apache and MySQL on it.
 
+\newpage
+
+![Architecture](img/architecture.png)
+
 ## Migrations
 
 `php artisan migrate` runs what Laravel calls migrations. Each migration 
@@ -81,10 +85,6 @@ runned locally.
 The database credentials are located in the file `app/config/database.php` 
 under the `mysql` section starting at line 55.
 
-![Architecture](img/architecture.png)
-
-![Use cases](img/use-cases.png)
-
 ## Views
 
 The main layout of the site is located in `app/views/layouts/main.blade.php`. 
@@ -104,6 +104,8 @@ rename some methods (`Auth::attempt()` becomes `Auth::golfclub()->attempt()`
 for instance) and change `app/config/auth.php`. Further modifications need to 
 be done to Laravel to allow password reminders. For more information see Ollie 
 Read's page on GitHub.
+
+![Use cases](img/use-cases.png)
 
 ## Sources
 

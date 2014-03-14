@@ -151,4 +151,77 @@ class GolfClubTest extends TestCase {
 
 	}
 
+	public function testLoginFailsWithCrawler() {
+		// Perform user login.
+		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
+		$crawler = $this->client->request('GET', '/golfclubs/login');
+		$form = $crawler->selectButton('Login')->form();
+		$this->client->submit($form, array('email' => 'test@test2.ch', 'password' => 'password'));
+		$crawler = $this->client->followRedirect(true);
+		$this->assertCount(1, $crawler->filter('div:contains("incorrect")'));
+	}
+
+	public function testLoginSucceedsWithCrawler() {
+		$golfclub = new GolfClub;
+		$golfclub->name = "Golf Club de Sion";
+		$golfclub->address = "Rue du golf 1";
+		$golfclub->email = "test@test.ch";
+		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->place = "Sion";
+		$golfclub->description = "Le meilleur club du Valais";
+		$golfclub->phonenumber = "0790000000";
+		$golfclub->save();
+
+		// Perform user login.
+		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
+		$crawler = $this->client->request('GET', '/golfclubs/login');
+		$form = $crawler->selectButton('Login')->form();
+		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'password'));
+		$crawler = $this->client->followRedirect(true);
+		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
+	}
+
+	public function testUpdateProfileIsWorking() {
+		$golfclub = new GolfClub;
+		$golfclub->name = "Golf Club de Sion";
+		$golfclub->address = "Rue du golf 1";
+		$golfclub->email = "test@test.ch";
+		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->place = "Sion";
+		$golfclub->description = "Le meilleur club du Valais";
+		$golfclub->phonenumber = "0790000000";
+		$golfclub->save();
+
+		// Perform user login.
+		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
+		$crawler = $this->client->request('GET', '/golfclubs/login');
+		$form = $crawler->selectButton('Login')->form();
+		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'password'));
+		$crawler = $this->client->followRedirect(true);
+		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
+
+		// go to the profile
+		$crawler = $this->client->request('GET', 'golfclubs/profile');
+		$form = $crawler->selectButton('Update')->form();
+
+		$form->setValues(array(
+			'name'    => 'Somewhere 23',
+			'email'    => 'test@test.ch',
+			'address'    => 'Someren',
+			'place'    => 'Netherlands',
+			'phonenumber'    => 'Netherlands',
+			'password' => 'password',
+			'password_confirmation'    => 'password',
+			'description'    => 'Netherlands'
+		));
+
+		$crawler = $this->client->submit($form);
+		$crawler = $this->client->followRedirect(true);
+		$this->assertCount(1, $crawler->filter('div:contains("updated")'));
+
+		$golfClubDB = GolfClub::find(1);
+		$this->assertEquals($golfClubDB->email, 'test@test.ch');
+		$this->assertEquals($golfClubDB->address, 'Someren');
+	}
+
 }

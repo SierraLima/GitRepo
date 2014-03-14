@@ -2,7 +2,7 @@
 
 	<legend>Profil</legend>
 
-	{{ Form::model($golfclub, array('route' => array('golfclubs/update', $golfclub->id))) }}
+	{{ Form::model($golfclub, array('url' => array('golfclubs/update', $golfclub->id))) }}
 	 
 		<ul>
 			@foreach($errors->all() as $error)
@@ -34,6 +34,6 @@
 			{{ Form::textarea('description', null, array('class'=>'form-control', 'placeholder'=>'Description')) }}
 		</div>
 
-		{{ Form::submit('Register', array('class'=>'btn btn-block btn-primary btn-default'))}}
+		{{ Form::submit('Update', array('class'=>'btn btn-block btn-primary btn-default'))}}
 
 	{{ Form::close() }}
