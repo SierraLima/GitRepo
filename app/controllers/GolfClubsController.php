@@ -41,10 +41,40 @@ class GolfClubsController extends BaseController {
 	 */
 	public function getProfile() {
 		if(Auth::golfclub()->check()) {
-			$this->layout->content = View::make('admin.profile');
+			$this->layout->content = View::make('admin.profile')->with('golfclub', Auth::golfclub()->get());
 		}
 		else {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
+	}
+
+	public function postUpdate($id) {
+
+		// fixing laravel unique issue
+		$rules = GolfClub::$rules;
+		$rules['email'] = 'required|email|unique:golfclubs,email,'.$id;
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+
+			// validation has passed, save user in DB
+			$golfclub = GolfClub::find($id);
+
+			$golfclub->name = Input::get('name');
+			$golfclub->email = Input::get('email');
+			$golfclub->address = Input::get('address');
+			$golfclub->place = Input::get('place');
+			$golfclub->phonenumber = Input::get('phonenumber');
+			$golfclub->description = Input::get('description');
+			$golfclub->password = Hash::make(Input::get('password'));
+			$golfclub->update();
+
+			return Redirect::to('golfclubs')->with('message', 'Your profile has been updated.');
+
+		} else {
+			// validation has failed, display error messages    
+			return Redirect::to('golfclubs/profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
 	}
 
