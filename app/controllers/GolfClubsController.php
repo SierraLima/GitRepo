@@ -6,8 +6,6 @@ class GolfClubsController extends BaseController {
 
 	/**
 	 * The database table used by the model.
-	 *
-	 * @var string
 	 */
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
@@ -15,7 +13,7 @@ class GolfClubsController extends BaseController {
 	}
 
 	/**
-	 * return register page
+	 * return home page
 	 */
 	public function getIndex() {
 		$this->layout->content = View::make('admin.home');
@@ -48,6 +46,11 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
+	/**
+	 * update profile page
+	 * 
+	 * @param id -> int to identify a golfclub
+	 */
 	public function postUpdate($id) {
 
 		// fixing laravel unique issue
@@ -79,7 +82,7 @@ class GolfClubsController extends BaseController {
 	}
 
 	/**
-	 * return gallery
+	 * return gallery page
 	 */
 	public function getGallery() {
 
@@ -101,6 +104,11 @@ class GolfClubsController extends BaseController {
 		return Redirect::to('golfclubs/login')->with('message', 'Your are now logged out!');
 	}
 
+	/**
+	 * return delete page
+	 * 
+	 * @param id -> int to delete a media
+	 */
 	public function getDelete($id) {
 
 		if (Auth::golfclub()->check()) {
@@ -118,10 +126,9 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
-	/*
-	 * Validate the form of register
+	/**
+	 * validate the form of register
 	 */
-
 	public function postCreate() {
 
 		$validator = Validator::make(Input::all(), GolfClub::$rules);
@@ -149,8 +156,7 @@ class GolfClubsController extends BaseController {
 
 	}
 
-
-	/*
+	/**
 	 * action of register the form
 	 */
 	public function postSignin() {
@@ -164,6 +170,9 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
+	/**
+	 * action of upload an image
+	 */
 	public function postUpload() {
 
 		// validation has passed, save picture in the DB
@@ -189,7 +198,5 @@ class GolfClubsController extends BaseController {
 			return Redirect::to('golfclubs/gallery')->with('message', 'An error occured.');
 
 	}
-
-
 
 }

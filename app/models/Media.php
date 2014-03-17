@@ -21,7 +21,7 @@ class Media extends Eloquent {
 	 *
 	 * @return foreign
 	 */
-	public function post()
+	public function golfclub()
 	{
 		return $this->belongsTo('golfclubs');
 	}

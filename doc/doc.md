@@ -80,6 +80,13 @@ The tests are located in `app/tests`. To run the suite, type
 is currently not installed on the virtual machine therefore the tests must be 
 runned locally.
 
+We have some problems to test and simulate a file uploading. We try to simulate
+it with mockery but the problems wasn't resolve. After that we try to follow a
+tutoriel on jasonfunk.net (link bellow) and we have discover that an method in
+FileUploader class isn't simulated. One solution is to nut "Input::file()" but
+we need it. Aftet past 5 hours on this test, we decide to remplace that one
+by some others test.
+
 ## MySQL login
 
 The database credentials are located in the file `app/config/database.php` 
@@ -116,3 +123,4 @@ Read's page on GitHub.
 - http://getbootstrap.com
 - http://laravel.com
 - http://www.windowsazure.com/
+- http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/

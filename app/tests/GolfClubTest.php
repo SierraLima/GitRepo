@@ -35,6 +35,7 @@ class GolfClubTest extends TestCase {
 	{
 		// Create a golf club
 		$golfclub = new GolfClub;
+		
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "golf@club.ch";
@@ -67,7 +68,6 @@ class GolfClubTest extends TestCase {
 			echo $validator->messages();
 
 		$this->assertTrue($validator->passes());
-
 	}
 
 	public function testEmailIsRequired()
@@ -87,14 +87,13 @@ class GolfClubTest extends TestCase {
 		);
 
 		$this->assertTrue($validator->fails());
-
 	}
-
 
 	public function testLoginWorks()
 	{
 		// Create a golf club
 		$golfclub = new GolfClub;
+		
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "golf@club.ch";
@@ -130,6 +129,7 @@ class GolfClubTest extends TestCase {
 	{
 		// Create a golf club
 		$golfclub = new GolfClub;
+		
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "golf2@club.ch";
@@ -148,21 +148,26 @@ class GolfClubTest extends TestCase {
 		);
 
 		$this->assertFalse(Auth::golfclub()->attempt($credentials));
-
 	}
 
-	public function testLoginFailsWithCrawler() {
+	public function testLoginFailsWithCrawler()
+	{
 		// Perform user login.
 		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
 		$crawler = $this->client->request('GET', '/golfclubs/login');
 		$form = $crawler->selectButton('Login')->form();
 		$this->client->submit($form, array('email' => 'test@test2.ch', 'password' => 'password'));
 		$crawler = $this->client->followRedirect(true);
+		
+		// Test that one div: contains incorrect
 		$this->assertCount(1, $crawler->filter('div:contains("incorrect")'));
 	}
 
-	public function testLoginSucceedsWithCrawler() {
+	public function testLoginSucceedsWithCrawler()
+	{	
+		// Create a golf club		
 		$golfclub = new GolfClub;
+		
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "test@test.ch";
@@ -178,11 +183,16 @@ class GolfClubTest extends TestCase {
 		$form = $crawler->selectButton('Login')->form();
 		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'password'));
 		$crawler = $this->client->followRedirect(true);
+		
+		// Test that one div: contains logged in
 		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
 	}
 
-	public function testUpdateProfileIsWorking() {
+	public function testUpdateProfileIsWorking()
+	{
+		// Create a golf club
 		$golfclub = new GolfClub;
+		
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "test@test.ch";
@@ -198,6 +208,8 @@ class GolfClubTest extends TestCase {
 		$form = $crawler->selectButton('Login')->form();
 		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'password'));
 		$crawler = $this->client->followRedirect(true);
+		
+		// Test that one div: contains logged in
 		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
 
 		// go to the profile
@@ -217,9 +229,13 @@ class GolfClubTest extends TestCase {
 
 		$crawler = $this->client->submit($form);
 		$crawler = $this->client->followRedirect(true);
+		
+		// Test that one div: contains updated
 		$this->assertCount(1, $crawler->filter('div:contains("updated")'));
 
 		$golfClubDB = GolfClub::find(1);
+		
+		// Tests Equalities
 		$this->assertEquals($golfClubDB->email, 'test@test.ch');
 		$this->assertEquals($golfClubDB->address, 'Someren');
 	}

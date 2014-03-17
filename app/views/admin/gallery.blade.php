@@ -1,4 +1,5 @@
 <div class="container" style="padding-top:48px;">
+
 <legend>Gallerie</legend>
 
 <style type="text/css">
