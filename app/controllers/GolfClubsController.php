@@ -52,7 +52,7 @@ class GolfClubsController extends BaseController {
 
 		// fixing laravel unique issue
 		$rules = GolfClub::$rules;
-		$rules['email'] = 'required|email|unique:golfclubs,email,'.$id;
+		$rules['email'] = $rules['email'].','.$id;
 
 		$validator = Validator::make(Input::all(), $rules);
 
