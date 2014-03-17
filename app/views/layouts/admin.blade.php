@@ -19,6 +19,8 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   </head>
 
   <body>
@@ -44,6 +46,7 @@
 		@else
 		    <li>{{ HTML::link('golfclubs/logout', 'Déconnexion') }}</li>
             	    <li class="{{Request::path() == 'golfclubs/profile' ? 'active' : '';}}">{{ HTML::link('golfclubs/profile', 'Profil') }}</li>
+            	    <li class="{{Request::path() == 'golfclubs/teetimes' ? 'active' : '';}}">{{ HTML::link('golfclubs/teetimes', 'Tee-times') }}</li>
 		    <li class="{{Request::path() == 'golfclubs/gallery' ? 'active' : '';}}">{{ HTML::link('golfclubs/gallery', 'Gallerie') }}</li>   
 		@endif
           </ul>
@@ -63,11 +66,5 @@
         <p>&copy; Teezy 2014</p>
       </footer>
     </div> <!-- /container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   </body>
 </html>

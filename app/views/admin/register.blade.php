@@ -30,9 +30,6 @@
 		<div class="form-group">
 			{{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>'Confirm Password')) }}
 		</div>
-		<div class="form-group">
-			{{ Form::textarea('description', null, array('class'=>'form-control', 'placeholder'=>'Description')) }}
-		</div>
 
 		{{ Form::submit('Register', array('class'=>'btn btn-block btn-primary btn-default'))}}
 

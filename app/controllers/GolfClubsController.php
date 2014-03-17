@@ -95,6 +95,16 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
+	public function getTeetimes() {
+
+		if (Auth::golfclub()->check()) {
+			$this->layout->content = View::make('admin.teetimes');
+		}
+		else {
+			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
+	}
+
 	/**
 	 * return logout page
 	 */
@@ -143,7 +153,6 @@ class GolfClubsController extends BaseController {
 			$golfclub->address = Input::get('address');
 			$golfclub->place = Input::get('place');
 			$golfclub->phonenumber = Input::get('phonenumber');
-			$golfclub->description = Input::get('description');
 			$golfclub->password = Hash::make(Input::get('password'));
 			$golfclub->save();
 
