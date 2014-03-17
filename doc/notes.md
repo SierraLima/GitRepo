@@ -10,11 +10,13 @@
 variables to Auth::attempt(). That method requires an array with keys username, 
 password and optionally remember.
 
-## TODO
-
-- administrateur : voit un tableau de tous les tee-times
-
 ## Inspiration
 
 - rbnb.fr
 - golfhub.com
+
+## Admin tee-times
+
+- de 7 à 22h
+- admin -> pas mobile
+- prix spécifiques à chaque golfclub
