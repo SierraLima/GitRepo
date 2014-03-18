@@ -23,7 +23,7 @@ class Media extends Eloquent {
 	 */
 	public function golfclub()
 	{
-		return $this->belongsTo('golfclubs');
+		return $this->belongsTo('GolfClub');
 	}
 
 }

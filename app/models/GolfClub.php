@@ -68,7 +68,7 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function media()
 	{
-		return $this->hasMany('media');
+		return $this->hasMany('Media');
 	}
 
 }

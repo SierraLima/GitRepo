@@ -87,7 +87,7 @@ class GolfClubsController extends BaseController {
 	public function getGallery() {
 
 		if (Auth::golfclub()->check()) {
-			$media = Auth::golfclub()->get()->Media();
+			$media = Auth::golfclub()->get()->media;
 			$this->layout->content = View::make('admin.gallery')->with('media', $media);
 		}
 		else {
