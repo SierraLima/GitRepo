@@ -114,6 +114,17 @@ Read's page on GitHub.
 
 ![Use cases](img/use-cases.png)
 
+## Sprint 1
+
+For this Sprint we have validate the US1,2 and 3 and the US 4 added at the
+middle of the sprint is to finish on Sprint 2. Some tasks was a little too
+high evaluated we will try to better evaluate tasks for nexts sprints. We 
+have to correct some little things on formular
+
+On sprint retrospective we decide to take more story point for the sprint 2 (21).
+And we have a new ressouve for the developement team (Kévin Kreuzer). We have 
+revaluate the US5 to 13 story point. We taked US4,5 and 6 for the Sprint 2.
+
 ## Sources
 
 - https://github.com/ollieread/multiauth
