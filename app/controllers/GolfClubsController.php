@@ -200,11 +200,11 @@ class GolfClubsController extends BaseController {
 			$media->golf_club_id = Auth::golfclub()->get()->id;
 
 		}
+		else
+			return Redirect::to('golfclubs/gallery')->with('message', 'An error occured.');
 
 		if($media->save())
 			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
-		else
-			return Redirect::to('golfclubs/gallery')->with('message', 'An error occured.');
 
 	}
 

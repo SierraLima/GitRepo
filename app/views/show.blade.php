@@ -5,15 +5,17 @@
 img { max-width: 200px; height: auto; }
 </style>
 
-@foreach ($media as $picture)
-	<img src="<?php echo URL::to('/').'/'.$picture->url ?>"/>
-@endforeach
+@if(count($media)==1)
+	@foreach ($media as $picture)
+		<img src="<?php echo URL::to('/').'/'.$picture->url ?>"/>
+	@endforeach
 
 <hr />
+@endif
 
-name : {{{ $name }}} <br />
-address : {{{ $address }}} <br />
-email : {{{ $email }}} <br />
-description : {{{ $description }}} <br />
-place : {{{ $place }}} <br />
-phonenumber : {{{ $phonenumber }}} <br />
+Name: {{{ $name }}} <br />
+Address: {{{ $address }}} <br />
+Email: {{{ $email }}} <br />
+Description: {{{ $description }}} <br />
+Place: {{{ $place }}} <br />
+Phone number: {{{ $phonenumber }}} <br />
