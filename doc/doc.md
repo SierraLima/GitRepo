@@ -83,7 +83,7 @@ runned locally.
 We have some problems to test and simulate a file uploading. We try to simulate
 it with mockery but the problems wasn't resolve. After that we try to follow a
 tutoriel on jasonfunk.net (link bellow) and we have discover that an method in
-FileUploader class isn't simulated. One solution is to nut "Input::file()" but
+FileUploader class isn't simulated. One solution is to not use "Input::file()" but
 we need it. Aftet past 5 hours on this test, we decide to remplace that one
 by some others test.
 
@@ -117,12 +117,11 @@ Read's page on GitHub.
 ## Sprint 1
 
 For this Sprint we have validate the US1, 2 and 3 and the US 4 added at the
-middle of the sprint is to finish on Sprint 2. Some tasks was a little too
-high evaluated we will try to better evaluate tasks for next sprints. We have 
+middle of the sprint will finish on Sprint 2. Some tasks was a little too
+high evaluated we will try to better evaluate tasks for next sprints. We must 
 also corrected some little things on the golfclub registration page.
 
-On sprint retrospective we decide to take more story point for the sprint 2 
-(21).
+On sprint retrospective we decide to take more story point for the sprint 2(21).
 And we have a new ressouve for the developement team (Kevin Kreuzer). We have 
 revaluated the US5 to 13 story point. We took US4, 5 and 6 for the Sprint 2.
 
@@ -135,5 +134,4 @@ revaluated the US5 to 13 story point. We took US4, 5 and 6 for the Sprint 2.
 - http://getbootstrap.com
 - http://laravel.com
 - http://www.windowsazure.com/
-- 
-http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/
+- http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/
