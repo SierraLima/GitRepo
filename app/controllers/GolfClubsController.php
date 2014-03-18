@@ -201,6 +201,8 @@ class GolfClubsController extends BaseController {
 		{
 			$destinationPath = 'upload/';
 
+			$file = Input::file('image');
+			$extension = $file->getClientOriginalExtension();
 			$filename = sha1(time()).'.'.$extension;
 			Input::file('image')->move($destinationPath, $filename);
 
