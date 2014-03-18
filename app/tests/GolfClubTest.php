@@ -238,6 +238,10 @@ class GolfClubTest extends TestCase {
 		// Tests Equalities
 		$this->assertEquals($golfClubDB->email, 'test@test.ch');
 		$this->assertEquals($golfClubDB->address, 'Someren');
+
+		// testing that the public page shows the correct information
+		$crawler = $this->client->request('GET', 'show/1');
+		$this->assertCount(1, $crawler->filter('html:contains("Someren")'));
 	}
 
 }

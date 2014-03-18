@@ -187,7 +187,11 @@ class GolfClubsController extends BaseController {
 		// validation has passed, save picture in the DB
 		$media = new Media;
 
-		$file = Input::file('image');
+		if(Input::has('image'))
+			$file = Input::file('image');
+		else
+			return Redirect::to('golfclubs/gallery')->with('message', 'You didn\'t choose a file.');
+
 		$destinationPath = 'upload/';
 		$extension = $file->getClientOriginalExtension();
 
@@ -201,10 +205,12 @@ class GolfClubsController extends BaseController {
 
 		}
 		else
-			return Redirect::to('golfclubs/gallery')->with('message', 'An error occured.');
+			return Redirect::to('golfclubs/gallery')->with('message', 'The file you\'ve sent is not supported.');
 
 		if($media->save())
 			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
+		else
+			return Redirect::to('golfclubs/gallery')->with('message', 'There was an error. Please try again.');
 
 	}
 
