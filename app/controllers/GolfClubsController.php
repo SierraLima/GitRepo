@@ -187,20 +187,19 @@ class GolfClubsController extends BaseController {
 		// validation has passed, save picture in the DB
 		$media = new Media;
 
-		if(Input::hasFile('image')) {
-			$file = Input::file('image');
-			$max_upload = (int)(ini_get('upload_max_filesize'));
-			if($file->getSize()>$max_upload)
-				return Redirect::to('golfclubs/gallery')->with('message', 'The image you sent is too big.');
-		}
-		else {
-			return Redirect::to('golfclubs/gallery')->with('message', 'You didn\'t choose a file.');
-		}
+		$rules = array(
+			'image' => 'image|max:2000'
+		);
 
-		$destinationPath = 'upload/';
-		$extension = $file->getClientOriginalExtension();
+		$inputs = array(
+			'image' => Input::file('image')
+		);
 
-		if($extension=='jpg'||$extension=='png'||$extension=='gif'||$extension=='jpeg') {
+		$validation = Validator::make($inputs, $rules);
+
+		if($validation->passes())
+		{
+			$destinationPath = 'upload/';
 
 			$filename = sha1(time()).'.'.$extension;
 			Input::file('image')->move($destinationPath, $filename);
@@ -208,14 +207,15 @@ class GolfClubsController extends BaseController {
 			$media->url = $destinationPath.$filename;
 			$media->golf_club_id = Auth::golfclub()->get()->id;
 
+			if($media->save())
+				return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
+			else
+				return Redirect::to('golfclubs/gallery')->with('message', 'There was an error. Please try again.');
 		}
 		else
-			return Redirect::to('golfclubs/gallery')->with('message', 'The file you\'ve sent is not supported.');
-
-		if($media->save())
-			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
-		else
-			return Redirect::to('golfclubs/gallery')->with('message', 'There was an error. Please try again.');
+		{
+			return Redirect::to('golfclubs/gallery')->with('message', 'The either didn\'t send an image or sent it too big.');
+		}
 
 	}
 
