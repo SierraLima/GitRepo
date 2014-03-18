@@ -5,7 +5,7 @@
 img { max-width: 200px; height: auto; }
 </style>
 
-@if(count($media)>1)
+@if(count($media)>=1)
 	@foreach ($media as $picture)
 		<img src="<?php echo URL::to('/').'/'.$picture->url ?>"/>
 	@endforeach
