@@ -187,7 +187,7 @@ class GolfClubsController extends BaseController {
 		// validation has passed, save picture in the DB
 		$media = new Media;
 
-		if(Input::has('image'))
+		if(Input::hasFile('image'))
 			$file = Input::file('image');
 		else
 			return Redirect::to('golfclubs/gallery')->with('message', 'You didn\'t choose a file.');
