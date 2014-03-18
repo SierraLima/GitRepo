@@ -187,10 +187,15 @@ class GolfClubsController extends BaseController {
 		// validation has passed, save picture in the DB
 		$media = new Media;
 
-		if(Input::hasFile('image'))
+		if(Input::hasFile('image')) {
 			$file = Input::file('image');
-		else
+			$max_upload = (int)(ini_get('upload_max_filesize'));
+			if($file->getSize()>$max_upload)
+				return Redirect::to('golfclubs/gallery')->with('message', 'The image you sent is too big.');
+		}
+		else {
 			return Redirect::to('golfclubs/gallery')->with('message', 'You didn\'t choose a file.');
+		}
 
 		$destinationPath = 'upload/';
 		$extension = $file->getClientOriginalExtension();
