@@ -20,22 +20,13 @@ color: #000;
 display: inline-block;
 margin-bottom:2px;
 text-align: center;
-background-color: #839098;
+background-color: #F15F74;
 }
 
 .btn-selected {border: 2px solid #000000;}
 
 
 .btn:hover { background-color:#FFFFFF;}
-
-
-/* TODO
-
-green : #98CB4A
-gray : #839098
-blue : #5481E6
-orange : #F76D3C
-*/
 
 .btn-red {background-color: #F15F74; color: #FFFFFF}
 .btn-green {background-color: #98CB4A}
@@ -45,15 +36,42 @@ orange : #F76D3C
 
 <script type="text/javascript">
 
-
 $(document).ready(function () {
-	$("td a").click(function() {
+	
+	$("td a").click(function(e) {
+		e.preventDefault();
 		if($(this).hasClass("btn-selected"))
 			$(this).removeClass("btn-selected");
 		else
 			$(this).addClass("btn-selected");
 	});
+
+	var myJSONObject = {"bindings": [
+		{"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},
+		{"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
+		{"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
+	    ]
+	};
+
+	$("#submit").click(function() {
+
+		$.ajax({
+			type: "POST",
+			url: "{{ URL::action('GolfClubsController@postUpload') }}",
+			data: myJSONObject,
+			success: success
+		});
+
+		function success() {
+			alert("success");
+		}
+
+	});
+
 });
+
+
+// une réservation pour 1 joueur ne bloque pas le reste
 
 </script>
 
@@ -89,7 +107,7 @@ $(document).ready(function () {
 					<td>
 						<a href="#" class="btn-circle btn-green">120.-</a>
 						<a href="#" class="btn-circle btn-blue">&nbsp;</a>
-						<a href="#" class="btn-circle btn-red">&nbsp;</a>
+						<a href="#" class="btn-circle">&nbsp;</a>
 						<a href="#" class="btn-circle">&nbsp;</a>
 					</td>
 				@endfor
@@ -105,3 +123,5 @@ $(document).ready(function () {
 {{ Form::open(array('url'=>'golfclubs/upload')) }}
 	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
 {{ Form::close() }}
+
+<input id="submit" class="btn btn-primary btn-default" value="Envoyer">

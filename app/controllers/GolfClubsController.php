@@ -219,4 +219,8 @@ class GolfClubsController extends BaseController {
 
 	}
 
+	public function postTeetimes($json) {
+	
+	}
+
 }
