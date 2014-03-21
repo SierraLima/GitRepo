@@ -219,7 +219,15 @@ class GolfClubsController extends BaseController {
 
 	}
 
-	public function postTeetimes($json) {
+	public function postTeetimes() {
+		$teetime = new Teetime;
+		$teetime->date = "2012-03-02";
+		$teetime->price = "12";
+		$temp = json_decode(Input::get('json'));
+		$teetime->test = $temp->key;
+
+		$teetime->save();
+		return Redirect::to('golfclubs/teetimes')->with('message', 'Your updates have been saved.');
 	
 	}
 

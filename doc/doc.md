@@ -75,17 +75,15 @@ shown. Type `sudo apt-get update` to run the update.
 
 ## Tests
 
+### Unit tests
+
 The tests are located in `app/tests`. To run the suite, type 
 `/vendor/bin/phpunit` at the root of the code source on a Linux machine. SQLite 
 is currently not installed on the virtual machine therefore the tests must be 
 runned locally.
 
-We have some problems to test and simulate a file uploading. We try to simulate
-it with mockery but the problems wasn't resolve. After that we try to follow a
-tutoriel on jasonfunk.net (link bellow) and we have discover that an method in
-FileUploader class isn't simulated. One solution is to not use "Input::file()" but
-we need it. Aftet past 5 hours on this test, we decide to remplace that one
-by some others test.
+### Functional tests
+
 
 ## MySQL login
 

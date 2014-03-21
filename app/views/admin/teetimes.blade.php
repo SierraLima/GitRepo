@@ -5,67 +5,22 @@
 
 img { max-width: 200px; height: auto; }
 
-.btn-circle {
-line-height: 1.42857143;
-border: 1px solid transparent;
-
-width: 30px;
-height: 30px;
-padding: 6px 0;
-font-size: 12px;
-line-height: 1.42;
-border-radius: 15px;
-color: #000;
-
-display: inline-block;
-margin-bottom:2px;
-text-align: center;
-background-color: #F15F74;
-}
-
-.btn-selected {border: 2px solid #000000;}
-
-
-.btn:hover { background-color:#FFFFFF;}
-
-.btn-red {background-color: #F15F74; color: #FFFFFF}
-.btn-green {background-color: #98CB4A}
-.btn-blue {background-color: #5481E6; color: #FFFFFF}
-
 </style>
 
 <script type="text/javascript">
 
 $(document).ready(function () {
-	
+
+	var myJSONObject = {"key": "value"};
+
 	$("td a").click(function(e) {
 		e.preventDefault();
 		if($(this).hasClass("btn-selected"))
 			$(this).removeClass("btn-selected");
 		else
 			$(this).addClass("btn-selected");
-	});
 
-	var myJSONObject = {"bindings": [
-		{"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},
-		{"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
-		{"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
-	    ]
-	};
-
-	$("#submit").click(function() {
-
-		$.ajax({
-			type: "POST",
-			url: "{{ URL::action('GolfClubsController@postUpload') }}",
-			data: myJSONObject,
-			success: success
-		});
-
-		function success() {
-			alert("success");
-		}
-
+		$("#json").val(JSON.stringify(myJSONObject));
 	});
 
 });
@@ -120,8 +75,7 @@ $(document).ready(function () {
 	</tbody>
 </table>
 
-{{ Form::open(array('url'=>'golfclubs/upload')) }}
+{{ Form::open(array('url'=>'golfclubs/teetimes')) }}
+	<input type="hidden" id="json" name="json" value="bonjour" />
 	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
 {{ Form::close() }}
-
-<input id="submit" class="btn btn-primary btn-default" value="Envoyer">
