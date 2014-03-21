@@ -26,6 +26,6 @@ img { max-width: 200px; height: auto; }
 </table>
 
 {{ Form::open(array('url'=>'golfclubs/upload', 'files'=>'true')) }}
-	<p>Ajouter une image : <input type="file" name="image" ></p>
+	<p>Ajouter une image (max. 2 Mo) : <input type="file" name="image" ></p>
 	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
 {{ Form::close() }}
