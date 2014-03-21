@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AlterMediaTable' => $baseDir . '/app/database/migrations/2014_03_11_085357_alter_media_table.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
     'Boris\\CLIOptionsHandler' => $vendorDir . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',
@@ -31,6 +30,7 @@ return array(
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
     'CreateGolfclubsTable' => $baseDir . '/app/database/migrations/2014_03_07_102549_create_golfclubs_table.php',
     'CreateMediaTable' => $baseDir . '/app/database/migrations/2014_03_10_083419_create_media_table.php',
+    'CreateTeetimeTable' => $baseDir . '/app/database/migrations/2014_03_21_082718_create_teetime_table.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2014_03_04_081228_create-users-table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
     'Crypt_Base' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
