@@ -14,7 +14,7 @@ class CreateTeetimesTable extends Migration {
 	{
 		Schema::create('teetimes', function(Blueprint $table) {
 			$table->increments('id');
-			$table->date('date');
+			$table->dateTime('date');
 			$table->float('price');
 			$table->timestamps();
 		});
