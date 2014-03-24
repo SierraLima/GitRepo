@@ -8,7 +8,7 @@ class Teetime extends Eloquent {
 	// define validation rules
 	public static $rules = array(
 		'date'=>'required',
-		'price'=>'required',
+		'price'=>'required'
 	);
 
 	/**
@@ -19,15 +19,13 @@ class Teetime extends Eloquent {
 	protected $table = 'teetimes';
 
 	/**
-	 * Foreign key about media
+	 * Foreign key about golfcourses
 	 *
 	 * @return foreign
-	 *
-	public function golfcourse()
+	 */
+	public function golfcourses()
 	{
 		return $this->belongsTo('GolfCourse');
 	}
-	 * 
-	 */
 
 }

@@ -70,5 +70,15 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->hasMany('Media');
 	}
-
+	
+	/**
+	 * Foreign key about golfcourses
+	 *
+	 * @return foreign
+	 */
+	public function golfcourses()
+	{
+		return $this->hasMany('GolfCourse');
+	}
+	
 }

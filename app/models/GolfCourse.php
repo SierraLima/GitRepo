@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Media extends Eloquent {
+class GolfCourse extends Eloquent {
 
 	// define validation rules
 	public static $rules = array(
@@ -14,7 +14,7 @@ class Media extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'media';
+	protected $table = 'golfcourses';
 
 	/**
 	 * Foreign key about golfclubs
@@ -25,5 +25,15 @@ class Media extends Eloquent {
 	{
 		return $this->belongsTo('GolfClub');
 	}
-
+	
+	/**
+	 * Foreign key about teetimes
+	 *
+	 * @return foreign
+	 */
+	public function teetimes()
+	{
+		return $this->hasMany('Teetime');
+	}
+	
 }

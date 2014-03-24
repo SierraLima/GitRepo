@@ -271,5 +271,29 @@ class GolfClubTest extends TestCase {
 
 		$this->assertTrue($validator->passes());
 	}
+	
+	/**
+	public function testTeetimeFieldsAreRequired()
+	{
+		$validator = Validator::make(
+			array(
+				'firstname' => 'John',
+				'lastname' => 'Doe',
+				'email' => '',
+				'licence' => 'Blabla',
+				'day' => '12',
+				'month' => '12',
+			),
+			User::$rules
+		);
+
+		$this->assertTrue($validator->fails());
+
+	}
+	
+	public function testTeetimeDeleteIsWorking()
+	{
+		
+	}*/
 
 }
