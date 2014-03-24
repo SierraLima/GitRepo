@@ -16,7 +16,7 @@ class CreateMediaTable extends Migration {
 			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('url', 100);
-			$table->unsignedInteger('golf_club_id')->unsigned();
+			$table->unsignedInteger('golf_club_id');
 			$table->timestamps();
 		});
 
