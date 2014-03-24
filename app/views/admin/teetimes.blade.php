@@ -7,19 +7,58 @@ img { max-width: 200px; height: auto; }
 
 </style>
 
-{{ $date }}
-
 <script type="text/javascript">
 
 $(document).ready(function () {
 
-	var myJSONObject = {"date": "2012-03-03", "updates":{
-		{"hour":"07",
-		"minutes": "10",
-		"action: "delete"},
+	// getting the date from laravel
+	var requestedDate = '{{ $date }}';
 
+	// splitting
+	var parts = requestedDate.split('-');
+	var year = parts[0];
+	var month = parts[1];
+	var day = parts[2];
+
+	// creating an actual date
+	var requestedDate = new Date(year, month - 1, day);
+
+	// generating dates around the requested date
+	for(var i=-5; i<=5; i++) {
+		var d = new Date();
+		d.setDate(requestedDate.getDate() + i);
+
+		var month = d.getMonth() + 1;
+		var day = d.getDate();
+		var year = d.getFullYear();
+
+		var outputDate = year+"-"+month+"-"+day;
+
+		$("#date").append(new Option(outputDate, outputDate));
+		// default value
+		if(i==0)
+			$('#date option[value="'+outputDate+'"]').attr("selected",true);
 	
-	}};
+	}
+		
+	var myJSONObject = 
+		{
+		    "date": "2012-03-03",
+		    "updates": [
+			// {
+			//     "hour": "07",
+			//     "minutes": "10",
+			//     "action": "liberate",
+			//     "price": "120"
+			// }
+			{
+			    "hour": "07",
+			    "minutes": "20",
+			    "action": "delete"
+			}
+		    ]
+		};
+	$("#json").val(JSON.stringify(myJSONObject));
 
 	$("td a").click(function(e) {
 		e.preventDefault();
@@ -28,19 +67,21 @@ $(document).ready(function () {
 		else
 			$(this).addClass("btn-selected");
 
-		$("#json").val(JSON.stringify(myJSONObject));
 	});
+	
 
 });
 
 </script>
 
-<select class="form-control" style="width:250px; float: left;">
-	<option value="volvo">Lundi 17 mars 2014</option>
-	<option value="saab">Mardi 18 mars 2014</option>
-	<option value="mercedes">Mercredi 19 mars 2014</option>
-	<option value="audi">Vendredi 20 décembre 2014</option>
-</select>
+<div style="float: left;" class="form-inline">
+	<select id="date" class="form-control" style="width:250px;">
+	</select>
+
+	<select id="date" class="form-control" style="width:250px;">
+		<option>Parcours 1</option>
+	</select>
+</div>
 
 <p style="text-align:right; float:right;">
 	<a href="#" class="btn-circle btn-green">&nbsp;</a> libre
@@ -81,6 +122,6 @@ $(document).ready(function () {
 </table>
 
 {{ Form::open(array('url'=>'golfclubs/teetimes')) }}
-	<input type="hidden" id="json" name="json" value="bonjour" />
+	<input type="hidden" id="json" name="json" value="" />
 	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
 {{ Form::close() }}
