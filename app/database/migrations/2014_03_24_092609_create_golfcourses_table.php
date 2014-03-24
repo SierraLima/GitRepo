@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTeetimesTable extends Migration {
+class CreateGolfcoursesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,18 +12,17 @@ class CreateTeetimesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('teetimes', function(Blueprint $table) {
+		Schema::create('golfcourses', function(Blueprint $table) {
 			$table->engine = 'InnoDB';
 			$table->increments('id');
-			$table->dateTime('date');
-			$table->float('price');
-			$table->unsignedInteger('golf_course_id')->unsigned();
+			$table->integer('holenumber');
+			$table->unsignedInteger('golf_club_id')->unsigned();
 			$table->timestamps();
 		});
-		
+
 		// the table has to be created before we can add a foreign key reference
-		Schema::table('teetimes', function($table) {
-			$table->foreign('golf_course_id')->references('id')->on('golfcourses');
+		Schema::table('golfcourses', function($table) {
+			$table->foreign('golf_club_id')->references('id')->on('golfclubs');
 		});
 	}
 
@@ -34,7 +33,7 @@ class CreateTeetimesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('teetimes');
+		Schema::dropIfExists('golfcourses');
 	}
 
 }
