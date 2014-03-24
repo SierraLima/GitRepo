@@ -7,11 +7,19 @@ img { max-width: 200px; height: auto; }
 
 </style>
 
+{{ $date }}
+
 <script type="text/javascript">
 
 $(document).ready(function () {
 
-	var myJSONObject = {"key": "value"};
+	var myJSONObject = {"date": "2012-03-03", "updates":{
+		{"hour":"07",
+		"minutes": "10",
+		"action: "delete"},
+
+	
+	}};
 
 	$("td a").click(function(e) {
 		e.preventDefault();
@@ -24,9 +32,6 @@ $(document).ready(function () {
 	});
 
 });
-
-
-// une réservation pour 1 joueur ne bloque pas le reste
 
 </script>
 

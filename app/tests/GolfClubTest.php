@@ -244,4 +244,32 @@ class GolfClubTest extends TestCase {
 		$this->assertCount(1, $crawler->filter('html:contains("Someren")'));
 	}
 
+	public function testTeetimeCreationWorks()
+	{
+		// Create a teetime
+		$teetime = new Teetime;
+		
+		$teetime->date = "01.01.2000 0:00";
+		$teetime->price = "120";
+
+		// Teetime should save
+		$this->assertTrue($teetime->save());
+	}
+
+	public function testTeetimeValidationWorks()
+	{
+		$validator = Validator::make(
+			array(
+				'date' => '01.01.2000 0:00',
+				'price' => '120'
+			),
+			Teetime::$rules
+		);
+
+		if($validator->fails())
+			echo $validator->messages();
+
+		$this->assertTrue($validator->passes());
+	}
+
 }

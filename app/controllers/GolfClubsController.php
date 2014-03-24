@@ -95,10 +95,16 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
-	public function getTeetimes() {
+	public function getTeetimes($date) {
+
+		// TODO: transfer tee-times to the view
+		if(empty($date)) {
+			// we use today's date
+		}
 
 		if (Auth::golfclub()->check()) {
-			$this->layout->content = View::make('admin.teetimes');
+			$teetimes = Auth::golfclub()->get()->teetimes;
+			$this->layout->content = View::make('admin.teetimes')->with('teetimes', $teetimes)->with('date',$date);
 		}
 		else {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
