@@ -108,6 +108,7 @@ class TeetimeTest extends TestCase {
 		$this->assertTrue($validator->fails());
 	}
 	
+	/*
 	public function testTeetimeDeleteIsWorking()
 	{
 		// Create a teetime
@@ -122,6 +123,6 @@ class TeetimeTest extends TestCase {
 		
 		// Destroy teetime
 		$this->assertTrue($teetime->destroy($teetime));		
-	}
+	}*/
 	
 }
