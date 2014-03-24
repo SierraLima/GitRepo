@@ -16,7 +16,7 @@ class CreateGolfcoursesTable extends Migration {
 			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->integer('holenumber');
-			$table->unsignedInteger('golf_club_id')->unsigned();
+			$table->unsignedInteger('golf_club_id');
 			$table->timestamps();
 		});
 
