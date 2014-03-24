@@ -226,14 +226,34 @@ class GolfClubsController extends BaseController {
 	}
 
 	public function postTeetimes() {
-		$teetime = new Teetime;
-		$teetime->date = "2012-03-02";
-		$teetime->price = "12";
-		$temp = json_decode(Input::get('json'));
-		$teetime->test = $temp->key;
+
+		// getting the JSON back
+		$json = json_decode(Input::get('json'));
+		$date = $json->date;
+
+		for ($i = 0; $i < count($json->updates); $i++) {
+			$formattedDate = $date.' '.$json->updates[$i]->hour.':'.$json->updates[$i]->minutes;
+			$action = $json->updates[$i]->action;
+
+			// treating the JSON
+			if($action=="delete") {
+				$teetime = Teetime::where('date', '=', $formattedDate)->firstOrFail();
+				// for some reason $teetime->delete() doesn't work
+				Teetime::destroy($teetime->id);
+			}
+			elseif($action=="liberate") {
+				// saving a new tee-time in the database
+				$teetime = new Teetime;
+				$teetime->date = $date;
+				$teetime->price = $json->updates[$i]->price;
+				$teetime->date = $formattedDate;
+				$teetime->save();
+			}
+
+		}
 
 		$teetime->save();
-		return Redirect::to('golfclubs/teetimes')->with('message', 'Your updates have been saved.');
+		return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Your updates have been saved.');
 	
 	}
 
