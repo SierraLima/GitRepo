@@ -46,7 +46,8 @@
 		@else
 		    <li>{{ HTML::link('golfclubs/logout', 'Déconnexion') }}</li>
             	    <li class="{{Request::path() == 'golfclubs/profile' ? 'active' : '';}}">{{ HTML::link('golfclubs/profile', 'Profil') }}</li>
-            	    <li class="{{Request::path() == 'golfclubs/teetimes' ? 'active' : '';}}">{{ HTML::link('golfclubs/teetimes', 'Tee-times') }}</li>
+		    <?php $datetime = new DateTime(); // generating today's date ?>
+            	    <li class="{{substr(Request::path(),0,18)=='golfclubs/teetimes' ? 'active' : '';}}"><?php echo HTML::link("golfclubs/teetimes/".$datetime->format('Y-m-d'), 'Tee-times') ?></li>
 		    <li class="{{Request::path() == 'golfclubs/gallery' ? 'active' : '';}}">{{ HTML::link('golfclubs/gallery', 'Gallerie') }}</li>   
 		@endif
           </ul>
