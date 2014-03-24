@@ -121,8 +121,6 @@ class TeetimeTest extends TestCase {
 		$this->assertTrue($teetime->save());
 		
 		// Destroy teetime
-		Teetime::destroy($teetime);
-	
 		$this->assertTrue($teetime->destroy($teetime));		
 	}
 	
