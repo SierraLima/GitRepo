@@ -49,7 +49,8 @@ class TeetimeTest extends TestCase {
 		$validator = Validator::make(
 			array(
 				'date' => '01.01.2000 0:00',
-				'price' => '120'
+				'price' => '120',
+				'golf_course_id' => '1'
 			),
 			Teetime::$rules
 		);
@@ -66,7 +67,8 @@ class TeetimeTest extends TestCase {
 		$validator = Validator::make(
 			array(
 				'date' => '',
-				'price' => ''
+				'price' => '',
+				'golf_course_id' => ''
 			),
 			Teetime::$rules
 		);
@@ -80,7 +82,8 @@ class TeetimeTest extends TestCase {
 		$validator = Validator::make(
 			array(
 				'date' => '',
-				'price' => '120'
+				'price' => '120',
+				'golf_course_id' => '1'
 			),
 			Teetime::$rules
 		);
@@ -94,7 +97,8 @@ class TeetimeTest extends TestCase {
 		$validator = Validator::make(
 			array(
 				'date' => '01.01.2000 0:00',
-				'price' => ''
+				'price' => '',
+				'golf_course_id' => '1'
 			),
 			Teetime::$rules
 		);
