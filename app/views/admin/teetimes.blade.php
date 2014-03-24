@@ -25,9 +25,6 @@ $(document).ready(function () {
 
 });
 
-
-// une réservation pour 1 joueur ne bloque pas le reste
-
 </script>
 
 <select class="form-control" style="width:250px; float: left;">
