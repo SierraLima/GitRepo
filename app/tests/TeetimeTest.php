@@ -70,14 +70,54 @@ class TeetimeTest extends TestCase {
 			),
 			Teetime::$rules
 		);
-
+		
+		//  Fails because no value setting
 		$this->assertTrue($validator->fails());
 	}
-
-/*	
+	
+	public function testTeetimeDateIsRequired()
+	{
+		$validator = Validator::make(
+			array(
+				'date' => '',
+				'price' => '120'
+			),
+			Teetime::$rules
+		);
+		
+		// Fails because no value setting on date
+		$this->assertTrue($validator->fails());
+	}
+	
+	public function testTeetimePriceIsRequired()
+	{
+		$validator = Validator::make(
+			array(
+				'date' => '01.01.2000 0:00',
+				'price' => ''
+			),
+			Teetime::$rules
+		);
+		
+		// Fails because no value setting on price
+		$this->assertTrue($validator->fails());
+	}
+	
 	public function testTeetimeDeleteIsWorking()
 	{
+		// Create a teetime
+		$teetime = new Teetime;
 		
+		$teetime->date = "01.01.2000 0:00";
+		$teetime->price = "120";
+
+		// Teetime should save
+		$this->assertTrue($teetime->save());
+		
+		// Destroy teetime
+		Teetime::destroy($teetime);
+	
+		$this->assertTrue($teetime->destroy());		
 	}
-	*/	
+	
 }
