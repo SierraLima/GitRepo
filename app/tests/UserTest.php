@@ -206,11 +206,6 @@ class UserTest extends TestCase {
 		// Tests Equalities
 		$this->assertEquals($userDB->email, 'test@test.ch');
 		$this->assertEquals($userDB->firstname, 'Timo');
-
-        
-		// testing that the public page shows the correct information
-		$crawler = $this->client->request('GET', 'show/1');
-		$this->assertCount(1, $crawler->filter('html:contains("Timo")'));
         
 	}
 }
