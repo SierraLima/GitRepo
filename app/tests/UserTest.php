@@ -179,7 +179,7 @@ class UserTest extends TestCase {
 		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
 
 		// go to the profile
-		$crawler = $this->client->request('GET', 'users/profile');
+		$crawler = $this->client->request('GET', 'profile');
 		$form = $crawler->selectButton('Update')->form();
 
 		$form->setValues(array(
@@ -189,7 +189,7 @@ class UserTest extends TestCase {
 			'birthday'    => '1900-10-23',
 			'country'    => 'Netherlands',
 			'password' => 'password',
-			'password_confirmation'    => 'password',
+			'password_confirmation'    => 'password'
 		));
 
 		$crawler = $this->client->submit($form);
