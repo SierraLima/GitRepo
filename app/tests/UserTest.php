@@ -154,6 +154,8 @@ class UserTest extends TestCase {
 		$this->assertFalse(Auth::user()->attempt($credentials));
 	}
     
+	
+	// ACTUAL VERSION
     public function testUpdateProfileIsWorking()
 	{
 		// Create a user
