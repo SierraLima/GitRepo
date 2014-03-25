@@ -49,7 +49,6 @@ class UsersController extends BaseController {
 			// validation has failed, display error messages    
 			return Redirect::to('users/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
-
 	}
 
 	/**
@@ -92,7 +91,6 @@ class UsersController extends BaseController {
 
 		Auth::user()->logout();
 		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
-
 	}
     
     
@@ -105,17 +103,16 @@ class UsersController extends BaseController {
         
         //Creating some new rules for the validation of this page
         $rules = array(
-		'firstname'=>'required|alpha|min:2',
-		'lastname'=>'required|alpha|min:2',
-		'email'=>'required|email|unique:users,email',
-		'birthday'=>'required',
-		'country'=>'required|alpha_num',
-		'password'=>'required|alpha_num|between:6,12|confirmed',
-		'password_confirmation'=>'required|alpha_num|between:6,12'
-	       );
+			'firstname'=>'required|alpha|min:2',
+			'lastname'=>'required|alpha|min:2',
+			'email'=>'required|email|unique:users,email',
+			'birthday'=>'required',
+			'country'=>'required|alpha_num',
+			'password'=>'required|alpha_num|between:6,12|confirmed',
+			'password_confirmation'=>'required|alpha_num|between:6,12'
+	    );
         
         $rules['email'] = $rules['email'].','.$id;
-
 
 		$validator = Validator::make(Input::all(), $rules);
 
@@ -139,5 +136,5 @@ class UsersController extends BaseController {
 			return Redirect::to('users/profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
 	}
-    //*/
+
 }
