@@ -152,13 +152,11 @@ class UserTest extends TestCase {
 		);
 
 		$this->assertFalse(Auth::user()->attempt($credentials));
-
 	}
-    
     
     public function testUpdateProfileIsWorking()
 	{
-		// Create a golf club
+		// Create a user
 		$user = new User;
 		
 		$user->firstname = "Harald";
