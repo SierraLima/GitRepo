@@ -165,7 +165,7 @@ class UserTest extends TestCase {
 		$user->birthday = "1900-11-26";
         $user->country = "CH";
 		$user->password = Hash::make("password"); // crypt password
-		$user->licence = "45-5";
+		$user->licence = "455";
 		$user->save();
 
 		// Perform user login.
@@ -206,6 +206,6 @@ class UserTest extends TestCase {
 
 		// testing that the public page shows the correct information
 		$crawler = $this->client->request('GET', 'show/1');
-		$this->assertCount(1, $crawler->filter('html:contains("Someren")'));
+		$this->assertCount(1, $crawler->filter('html:contains("Timo")'));
 	}
 }
