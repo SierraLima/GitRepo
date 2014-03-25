@@ -10,7 +10,7 @@
 			@endforeach
     </ul>
     
-<div class="form-group">
+		<div class="form-group">
 			{{ Form::text('firstname', null, array('class'=>'form-control', 'placeholder'=>'Firstname')) }}
 		</div>
         <div class="form-group">
