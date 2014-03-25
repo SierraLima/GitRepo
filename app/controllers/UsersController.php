@@ -112,7 +112,7 @@ class UsersController extends BaseController {
         
         $rules['email'] = $rules['email'].','.$id;
 
-		$validator = Validator::make(Inzput::all(), $rules);
+		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
 

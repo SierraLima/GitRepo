@@ -179,7 +179,7 @@ class UserTest extends TestCase {
 		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
 
 		// go to the profile
-		$crawler = $this->client->request('GET', 'users/profile');
+		$crawler = $this->client->request('GET', 'profile');
 		$form = $crawler->selectButton('Update')->form();
 
 		$form->setValues(array(
