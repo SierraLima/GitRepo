@@ -102,10 +102,20 @@ class UsersController extends BaseController {
 	 * @param id -> int to identify a user
 	 */
 	public function postUpdate($id) {
-
+        
 		// fixing laravel unique issue
-		$rules = User::$rules;
-		$rules['email'] = $rules['email'].','.$id;
+        $rules = array(
+		'firstname'=>'required|alpha|min:2',
+		'lastname'=>'required|alpha|min:2',
+		'email'=>'required|email|unique:users,email',
+		'birthday'=>'required',
+		'country'=>'required|alpha_num',
+		'password'=>'required|alpha_num|between:6,12|confirmed',
+		'password_confirmation'=>'required|alpha_num|between:6,12'
+	       );
+        
+        $rules['email'] = $rules['email'].','.$id;
+
 
 		$validator = Validator::make(Input::all(), $rules);
 
@@ -120,14 +130,13 @@ class UsersController extends BaseController {
 			$user->birthday = Input::get('birthday');
 			$user->country = Input::get('country');
 			$user->password = Hash::make(Input::get('password'));
-            $user->description = Input::get('description');
 			$user->update();
 
-			return Redirect::to('users')->with('message', 'Your profile has been updated.');
+			return Redirect::to('users/profile')->with('message', 'Your profile has been updated.');
 
 		} else {
 			// validation has failed, display error messages    
-			return Redirect::to('user/profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+			return Redirect::to('users/profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
 	}
     //*/

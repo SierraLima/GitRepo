@@ -26,13 +26,10 @@
 			{{ Form::text('country', null, array('class'=>'form-control', 'placeholder'=>'Phone number')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::password('licence', array('class'=>'form-control', 'placeholder'=>'Password')) }}
+			{{ Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')) }}
 		</div>
         <div class="form-group">
 			{{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>'Confirm Password')) }}
-		</div>
-        <div class="form-group">
-			{{ Form::textarea('description', null, array('class'=>'form-control', 'placeholder'=>'Description')) }}
 		</div>
     
     {{ Form::submit('Update', array('class'=>'btn btn-block btn-primary btn-default'))}}
