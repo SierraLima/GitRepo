@@ -154,5 +154,60 @@ class UserTest extends TestCase {
 		$this->assertFalse(Auth::user()->attempt($credentials));
 
 	}
+    
+    
+    public function testUpdateProfileIsWorking()
+	{
+		// Create a golf club
+		$user = new User;
+		
+		$user->firstname = "Harald";
+        $user->lastname = "Schultze";
+		$user->email = "harald@schultze.ch";
+		$user->birthday = "1900-11-26";
+        $user->country = "CH";
+		$user->password = Hash::make("password"); // crypt password
+		$user->licence = "45-5";
+		$user->save();
 
+		// Perform user login.
+		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
+		$crawler = $this->client->request('GET', '/users/login');
+		$form = $crawler->selectButton('Login')->form();
+		$this->client->submit($form, array('email' => 'harald@schultze.ch', 'password' => 'password'));
+		$crawler = $this->client->followRedirect(true);
+		
+		// Test that one div: contains logged in
+		$this->assertCount(1, $crawler->filter('div:contains("logged in")'));
+
+		// go to the profile
+		$crawler = $this->client->request('GET', 'users/profile');
+		$form = $crawler->selectButton('Update')->form();
+
+		$form->setValues(array(
+			'firstname'    => 'Timo',
+            'lastname'    => 'Steffen',
+			'email'    => 'test@test.ch',
+			'birthday'    => '1900-10-23',
+			'country'    => 'Netherlands',
+			'password' => 'password',
+			'password_confirmation'    => 'password',
+		));
+
+		$crawler = $this->client->submit($form);
+		$crawler = $this->client->followRedirect(true);
+		
+		// Test that one div: contains updated
+		$this->assertCount(1, $crawler->filter('div:contains("updated")'));
+
+		$userDB = User::find(1);
+		
+		// Tests Equalities
+		$this->assertEquals($userDB->email, 'test@test.ch');
+		$this->assertEquals($userDB->firstname, 'Timo');
+
+		// testing that the public page shows the correct information
+		$crawler = $this->client->request('GET', 'show/1');
+		$this->assertCount(1, $crawler->filter('html:contains("Someren")'));
+	}
 }
