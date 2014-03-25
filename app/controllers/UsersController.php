@@ -12,7 +12,6 @@ class UsersController extends BaseController {
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
 		$this->beforeFilter('auth', array('only'=>array('getProfile')));
-
 	}
 
 	/**
@@ -93,7 +92,6 @@ class UsersController extends BaseController {
 		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
 	}
     
-    
 	/**
 	 * update profile page
 	 * 
@@ -114,7 +112,7 @@ class UsersController extends BaseController {
         
         $rules['email'] = $rules['email'].','.$id;
 
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = Validator::make(Inzput::all(), $rules);
 
 		if ($validator->passes()) {
 
