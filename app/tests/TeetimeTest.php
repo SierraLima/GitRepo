@@ -12,7 +12,7 @@ class TeetimeTest extends TestCase {
 	}
 
 	/**
-	 * Creates the application.
+	 * Creates the application
 	 *
 	 * @return Symfony\Component\HttpKernel\HttpKernelInterface
 	 */
