@@ -85,7 +85,7 @@ class UsersController extends BaseController {
 		}
 	}
 
-	/**
+	/*
 	 * return logout page
 	 */
 	public function getLogout() {

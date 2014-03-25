@@ -6,20 +6,110 @@
 }
 </style>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    
+	function checkclick($datum){
+        
+         
+        
+        alert(date);  
+        
+    }
+    
+    function myfunction(){   
+                
+        
+        var dt = new Date($.now());
+        var year = dt.getFullYear();
+        var month = dt.getMonth() + 1;
+        var day = dt.getDate();
+        
+        var selector = document.getElementById("navigation");
+        var months = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
+        
+        var anzahltage;
+        
+        switch(month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                anzahltage = 31;
+            break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                anzahltage = 30;
+            break;
+            case 2:
+                anzahltage = 28;
+            break;
+        }
+        
+        
+        for(var i = 0; i < 5; i++){
+            
+            switch(anzahltage){
+                case 31:
+                    if(day > 31){
+                        day = 1;
+                        month++;
+                    }
+                break;
+                case 30:
+                    if(day > 30){
+                        day = 1;
+                        month++;
+                    }
+                break;
+                case 28:
+                    if(day > 28){
+                        day = 1;
+                        month++;
+                    }
+                break; 
+            }
+            
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.setAttribute("id", year + "-" + month + "-" + day);
+            a.href = "#";
+            a.setAttribute("onclick","javascript:checkclick(this.id);");
+            
+            a.appendChild(document.createTextNode(day + " " + months[month-1] + " " + year));
+            li.appendChild(a);
+            
+            selector.appendChild(li);
+            day++;
+        }        
+        
+        
+    }
+    
+    </script>
+
 <div class="container" style="padding-top:48px;">
 
 	<legend>Recherche d'un tee-time</legend>
 	<div class="row">
 
 		<div class="col-md-8">
-			<ul class="nav nav-tabs">
-				<li><a href="#">« prev</a></li>
+			<ul id="navigation" class="nav nav-tabs">
+				<!--
+                <li><a href="#">« prev</a></li>
 				<li><a href="#">26 mars</a></li>
 				<li><a href="#">27 mars</a></li>
 				<li class="active"><a href="#">28 mars</a></li>
 				<li><a href="#">29 mars</a></li>
 				<li><a href="#">30 mars</a></li>
 				<li><a href="#">next »</a></li>
+                -->
 			</ul>
 			<div class="tab-content">
 				<div class="table-responsive">
@@ -175,3 +265,4 @@
 		</div>
 
 	</div>
+ <script>myfunction()</script>
