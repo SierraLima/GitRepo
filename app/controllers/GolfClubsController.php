@@ -97,8 +97,6 @@ class GolfClubsController extends BaseController {
 
 	public function getTeetimes($date) {
 
-		// TODO: transfer tee-times to the view
-
 		if (Auth::golfclub()->check()) {
 			$teetimes = Auth::golfclub()->get()->golfcourses[0]->teetimes;
 			$this->layout->content = View::make('admin.teetimes')->with('teetimes', $teetimes)->with('date',$date);
