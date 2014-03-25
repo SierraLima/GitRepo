@@ -158,6 +158,7 @@ class UserTest extends TestCase {
 	// ACTUAL VERSION
     public function testUpdateProfileIsWorking()
 	{
+        
 		// Create a user
 		$user = new User;
 		
@@ -193,7 +194,7 @@ class UserTest extends TestCase {
 			'password' => 'password',
 			'password_confirmation'    => 'password'
 		));
-
+    
 		$crawler = $this->client->submit($form);
 		$crawler = $this->client->followRedirect(true);
 		
@@ -206,8 +207,10 @@ class UserTest extends TestCase {
 		$this->assertEquals($userDB->email, 'test@test.ch');
 		$this->assertEquals($userDB->firstname, 'Timo');
 
+        
 		// testing that the public page shows the correct information
 		$crawler = $this->client->request('GET', 'show/1');
 		$this->assertCount(1, $crawler->filter('html:contains("Timo")'));
+        
 	}
 }

@@ -13,8 +13,15 @@
 	function checkclick($datum){
         
          
+        alert($datum);  
         
-        alert(date);  
+        /*
+        <ul>
+        @foreach($teetimes as $teetime)
+        <li> {{ $teetime->date }}</li>
+        @endforeach
+        </ul>
+        */
         
     }
     
@@ -78,7 +85,19 @@
             
             var li = document.createElement("li");
             var a = document.createElement("a");
-            a.setAttribute("id", year + "-" + month + "-" + day);
+            
+            if(month < 10 && day < 10){
+                a.setAttribute("id", year + "-0" + month + "-0" + day);
+            }  
+            else if(mont < 10){
+                a.setAttribute("id", year + "-0" + month + "-" + day);
+                }
+                else if(day < 10){
+                a.setAttribute("id", year + "-" + month + "-0" + day);
+                }
+                else{
+                a.setAttribute("id", year + "-" + month + "-" + day);
+                }
             a.href = "#";
             a.setAttribute("onclick","javascript:checkclick(this.id);");
             
@@ -95,7 +114,7 @@
     </script>
 
 <div class="container" style="padding-top:48px;">
-
+    
 	<legend>Recherche d'un tee-time</legend>
 	<div class="row">
 

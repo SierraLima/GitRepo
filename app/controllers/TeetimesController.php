@@ -7,7 +7,7 @@ class TeetimesController extends BaseController {
 	// routed from GET request to /users
 	public function getSearch()
 	{
-		$this->layout->content = View::make('search');
+		$this->layout->content = View::make('search')->with('teetimes', Teetime::all());
 	}
 
 }
