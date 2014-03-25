@@ -12,7 +12,6 @@ class UsersController extends BaseController {
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
 		$this->beforeFilter('auth', array('only'=>array('getProfile')));
-
 	}
 
 	/**
@@ -92,7 +91,6 @@ class UsersController extends BaseController {
 		Auth::user()->logout();
 		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
 	}
-    
     
 	/**
 	 * update profile page
