@@ -62,5 +62,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+	
+	/**
+	 * Foreign key about reservations
+	 *
+	 * @return foreign
+	 */
+	public function reservations()
+	{
+		return $this->hasMany('Reservation');
+	}
 
 }

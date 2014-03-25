@@ -27,5 +27,15 @@ class Teetime extends Eloquent {
 	{
 		return $this->belongsTo('GolfCourse');
 	}
+	
+	/**
+	 * Foreign key about reservations
+	 *
+	 * @return foreign
+	 */
+	public function reservation()
+	{
+		return $this->hasOne('Reservation');
+	}
 
 }
