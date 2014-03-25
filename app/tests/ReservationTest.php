@@ -1,6 +1,6 @@
 <?php
 
-class TeetimeTest extends TestCase {
+class ReservationTest extends TestCase {
 
 	/**
 	 * Default preparation for each test
