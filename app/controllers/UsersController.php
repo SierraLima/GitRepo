@@ -103,7 +103,7 @@ class UsersController extends BaseController {
 	 */
 	public function postUpdate($id) {
         
-		// fixing laravel unique issue
+        //Creating some new rules for the validation of this page
         $rules = array(
 		'firstname'=>'required|alpha|min:2',
 		'lastname'=>'required|alpha|min:2',

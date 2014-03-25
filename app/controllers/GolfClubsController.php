@@ -98,12 +98,9 @@ class GolfClubsController extends BaseController {
 	public function getTeetimes($date) {
 
 		// TODO: transfer tee-times to the view
-		if(empty($date)) {
-			// we use today's date
-		}
 
 		if (Auth::golfclub()->check()) {
-			$teetimes = Auth::golfclub()->get()->teetimes;
+			$teetimes = Auth::golfclub()->get()->golfcourses[0]->teetimes;
 			$this->layout->content = View::make('admin.teetimes')->with('teetimes', $teetimes)->with('date',$date);
 		}
 		else {
@@ -239,13 +236,14 @@ class GolfClubsController extends BaseController {
 			// treating the JSON
 			if($action=="delete") {
 				$teetime = Teetime::where('date', '=', $formattedDate)->firstOrFail();
-				// for some reason $teetime->delete() doesn't work
+				// with firstOrFail() you have to use destroy()
 				Teetime::destroy($teetime->id);
 			}
 			elseif($action=="liberate") {
 				// saving a new tee-time in the database
 				$teetime = new Teetime;
 				$teetime->date = $date;
+				$teetime->golf_course_id = $json->updates[$i]->course;
 				$teetime->price = $json->updates[$i]->price;
 				$teetime->date = $formattedDate;
 				$teetime->save();

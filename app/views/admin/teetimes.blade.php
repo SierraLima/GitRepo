@@ -7,6 +7,8 @@ img { max-width: 200px; height: auto; }
 
 </style>
 
+{{ $teetimes }}
+
 <script type="text/javascript">
 
 $(document).ready(function () {
@@ -45,17 +47,18 @@ $(document).ready(function () {
 		{
 		    "date": "2012-03-03",
 		    "updates": [
+			{
+			    "hour": "07",
+			    "minutes": "10",
+			    "course": "1",
+			    "action": "liberate",
+			    "price": "120"
+			}
 			// {
 			//     "hour": "07",
 			//     "minutes": "10",
-			//     "action": "liberate",
-			//     "price": "120"
+			//     "action": "delete"
 			// }
-			{
-			    "hour": "07",
-			    "minutes": "20",
-			    "action": "delete"
-			}
 		    ]
 		};
 	$("#json").val(JSON.stringify(myJSONObject));
@@ -106,10 +109,38 @@ $(document).ready(function () {
 				<th>{{ str_pad($i, 2, "0"); }}</th>
 				@for ($j = 7; $j <= 22; $j++)
 					<td>
-						<a href="#" class="btn-circle btn-green">120.-</a>
-						<a href="#" class="btn-circle btn-blue">&nbsp;</a>
-						<a href="#" class="btn-circle">&nbsp;</a>
-						<a href="#" class="btn-circle">&nbsp;</a>
+						<?php
+							for($l=0; $l<4; $l++) {
+							
+								// i = minutes && j = hour
+								// we just need to format them correctly
+
+								for ($k = 0; $k < count($teetimes); $k++) {
+									// handling the date
+									$dt = DateTime::CreateFromFormat("Y-m-d H:i:s", $teetimes[$k]->date);
+									$hour = $dt->format('H');
+									$minutes = $dt->format('i');
+									if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour) {
+										if(isset($teetimes[$k]->price)) {
+											$treatedTeetimes++;
+											echo "<a href='#' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
+										}
+									}
+									// elseif : reservation
+									//<a href="#" class="btn-circle btn-blue">&nbsp;</a>
+
+								}
+
+								// displaying the rest
+								echo 4-count($teetimes);
+								for($m = 0; $m<4-count($teetimes); $m++)
+									echo "<a href='#' class='btn-circle'>&nbsp;</a>";
+							
+							
+							}
+
+
+						?>
 					</td>
 				@endfor
 			</tr>
