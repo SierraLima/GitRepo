@@ -110,36 +110,30 @@ $(document).ready(function () {
 				@for ($j = 7; $j <= 22; $j++)
 					<td>
 						<?php
-							for($l=0; $l<4; $l++) {
-							
-								// i = minutes && j = hour
-								// we just need to format them correctly
+							// i = minutes && j = hour
+							// we just need to format them correctly
+							$treatedTeetimes = 0;
 
-								for ($k = 0; $k < count($teetimes); $k++) {
-									// handling the date
-									$dt = DateTime::CreateFromFormat("Y-m-d H:i:s", $teetimes[$k]->date);
-									$hour = $dt->format('H');
-									$minutes = $dt->format('i');
-									if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour) {
-										if(isset($teetimes[$k]->price)) {
-											$treatedTeetimes++;
-											echo "<a href='#' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
-										}
+							for ($k = 0; $k < count($teetimes); $k++) {
+								// handling the date
+								$dt = DateTime::CreateFromFormat("Y-m-d H:i:s", $teetimes[$k]->date);
+								$hour = $dt->format('H');
+								$minutes = $dt->format('i');
+								// available tee-time
+								if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour) {
+									if(isset($teetimes[$k]->price)) {
+										$treatedTeetimes++;
+										echo "<a href='#' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
 									}
-									// elseif : reservation
-									//<a href="#" class="btn-circle btn-blue">&nbsp;</a>
-
 								}
+								// elseif : reservation
+								//<a href="#" class="btn-circle btn-blue">&nbsp;</a>
 
-								// displaying the rest
-								echo 4-count($teetimes);
-								for($m = 0; $m<4-count($teetimes); $m++)
-									echo "<a href='#' class='btn-circle'>&nbsp;</a>";
-							
-							
 							}
 
-
+							// displaying the rest
+							for($m = 0; $m<4-$treatedTeetimes; $m++)
+								echo "<a href='#' class='btn-circle'>&nbsp;</a>";
 						?>
 					</td>
 				@endfor
