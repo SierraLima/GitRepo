@@ -78,7 +78,7 @@ class UsersController extends BaseController {
 	 */
 	public function getProfile() {
 		if(Auth::user()->check()) {
-			$this->layout->content = View::make('users.profile');
+			$this->layout->content = View::make('users.profile')->with('user', Auth::user()->get());;
 		}
 		else {
 			return Redirect::to('index')->with('message', 'Your are not authorized to see this page!');
@@ -94,5 +94,41 @@ class UsersController extends BaseController {
 		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
 
 	}
+    
+    
+	/**
+	 * update profile page
+	 * 
+	 * @param id -> int to identify a user
+	 */
+	public function postUpdate($id) {
 
+		// fixing laravel unique issue
+		$rules = User::$rules;
+		$rules['email'] = $rules['email'].','.$id;
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+
+			// validation has passed, save user in DB
+			$user = User::find($id);
+
+			$user->firstname = Input::get('firstname');
+            $user->lastname = Input::get('lastname');
+			$user->email = Input::get('email');
+			$user->birthday = Input::get('birthday');
+			$user->country = Input::get('country');
+			$user->password = Hash::make(Input::get('password'));
+            $user->description = Input::get('description');
+			$user->update();
+
+			return Redirect::to('users')->with('message', 'Your profile has been updated.');
+
+		} else {
+			// validation has failed, display error messages    
+			return Redirect::to('user/profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+		}
+	}
+    //*/
 }

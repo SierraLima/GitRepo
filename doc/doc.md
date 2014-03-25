@@ -83,7 +83,16 @@ is currently not installed on the virtual machine therefore the tests must be
 runned locally.
 
 ### Functional tests
+For testing the fileupload we used Selenium. First we installed the Selenium IDE and 
+then wrote the tests. We wrote test for four different scenarios on the admin page.
 
+1. The admin logs in and uploads a image that is smaller then 2 megabytes.
+2. The admin logs in and uploads a image that is bigger then 2 megabytes.
+3. The admin logs in and uploads an empty image or a bad file.
+4. The admin logs in and deletes a file. 
+
+At the end of each test we werified that the correct message is displayed at the appearing info box. 
+All tests passed succesfully. 
 
 ## MySQL login
 
