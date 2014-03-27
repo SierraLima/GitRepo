@@ -253,5 +253,4 @@ class GolfClubsController extends BaseController {
 		return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Your updates have been saved.');
 	
 	}
-
 }

@@ -9,5 +9,4 @@ class TeetimesController extends BaseController {
 	{
 		$this->layout->content = View::make('search')->with('teetimes', Teetime::all());
 	}
-
 }
