@@ -20,6 +20,41 @@
     var jsonGolfcourse;
     var jsonMedia;
         
+    var selecteddate;
+    var ninefilter;
+    var eighteenfilter;
+        
+    //Variables to display the teetimes
+    var tr;
+    var golfclub;
+    var golfclublink;
+    var timetd;
+    var imagetd;
+    var image;
+    var price;
+    var pricebold;
+    var selecttd;
+    var selector;
+    var buttontd;
+    var button;
+    var tablebox;
+        
+    
+    function filter($number){
+        
+        if($number == 9){
+            ninefilter = true; 
+            eighteenfilter = false;
+        }
+        else{
+            ninefilter = false;
+            eighteenfilter = true;
+        }
+        
+        checkclick(selecteddate);
+    }
+        
+        
     function showdescription($name, $description, $imageurl){
         
         
@@ -28,13 +63,13 @@
         clearleftelement(div);
         
         var golfclubtitle = document.createElement("h4");
-        var image = document.createElement("img");
+        var descriptionimage = document.createElement("img");
         var p = document.createElement("p");
         
-        image.setAttribute("height", "56");
-        image.setAttribute("width", "56");
-        image.setAttribute("style", "float:left;margin:0 5px 0 0;");
-        image.setAttribute("src", $imageurl);
+        descriptionimage.setAttribute("height", "56");
+        descriptionimage.setAttribute("width", "56");
+        descriptionimage.setAttribute("style", "float:left;margin:0 5px 0 0;");
+        descriptionimage.setAttribute("src", $imageurl);
         golfclubtitle.innerHTML = $name;
         p.appendChild(golfclubtitle);
         p.appendChild(image);
@@ -65,11 +100,76 @@
         jsonGolfclub = JSON.parse(golfclubs);
         jsonGolfcourse = JSON.parse(golfcurse);
         jsonMedia = JSON.parse(media);
+    } 
+        
+    function createtablebox(){
+        tablebox = document.getElementById("tablebody"); 
+    }
+        
+    function createelements(){
+        tr = document.createElement("tr");
+        golfclub = document.createElement("td");
+        golfclublink = document.createElement("a");
+        timetd = document.createElement("td");
+        imagetd = document.createElement("td");
+        image = document.createElement("img");
+        price = document.createElement("td");
+        pricebold = document.createElement("b");
+        selecttd = document.createElement("td");
+        selector = document.createElement("select");
+        buttontd  = document.createElement("td");
+        button = document.createElement("button");
+    }
+        
+    function addelements(){
+        
+        if(image.hasAttribute("src") == false){
+            image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+            golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+        }
+                
+        golfclublink.href = "#";        
+        golfclublink.setAttribute("onclick", "javascript:showdescription($(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'));");
+                
+        image.setAttribute("height","28");
+        image.setAttribute("width","28");
+        button.setAttribute("type","submit");
+        button.setAttribute("class","btn btn-success");
+        button.innerHTML = "Reserver";
+        button.setAttribute("onclick", "javascript:buttonclick(this.id);");
+                        
+                
+                    imagetd.appendChild(image);
+                    price.appendChild(pricebold);
+                
+                    for(var i = 0; i<4; i++){
+                        var option = document.createElement("option");
+                        option.innerHTML = i+1;
+                        selector.appendChild(option); 
+                    }
+                    
+                    selecttd.appendChild(selector);
+                    selecttd.innerHTML += "  jouer(s)";
+                    buttontd.appendChild(button);
+                
+                    tr.appendChild(timetd);
+                    tr.appendChild(imagetd);
+                    tr.appendChild(golfclub);
+                    tr.appendChild(price);
+                    tr.appendChild(selecttd);
+                    tr.appendChild(buttontd);
+                    
+                
+                    tablebox.appendChild(tr);
     }
         
 	function checkclick($datum){
         
-        var tablebox = document.getElementById("tablebody"); 
+        //Set the actual date
+        selecteddate = $datum;
+        
+        createtablebox();
+        //var tablebox = document.getElementById("tablebody"); 
        
         while ( tablebox.rows.length > 0 )
         {
@@ -78,11 +178,12 @@
         
         for (var i in jsonData) {
             // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
-            if(jsonData[i].date.substring(0,10) == $datum){
+        if(jsonData[i].date.substring(0,10) == $datum){
                     
-                
-                     //Creating the variables
         
+        createelements();
+
+        /*
         var tr = document.createElement("tr");
         var golfclub = document.createElement("td");
         var golfclublink = document.createElement("a");
@@ -95,8 +196,11 @@
         var selector = document.createElement("select");
         var buttontd  = document.createElement("td");
         var button = document.createElement("button");
-        
+        */
   
+        /**********************************************/
+        
+                
         timetd.innerHTML = "12:40";
         //golfclub.innerHTML = "GolfClub de Sierre";
                 
@@ -105,23 +209,69 @@
             if(jsonGolfcourse[j].id == jsonData[i].golf_course_id){
                 for(var k in jsonGolfclub){
                     if(jsonGolfclub[k].id == jsonGolfcourse[j].golf_club_id){
+                        
+                        if(ninefilter){
+                        if(jsonGolfcourse[j].holenumber == 9){
+                        
+                            
                         golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         golfclublink.setAttribute("description", jsonGolfclub[k].description);
                         golfclublink.setAttribute("name", jsonGolfclub[k].name);
-                        //golfclub.innerHTML = jsonGolfclub[k].name;
                         golfclub.appendChild(golfclublink);
                         
                         for(var l in jsonMedia){
                         if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     image.setAttribute("src", jsonMedia[l].url);
                                     golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                }
+                            }
+                        button.setAttribute("id", jsonData[i].id);
+                        pricebold.innerHTML = jsonData[i].price;
+                        addelements();
                         }
+                        }
+                        else if(eighteenfilter){
+                            if(jsonGolfcourse[j].holenumber == 18){
+                                                
+                        golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
+                        golfclublink.setAttribute("description", jsonGolfclub[k].description);
+                        golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                        golfclub.appendChild(golfclublink);
+                        
+                        for(var l in jsonMedia){
+                        if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
+                                    image.setAttribute("src", jsonMedia[l].url);
+                                    golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                    }      
+                                }
+                            button.setAttribute("id", jsonData[i].id);
+                            pricebold.innerHTML = jsonData[i].price;
+                            addelements();
+                            }
+                        }
+                        else{
+                                                
+                        golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
+                        golfclublink.setAttribute("description", jsonGolfclub[k].description);
+                        golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                        golfclub.appendChild(golfclublink);
+                        
+                        for(var l in jsonMedia){
+                        if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
+                                    image.setAttribute("src", jsonMedia[l].url);
+                                    golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                            }
+                        }
+                        button.setAttribute("id", jsonData[i].id);
+                        pricebold.innerHTML = jsonData[i].price;
+                        addelements();
                     }
-                }
                 }
             }
         }
-        
+        }//End for var j
+            
+        /*
         if(image.hasAttribute("src") == false){
             image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
@@ -163,16 +313,18 @@
                     
                 
                     tablebox.appendChild(tr);
+                    */
                 }
         }
-        /*
+    }
+        
+            /*
         <ul>
         @foreach($teetimes as $teetime)
         <li> {{ $teetime->date }}</li>
         @endforeach
         </ul>
         */
-    }
         
     //Function to initialise the day, month and year variable with today's date
     function initialisedate($year, $month, $day){
@@ -505,8 +657,8 @@
 				<label class="control-label input-label" for="disabledInput">Filters :</label>
 				<p>
                     Trous
-                    <button style="width:50px;height:50px">9</button>
-                    <button style="width:50px;height:50px">18</button>
+                    <button number="9" style="width:50px;height:50px" onclick="filter( $(this).attr('number'))">9</button>
+                    <button number="18" style="width:50px;height:50px" onclick="filter( $(this).attr('number'))">18</button>
 
                 </p>
 			</div>
