@@ -14,6 +14,33 @@
     var month;
     var year;
         
+    function showdescription($name, $description, $imageurl){
+        
+        
+        var div = document.getElementById("descriptiondiv");
+        
+        clearleftelement(div);
+        
+        var golfclubtitle = document.createElement("h4");
+        var image = document.createElement("img");
+        var p = document.createElement("p");
+        
+        image.setAttribute("height", "56");
+        image.setAttribute("width", "56");
+        image.setAttribute("style", "float:left;margin:0 5px 0 0;");
+        image.setAttribute("src", $imageurl);
+        golfclubtitle.innerHTML = $name;
+        p.appendChild(golfclubtitle);
+        p.appendChild(image);
+        p.innerHTML += $description;
+        div.appendChild(p);
+    }
+        
+    function clearleftelement($div){
+        
+        $($div).empty();
+    }
+        
     function buttonclick($id){
         alert("Teetime with id " + $id + " clicked");   
     }
@@ -49,6 +76,7 @@
         
         var tr = document.createElement("tr");
         var golfclub = document.createElement("td");
+        var golfclublink = document.createElement("a");
         var timetd = document.createElement("td");
         var imagetd = document.createElement("td");
         var image = document.createElement("img");
@@ -68,22 +96,30 @@
             if(jsonGolfcourse[j].id == jsonData[i].golf_course_id){
                 for(var k in jsonGolfclub){
                     if(jsonGolfclub[k].id == jsonGolfcourse[j].golf_club_id){
-                        golfclub.innerHTML = jsonGolfclub[k].name;
+                        golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
+                        golfclublink.setAttribute("description", jsonGolfclub[k].description);
+                        golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                        //golfclub.innerHTML = jsonGolfclub[k].name;
+                        golfclub.appendChild(golfclublink);
                         
                         for(var l in jsonMedia){
                         if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     image.setAttribute("src", jsonMedia[l].url);
+                                    golfclublink.setAttribute("imageurl", jsonMedia[k].url);
                         }
                     }
                 }
-                break;
                 }
             }
         }
         
         if(image.hasAttribute("src") == false){
-            image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");        
+            image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+            golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
         }
+                
+        golfclublink.href = "#";        
+        golfclublink.setAttribute("onclick", "javascript:showdescription($(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'));");
                 
         image.setAttribute("height","28");
         image.setAttribute("width","28");
@@ -446,25 +482,24 @@
 		</div>
 
 		<div class="col-md-4">
-			<div class="left-table">
-				<h4>Sierre</h4>
-				<p>
-					<img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="56" width="56" style="float:left;margin:0 5px 0 0;" />
-					Duis aute irure dolor sed do eiusmod tempor incididunt in reprehenderit in voluptate. Cupidatat non proident, ut labore et dolore magna aliqua. Sunt in culpa quis nostrud exercitation excepteur sint occaecat. Mollit anim id est laborum.
+			<div id="descriptiondiv" class="left-table">
+				<h4 id="golfclubtitle"></h4>
+				<p id="descriptionp">
+                    <!--
+					<img id="descriptionimage" src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="56" width="56" style="float:left;margin:0 5px 0 0;" />
+                    -->
 				</p>
 			</div>
 
 			<div class="left-table">
 
-				TODO
+				<label class="control-label input-label" for="disabledInput">Filters :</label>
+				<p>
+                    Trous
+                    <button style="width:50px;height:50px">9</button>
+                    <button style="width:50px;height:50px">18</button>
 
-				<label class="control-label input-label" for="disabledInput">Start :</label>
-				<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
-
-				<select class="form-control">
-					<option>CHF</option>
-					<option>EUR</option>
-				</select>
+                </p>
 			</div>
 
 			<div class="left-table">
