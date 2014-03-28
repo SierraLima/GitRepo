@@ -38,7 +38,7 @@ class PriceTest extends TestCase {
 		
 		$price->amount = "120.00";
 		$price->description = "PriceTest";
-		$price->golf_club_id = '1';
+		$price->golf_club_id = "1";
 		
 		// Price should save
 		$this->assertTrue($price->save());
@@ -115,7 +115,7 @@ class PriceTest extends TestCase {
 		
 		$price->amount = "120.00";
 		$price->description = "PriceTest";
-		$price->golf_club_id = '1';
+		$price->golf_club_id = "1";
 
 		// Teetime should save
 		$this->assertTrue($price->save());
