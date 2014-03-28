@@ -29,9 +29,11 @@
 
 {{ Form::open(array('url'=>'golfclubs/newprice')) }}
 	<p>Ajouter un nouveau prix :</p>
+	
 	<div class="form-group">
 		{{ Form::text('description', null, array('class'=>'form-control', 'placeholder'=>'Description')) }}
 	</div>
+	
 	<div class="form-group">
 		{{ Form::text('amount', null, array('class'=>'form-control', 'placeholder'=>'Prix')) }}
 	</div>

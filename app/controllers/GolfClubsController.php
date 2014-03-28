@@ -33,7 +33,6 @@ class GolfClubsController extends BaseController {
 		$this->layout->content = View::make('admin.login');
 	}
 
-
 	/**
 	 * return profile page
 	 */
@@ -94,7 +93,10 @@ class GolfClubsController extends BaseController {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
 		}
 	}
-	
+
+	/**
+	 * return prices page
+	 */	
 	public function getPrices() {
 
 		if (Auth::golfclub()->check()) {
@@ -106,6 +108,11 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
+	/**
+	 * return teetimes page
+	 * 
+	 * @param date -> date of the teetime
+	 */	
 	public function getTeetimes($date) {
 
 		if (Auth::golfclub()->check()) {
@@ -129,13 +136,14 @@ class GolfClubsController extends BaseController {
 	}
 
 	/**
-	 * return delete page
+	 * return delete page of media
 	 * 
-	 * @param id -> int to delete a media
+	 * @param id -> int to delete the corresponding media
 	 */
-	public function getDelete($id) {
+	public function getDeletemedia($id) {
 
 		if (Auth::golfclub()->check()) {
+				
 			// deleting the db record
 			$picture = Media::find($id);
 			$picture->delete();
@@ -150,9 +158,15 @@ class GolfClubsController extends BaseController {
 		}
 	}
 
+	/**
+	 * return delete page of prices
+	 * 
+	 * @param id -> int to delete the corresponding price
+	 */
 	public function getDeleteprice($id) {
 
 		if (Auth::golfclub()->check()) {
+				
 			// deleting the db record
 			$price = Price::find($id);
 			$price->delete();
@@ -191,7 +205,6 @@ class GolfClubsController extends BaseController {
 			// validation has failed, display error messages    
 			return Redirect::to('golfclubs/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
-
 	}
 
 	/**
@@ -213,6 +226,7 @@ class GolfClubsController extends BaseController {
 	 */
 	public function postUpload() {
 
+		// Create a new media (image)
 		$media = new Media;
 
 		if(Input::hasFile('image'))
@@ -230,6 +244,7 @@ class GolfClubsController extends BaseController {
 		$rules = array('image' => 'image');
 		$validator = Validator::make($input, $rules);
 
+		// Check the rules
 		if($validator->fails()) {
 			return Redirect::to('golfclubs/gallery')->with('message', 'The file you\'ve sent is not supported.');
 		}
@@ -245,18 +260,22 @@ class GolfClubsController extends BaseController {
 			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
 		else
 			return Redirect::to('golfclubs/gallery')->with('message', 'There was an error. Please try again.');
-
 	}
-
+	
+	/**
+	 * action of create a price
+	 */
 	public function postNewprice() {
 
+		// Create a new price
 		$price = new Price;
 
 		$validator = Validator::make(Input::all(), Price::$rules);
 
+		// Check the rules
 		if ($validator->passes()) {
-			$price->description = Input::get('description');
 			$price->amount = Input::get('amount');
+			$price->description = Input::get('description');
 			$price->golf_club_id = Auth::golfclub()->get()->id;
 		}
 		else
@@ -264,10 +283,11 @@ class GolfClubsController extends BaseController {
 
 		if($price->save())
 			return Redirect::to('golfclubs/prices')->with('message', 'Your price has been successfully added!');
-
 	}
 
-
+	/**
+	 * action of create a teetime
+	 */
 	public function postTeetimes() {
 
 		// getting the JSON back
@@ -280,10 +300,12 @@ class GolfClubsController extends BaseController {
 			// treating the JSON
 			if($action=="delete") {
 				$teetime = Teetime::where('id', '=', $json->updates[$i]->id)->firstOrFail();
+				
 				// with firstOrFail() you have to use destroy()
 				Teetime::destroy($teetime->id);
 			}
 			elseif($action=="liberate") {
+					
 				// saving a new tee-time in the database
 				$formattedDate = $date.' '.$json->updates[$i]->hour.':'.$json->updates[$i]->minutes;
 				$teetime = new Teetime;
@@ -293,12 +315,9 @@ class GolfClubsController extends BaseController {
 				$teetime->date = $formattedDate;
 				$teetime->save();
 			}
-
 		}
-
 		$teetime->save();
 		return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Your updates have been saved.');
-	
 	}
 
 }

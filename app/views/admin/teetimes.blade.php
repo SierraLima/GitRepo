@@ -58,10 +58,10 @@ $(document).ready(function () {
 		var outputDate = year+"-"+month+"-"+day;
 
 		$("#date").append(new Option(outputDate, outputDate));
+		
 		// default value
 		if(i==0)
 			$('#date option[value="'+outputDate+'"]').attr("selected",true);
-	
 	}
 
 	var url = "{{ URL::action('GolfClubsController@getTeetimes') }}";
@@ -71,19 +71,19 @@ $(document).ready(function () {
 		
 	initMyJSONObject();
 
-
 	$("td a").click(function(e) {
 		e.preventDefault();
+		
 		if($(this).hasClass("btn-selected"))
 			$(this).removeClass("btn-selected");
 		else
 			$(this).addClass("btn-selected");
-
 	});
 	
 	$(".btn-circle").click(function(e) {
 		var row = $(this).closest("tr").index();
 		var col = $(this).closest("td").index()+6;
+		
 		if(mode=="delete") {
 			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
 		}
@@ -102,8 +102,6 @@ $(document).ready(function () {
 	$("input[type=submit]").click(function(e) {
 		$("#json").val(JSON.stringify(myJSONObject));
 	});
-
-
 });
 
 </script>
@@ -151,6 +149,7 @@ $(document).ready(function () {
 								$hour = $dt->format('H');
 								$minutes = $dt->format('i');
 								$year = $dt->format('Y');
+								
 								// converting 03 to 3
 								$month = ltrim($dt->format('m'), '0');
 								$day = ltrim($dt->format('d'), '0');
@@ -169,7 +168,6 @@ $(document).ready(function () {
 									}
 								}
 							}
-
 							// displaying the rest
 							for($m = 0; $m<4-$treatedTeetimes; $m++)
 								echo "<a href='#' class='btn-circle'>&nbsp;</a>";
@@ -204,6 +202,7 @@ $(document).ready(function () {
 				<td><input type="checkbox" value="{{ $prices[$k]->amount }}"></td>
 			</tr>
 			<?php } ?>
+			
 		</table>
 	</div>
 	<div class="content"><p>Select the tee-times you want to delete and click on Confirmation.</p></div>
@@ -211,6 +210,7 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 $(document).ready(function () {
+	
 	// hiding non active pane
 	$(".content").eq(1).hide();
 
@@ -233,9 +233,7 @@ $(document).ready(function () {
 		// showing the pane
 		var index = $(this).index();
 		$(".content").eq(index).show();
-
 	});
-
 });
 
 </script>
