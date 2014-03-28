@@ -7,7 +7,7 @@ class Price extends Eloquent {
 
 	// define validation rules
 	public static $rules = array(
-		'amount'=>'required',
+		'amount'=>'required|Numeric',
 		'description'=>'required'
 	);
 
