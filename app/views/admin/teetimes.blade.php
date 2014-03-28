@@ -9,6 +9,8 @@ img { max-width: 200px; height: auto; }
 
 <script type="text/javascript">
 
+var myJSONObject, mode = "manage";
+
 $(document).ready(function () {
 
 	// getting the date from laravel
@@ -46,25 +48,24 @@ $(document).ready(function () {
 		window.location = url+'/'+$(this).val();
 	});
 		
-	var myJSONObject = 
+	myJSONObject = 
 		{
-		    "date": "2012-03-03",
+		    "date": "{{ $date }}",
 		    "updates": [
-			{
-			    "hour": "07",
-			    "minutes": "10",
-			    "course": "1",
-			    "action": "liberate",
-			    "price": "120"
-			}
 			// {
 			//     "hour": "07",
 			//     "minutes": "10",
+			//     "course": "1",
+			//     "action": "liberate",
+			//     "price": "120"
+			// },
+			// {
+			//     "id": "7",
 			//     "action": "delete"
 			// }
 		    ]
 		};
-	$("#json").val(JSON.stringify(myJSONObject));
+
 
 	$("td a").click(function(e) {
 		e.preventDefault();
@@ -75,6 +76,21 @@ $(document).ready(function () {
 
 	});
 	
+	$(".btn-circle").click(function(e) {
+		if(mode=="delete") {
+			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
+		}
+		else if(mode=="liberate") {
+			console.debug(this);
+			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
+		}
+	});
+
+	// before submitting, we save myJSONObject in the form
+	$("input[type=submit]").click(function(e) {
+		$("#json").val(JSON.stringify(myJSONObject));
+	});
+
 
 });
 
@@ -126,17 +142,18 @@ $(document).ready(function () {
 								// converting 03 to 3
 								$month = ltrim($dt->format('m'), '0');
 								$day = ltrim($dt->format('d'), '0');
+								$id = $teetimes[$k]->id;
 
 								// reserved tee-time
 								if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour && $date==$year."-".$month."-".$day) {
 									if(count($teetimes[$k]->reservation)==1) {
 										$treatedTeetimes++;
-										echo "<a href='#' class='btn-circle btn-blue'>&nbsp;</a>";
+										echo "<a href='#' id='$id' class='btn-circle btn-blue'>&nbsp;</a>";
 									}
 									// available tee-time
 									elseif(count($teetimes[$k]->reservation)==0) {
 										$treatedTeetimes++;
-										echo "<a href='#' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
+										echo "<a href='#' id='$id' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
 									}
 								}
 							}
@@ -165,9 +182,36 @@ $(document).ready(function () {
 	<li id="delete"><a href="#">Delete tee-times</a></li>
 </ul>
 <div id="content">
-	<div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tempus sem ac sem molestie fringilla. Donec interdum, sapien eget placerat viverra, magna dui molestie diam, sit amet vulputate metus mi vel dui. Nam vel luctus ipsum, at dictum nibh. Pellentesque tristique facilisis ornare. Praesent non magna eget mauris ultricies venenatis. In quis sodales mi. Integer in nulla dictum, ultricies nibh sed, suscipit odio. Integer non volutpat libero. Curabitur sed tellus non nunc eleifend varius at ac magna. Phasellus laoreet leo est, ac adipiscing augue ultricies nec. Morbi sed leo vitae felis euismod pellentesque et vel velit.</div>
-	<div class="content">liberate</div>
-	<div class="content">delete</div>
+	<div class="content">
+		<table class="table">
+			<tr>
+				<td>Range X</td>
+				<td>120.-</td>
+				<td><a href="#">Delete</a></td>
+			</tr>
+			<tr>
+				<td>Range Y</td>
+				<td>80.-</td>
+				<td><a href="#">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="content">
+		<p>Select the tee-times you want to liberate, the price range that you want to apply and click on Confirmation.</p>
+		<table class="table">
+			<tr>
+				<td>Range X</td>
+				<td>120.-</td>
+				<td><input type="checkbox" name="option1" value="Milk"></td>
+			</tr>
+			<tr>
+				<td>Range Y</td>
+				<td>80.-</td>
+				<td><input type="checkbox" name="option1" value="Milk"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="content"><p>Select the tee-times you want to delete and click on Confirmation.</p></div>
 </div>
 
 <script type="text/javascript">
@@ -180,11 +224,13 @@ $(document).ready(function () {
 		e.preventDefault();
 
 		// active class
-		$("li.active").removeClass("active");
+		$("#links li.active").removeClass("active");
 		if($(this).hasClass("active"))
 			$(this).removeClass("active");
 		else
 			$(this).addClass("active");
+
+		mode = $(this).attr('id');
 
 		// hiding everything but the menu
 		$(".content").not(this).hide();
@@ -203,5 +249,5 @@ $(document).ready(function () {
 
 {{ Form::open(array('url'=>'golfclubs/teetimes')) }}
 	<input type="hidden" id="json" name="json" value="" />
-	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
+	{{ Form::submit('Confirmation', array('class'=>'btn btn-primary btn-default'))}}
 {{ Form::close() }}

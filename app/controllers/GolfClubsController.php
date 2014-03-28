@@ -228,17 +228,17 @@ class GolfClubsController extends BaseController {
 		$date = $json->date;
 
 		for ($i = 0; $i < count($json->updates); $i++) {
-			$formattedDate = $date.' '.$json->updates[$i]->hour.':'.$json->updates[$i]->minutes;
 			$action = $json->updates[$i]->action;
 
 			// treating the JSON
 			if($action=="delete") {
-				$teetime = Teetime::where('date', '=', $formattedDate)->firstOrFail();
+				$teetime = Teetime::where('id', '=', $json->updates[$i]->id)->firstOrFail();
 				// with firstOrFail() you have to use destroy()
 				Teetime::destroy($teetime->id);
 			}
 			elseif($action=="liberate") {
 				// saving a new tee-time in the database
+				$formattedDate = $date.' '.$json->updates[$i]->hour.':'.$json->updates[$i]->minutes;
 				$teetime = new Teetime;
 				$teetime->date = $date;
 				$teetime->golf_course_id = $json->updates[$i]->course;

@@ -83,16 +83,18 @@ is currently not installed on the virtual machine therefore the tests must be
 runned locally.
 
 ### Functional tests
-For testing the fileupload we used Selenium. First we installed the Selenium IDE and 
-then wrote the tests. We wrote test for four different scenarios on the admin page.
 
-1. The admin logs in and uploads a image that is smaller then 2 megabytes.
-2. The admin logs in and uploads a image that is bigger then 2 megabytes.
+For testing the file upload we used Selenium. First we installed the Selenium 
+IDE and then wrote the tests. We wrote test for four different scenarios on the 
+admin page.
+
+1. The admin logs in and uploads a image that is smaller than 2 megabytes.
+2. The admin logs in and uploads a image that is bigger than 2 megabytes.
 3. The admin logs in and uploads an empty image or a bad file.
 4. The admin logs in and deletes a file. 
 
-At the end of each test we werified that the correct message is displayed at the appearing info box. 
-All tests passed succesfully. 
+At the end of each test we verified that the correct message is displayed at 
+the appearing info box. All tests passed successfully. 
 
 ## MySQL login
 
@@ -128,9 +130,39 @@ middle of the sprint will finish on Sprint 2. Some tasks was a little too
 high evaluated we will try to better evaluate tasks for next sprints. We must 
 also corrected some little things on the golfclub registration page.
 
-On sprint retrospective we decide to take more story point for the sprint 2(21).
-And we have a new ressouve for the developement team (Kevin Kreuzer). We have 
-revaluated the US5 to 13 story point. We took US4, 5 and 6 for the Sprint 2.
+On sprint retrospective we decide to take more story point for the sprint 
+2(21). And we have a new ressouve for the developement team (Kevin Kreuzer). We 
+have revaluated the US5 to 13 story point. We took US4, 5 and 6 for the Sprint 
+2.
+
+## Tee-times "API"
+
+The easiest way we've found for editing tee-times was to make a Javascript page 
+communicate with Laravel. To do this we created a sort of API which looks like 
+this:
+
+	var myJSONObject = {
+		    "date": "2012-03-03",
+		    "updates": [
+			{
+			    "hour": "07",
+			    "minutes": "10",
+			    "course": "1",
+			    "action": "liberate",
+			    "price": "120"
+			}
+			{
+			    "id": "7",
+			    "action": "delete"
+			}
+		    ]
+		};
+
+Basically every update done to the tee-time calendar is a JSON item inside the 
+updates array. Every liberation contains an hour, minutes and a course and each 
+suppression contains an id. Then the `action` field tells the controller what 
+to do with that tee-time and saves it in the database. The JSON object also 
+contains a date which concerns all the updates done for this time.
 
 ## Sources
 
@@ -141,4 +173,5 @@ revaluated the US5 to 13 story point. We took US4, 5 and 6 for the Sprint 2.
 - http://getbootstrap.com
 - http://laravel.com
 - http://www.windowsazure.com/
-- http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/
+- 
+http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/
