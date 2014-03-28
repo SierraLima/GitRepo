@@ -20,9 +20,12 @@
     var jsonGolfcourse;
     var jsonMedia;
         
+    //Variables used for the filter function
     var selecteddate;
     var ninefilter;
     var eighteenfilter;
+    var minprice = 0.00;
+    var maxprice = 1000.00;
         
     //Variables to display the teetimes
     var tr;
@@ -38,7 +41,6 @@
     var buttontd;
     var button;
     var tablebox;
-        
     
     function filter($number){
         
@@ -46,10 +48,16 @@
             ninefilter = true; 
             eighteenfilter = false;
         }
-        else{
+        else if($number == 18){
             ninefilter = false;
             eighteenfilter = true;
         }
+        else
+        {
+            ninefilter = false;
+            eighteenfilter = false;
+        }
+        
         
         checkclick(selecteddate);
     }
@@ -72,7 +80,7 @@
         descriptionimage.setAttribute("src", $imageurl);
         golfclubtitle.innerHTML = $name;
         p.appendChild(golfclubtitle);
-        p.appendChild(image);
+        p.appendChild(descriptionimage);
         p.innerHTML += $description;
         div.appendChild(p);
     }
@@ -176,11 +184,15 @@
             tablebox.deleteRow(0);
         }
         
-        for (var i in jsonData) {
-            // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
-        if(jsonData[i].date.substring(0,10) == $datum){
-                    
         
+        for (var i in jsonData) {
+            
+        //alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
+            
+            
+            // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
+        if(jsonData[i].date.substring(0,10) == $datum && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
+                    
         createelements();
 
         /*
@@ -332,6 +344,24 @@
         this.month = $month;
         this.year = $year;
     }
+      
+    
+    //Functions to display th valu of the Slider
+    function showMinValue(newValue)
+    {
+        document.getElementById("range1").innerHTML=newValue;
+        minprice = newValue;
+        checkclick(selecteddate);
+    }
+        
+    function showMaxValue(newValue)
+    {
+        document.getElementById("range2").innerHTML=newValue;
+        maxprice = newValue;
+        checkclick(selecteddate);
+    }
+        
+    
     
     function myfunction(){   
         
@@ -659,7 +689,20 @@
                     Trous
                     <button number="9" style="width:50px;height:50px" onclick="filter( $(this).attr('number'))">9</button>
                     <button number="18" style="width:50px;height:50px" onclick="filter( $(this).attr('number'))">18</button>
-
+                    <button number="0" style="width:50px;height:50px" onclick="filter( $(this).attr('number'))">-</button>
+                </p>
+                <br />
+                <br />
+                <p>
+                    Preisminimum
+                    <input type="range" min="0" max="1000" value="0" onchange="showMinValue(this.value)">
+                    <span id="range1">0</span>
+                </p>
+                <br />
+                <p>
+                    Preismaximum
+                    <input type="range" min="0" max="1000" value="1000" onchange="showMaxValue(this.value)">
+                    <span id="range2">1000</span>
                 </p>
 			</div>
 
@@ -700,7 +743,6 @@
                 else{
                 passvalue = year + "-" + month + "-" + day;
                 }
-        
         initialisedate(year, month, day);
         myfunction();
         checkclick(passvalue);
