@@ -19,18 +19,19 @@
     }
         
 	function checkclick($datum){
-        
-         
-        
+                                
         var teetimes = '{{ $teetimes }}';
         
         //Retrieving the data from the golfclubs
         var golfclubs = '{{ Golfclub::all() }}';   
         var golfcurse = '{{ Golfcourse::all() }}';
+        var media = '{{ Media::all() }}';
+        
         
         var jsonData = JSON.parse(teetimes);
         var jsonGolfclub = JSON.parse(golfclubs);
         var jsonGolfcourse = JSON.parse(golfcurse);
+        var jsonMedia = JSON.parse(media);
         
         var tablebox = document.getElementById("tablebody"); 
        
@@ -68,15 +69,22 @@
                 for(var k in jsonGolfclub){
                     if(jsonGolfclub[k].id == jsonGolfcourse[j].golf_club_id){
                         golfclub.innerHTML = jsonGolfclub[k].name;
-                        break;
+                        
+                        for(var l in jsonMedia){
+                        if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
+                                    image.setAttribute("src", jsonMedia[l].url);
+                        }
                     }
                 }
-            break;
+                break;
+                }
             }
         }
         
+        if(image.hasAttribute("src") == false){
+            image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");        
+        }
                 
-        image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
         image.setAttribute("height","28");
         image.setAttribute("width","28");
         button.setAttribute("type","submit");
@@ -480,6 +488,22 @@
         var month = dt.getMonth() + 1;
         var day = dt.getDate();
      
+        var passvalue;   
+     
+        if(month < 10 && day < 10){
+                passvalue = year + "-0" + month + "-0" + day;
+            }  
+            else if(month < 10){
+                passvalue = year + "-0" + month + "-" + day;
+                }
+                else if(day < 10){
+                passvalue = year + "-" + month + "-0" + day;
+                }
+                else{
+                passvalue = year + "-" + month + "-" + day;
+                }
+     
         initialisedate(year, month, day);
         myfunction();
+        checkclick(passvalue);
 </script>
