@@ -31,4 +31,39 @@ class ReservationTest extends TestCase {
 		Artisan::call('migrate');
 	}
 	
+	/*
+	public function testReservationCreationWorks()
+	{
+		// Create a reservation
+		$reservation = new Reservation;
+		
+		$reservation->numberplayer = "4";
+		$reservation->user_id = "1";
+		$reservation->teetime_id = "1";
+		
+		// Price should save
+		$this->assertTrue($reservation->save());
+	}
+
+	public function testPriceValidationWorks()
+	{
+		// Set the validator
+		$validator = Validator::make(
+			array(
+				'numberplayer' => '4',
+				'user_id' => '1',
+				'teetime_id' => '1'
+			),
+			Reservation::$rules
+		);
+
+		if($validator->fails())
+			echo $validator->messages();
+
+		// Test must past
+		$this->assertTrue($validator->passes());
+	}
+	 * 
+	 */
+	
 }

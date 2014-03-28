@@ -38,7 +38,7 @@ class TeetimeTest extends TestCase {
 		
 		$teetime->date = "01.01.2000 0:00";
 		$teetime->price = "120";
-		$teetime->golf_course_id = '1';
+		$teetime->golf_course_id = "1";
 		
 		// Teetime should save
 		$this->assertTrue($teetime->save());
@@ -115,7 +115,7 @@ class TeetimeTest extends TestCase {
 		
 		$teetime->date = "01.01.2000 0:00";
 		$teetime->price = "120";
-		$teetime->golf_course_id = '1';
+		$teetime->golf_course_id = "1";
 
 		// Teetime should save
 		$this->assertTrue($teetime->save());

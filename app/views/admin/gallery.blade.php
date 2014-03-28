@@ -18,7 +18,7 @@ img { max-width: 200px; height: auto; }
 		@foreach ($media as $picture)
 			<tr>
 				<td><img src="<?php echo URL::to('/').'/'.$picture->url ?>"/></td>
-				<td><a href="<?php echo URL::to('golfclubs').'/delete/'.$picture->id ?>">Effacer</a></td>
+				<td><a href="<?php echo URL::to('golfclubs').'/deletemedia/'.$picture->id ?>">Effacer</a></td>
 			</tr>
 		@endforeach
 

@@ -9,6 +9,29 @@ img { max-width: 200px; height: auto; }
 
 <script type="text/javascript">
 
+var myJSONObject, mode = "liberate";
+
+function initMyJSONObject() {
+
+	myJSONObject = 
+		{
+		    "date": "{{ $date }}",
+		    "updates": [
+			// {
+			//     "hour": "07",
+			//     "minutes": "10",
+			//     "course": "1",
+			//     "action": "liberate",
+			//     "price": "120"
+			// },
+			// {
+			//     "id": "7",
+			//     "action": "delete"
+			// }
+		    ]
+		};
+}
+
 $(document).ready(function () {
 
 	// getting the date from laravel
@@ -28,17 +51,17 @@ $(document).ready(function () {
 		var d = new Date();
 		d.setDate(requestedDate.getDate() + i);
 
-		var month = d.getMonth() + 1;
+		var month = (d.getMonth() + 1);
 		var day = d.getDate();
 		var year = d.getFullYear();
 
 		var outputDate = year+"-"+month+"-"+day;
 
 		$("#date").append(new Option(outputDate, outputDate));
+		
 		// default value
 		if(i==0)
 			$('#date option[value="'+outputDate+'"]').attr("selected",true);
-	
 	}
 
 	var url = "{{ URL::action('GolfClubsController@getTeetimes') }}";
@@ -46,36 +69,39 @@ $(document).ready(function () {
 		window.location = url+'/'+$(this).val();
 	});
 		
-	var myJSONObject = 
-		{
-		    "date": "2012-03-03",
-		    "updates": [
-			{
-			    "hour": "07",
-			    "minutes": "10",
-			    "course": "1",
-			    "action": "liberate",
-			    "price": "120"
-			}
-			// {
-			//     "hour": "07",
-			//     "minutes": "10",
-			//     "action": "delete"
-			// }
-		    ]
-		};
-	$("#json").val(JSON.stringify(myJSONObject));
+	initMyJSONObject();
 
 	$("td a").click(function(e) {
 		e.preventDefault();
+		
 		if($(this).hasClass("btn-selected"))
 			$(this).removeClass("btn-selected");
 		else
 			$(this).addClass("btn-selected");
-
 	});
 	
+	$(".btn-circle").click(function(e) {
+		var row = $(this).closest("tr").index();
+		var col = $(this).closest("td").index()+6;
+		
+		if(mode=="delete") {
+			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
+		}
+		else if(mode=="liberate") {
+			myJSONObject.updates[myJSONObject.updates.length] = {
+				"hour": "0"+col,
+				"minutes": row*10+"",
+				"course": "1",
+				"action": "liberate",
+				"price": $("input[type=checkbox]:checked").val()+""
+			};
+		}
+	});
 
+	// before submitting, we save myJSONObject in the form
+	$("input[type=submit]").click(function(e) {
+		$("#json").val(JSON.stringify(myJSONObject));
+	});
 });
 
 </script>
@@ -123,24 +149,25 @@ $(document).ready(function () {
 								$hour = $dt->format('H');
 								$minutes = $dt->format('i');
 								$year = $dt->format('Y');
+								
 								// converting 03 to 3
 								$month = ltrim($dt->format('m'), '0');
 								$day = ltrim($dt->format('d'), '0');
+								$id = $teetimes[$k]->id;
 
 								// reserved tee-time
 								if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour && $date==$year."-".$month."-".$day) {
 									if(count($teetimes[$k]->reservation)==1) {
 										$treatedTeetimes++;
-										echo "<a href='#' class='btn-circle btn-blue'>&nbsp;</a>";
+										echo "<a href='#' id='$id' class='btn-circle btn-blue'>&nbsp;</a>";
 									}
 									// available tee-time
 									elseif(count($teetimes[$k]->reservation)==0) {
 										$treatedTeetimes++;
-										echo "<a href='#' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
+										echo "<a href='#' id='$id' class='btn-circle btn-green'>".round($teetimes[$k]->price).".-</a>";
 									}
 								}
 							}
-
 							// displaying the rest
 							for($m = 0; $m<4-$treatedTeetimes; $m++)
 								echo "<a href='#' class='btn-circle'>&nbsp;</a>";
@@ -160,31 +187,45 @@ $(document).ready(function () {
 </style>
 
 <ul id="links" class="nav nav-pills nav-stacked">
-	<li class="active" id="manage"><a href="#">Manage price categories</a></li>
-	<li id="liberate"><a href="#">Liberate tee-times</a></li>
+	<li id="liberate" class="active"><a href="#">Liberate tee-times</a></li>
 	<li id="delete"><a href="#">Delete tee-times</a></li>
 </ul>
 <div id="content">
-	<div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tempus sem ac sem molestie fringilla. Donec interdum, sapien eget placerat viverra, magna dui molestie diam, sit amet vulputate metus mi vel dui. Nam vel luctus ipsum, at dictum nibh. Pellentesque tristique facilisis ornare. Praesent non magna eget mauris ultricies venenatis. In quis sodales mi. Integer in nulla dictum, ultricies nibh sed, suscipit odio. Integer non volutpat libero. Curabitur sed tellus non nunc eleifend varius at ac magna. Phasellus laoreet leo est, ac adipiscing augue ultricies nec. Morbi sed leo vitae felis euismod pellentesque et vel velit.</div>
-	<div class="content">liberate</div>
-	<div class="content">delete</div>
+	<div class="content">
+		<p>Select the tee-times you want to liberate, the price range that you want to apply and click on Confirmation.</p>
+		<table class="table">
+
+			<?php for ($k = 0; $k < count($prices); $k++) { ?>
+			<tr>
+				<td>{{ $prices[$k]->description }}</td>
+				<td>{{ $prices[$k]->amount }}</td>
+				<td><input type="checkbox" value="{{ $prices[$k]->amount }}"></td>
+			</tr>
+			<?php } ?>
+			
+		</table>
+	</div>
+	<div class="content"><p>Select the tee-times you want to delete and click on Confirmation.</p></div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function () {
-	// hiding non active panes
+	
+	// hiding non active pane
 	$(".content").eq(1).hide();
-	$(".content").eq(2).hide();
 
-	$("#manage, #liberate, #delete").click(function(e) {
+	$("#liberate, #delete").click(function(e) {
+		initMyJSONObject();
 		e.preventDefault();
 
 		// active class
-		$("li.active").removeClass("active");
+		$("#links li.active").removeClass("active");
 		if($(this).hasClass("active"))
 			$(this).removeClass("active");
 		else
 			$(this).addClass("active");
+
+		mode = $(this).attr('id');
 
 		// hiding everything but the menu
 		$(".content").not(this).hide();
@@ -192,9 +233,7 @@ $(document).ready(function () {
 		// showing the pane
 		var index = $(this).index();
 		$(".content").eq(index).show();
-
 	});
-
 });
 
 </script>
@@ -203,5 +242,5 @@ $(document).ready(function () {
 
 {{ Form::open(array('url'=>'golfclubs/teetimes')) }}
 	<input type="hidden" id="json" name="json" value="" />
-	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
+	{{ Form::submit('Confirmation', array('class'=>'btn btn-primary btn-default'))}}
 {{ Form::close() }}
