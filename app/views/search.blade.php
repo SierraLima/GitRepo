@@ -14,6 +14,12 @@
     var month;
     var year;
         
+    //Global variables for the jsonData
+    var jsonData;
+    var jsonGolfclub;
+    var jsonGolfcourse;
+    var jsonMedia;
+        
     function showdescription($name, $description, $imageurl){
         
         
@@ -45,8 +51,8 @@
         alert("Teetime with id " + $id + " clicked");   
     }
         
-	function checkclick($datum){
-                                
+    function readdata(){
+        
         var teetimes = '{{ $teetimes }}';
         
         //Retrieving the data from the golfclubs
@@ -55,10 +61,13 @@
         var media = '{{ Media::all() }}';
         
         
-        var jsonData = JSON.parse(teetimes);
-        var jsonGolfclub = JSON.parse(golfclubs);
-        var jsonGolfcourse = JSON.parse(golfcurse);
-        var jsonMedia = JSON.parse(media);
+        jsonData = JSON.parse(teetimes);
+        jsonGolfclub = JSON.parse(golfclubs);
+        jsonGolfcourse = JSON.parse(golfcurse);
+        jsonMedia = JSON.parse(media);
+    }
+        
+	function checkclick($datum){
         
         var tablebox = document.getElementById("tablebody"); 
        
@@ -518,6 +527,8 @@
 	</div>
 <!-- Use JQuery to get the actual date and call the javascript funciton -->
  <script>
+        readdata();
+     
         var dt = new Date($.now());
         var year = dt.getFullYear();
         var month = dt.getMonth() + 1;
@@ -537,7 +548,7 @@
                 else{
                 passvalue = year + "-" + month + "-" + day;
                 }
-     
+        
         initialisedate(year, month, day);
         myfunction();
         checkclick(passvalue);
