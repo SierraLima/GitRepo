@@ -94,12 +94,25 @@ class GolfClubsController extends BaseController {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
 		}
 	}
+	
+	public function getPrices() {
+
+		if (Auth::golfclub()->check()) {
+			$prices = Auth::golfclub()->get()->prices;
+			$this->layout->content = View::make('admin.prices')->with('prices', $prices);
+		}
+		else {
+			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
+	}
 
 	public function getTeetimes($date) {
 
 		if (Auth::golfclub()->check()) {
 			$teetimes = Auth::golfclub()->get()->golfcourses[0]->teetimes;
-			$this->layout->content = View::make('admin.teetimes')->with('teetimes', $teetimes)->with('date',$date);
+			$prices = Auth::golfclub()->get()->prices;
+
+			$this->layout->content = View::make('admin.teetimes')->with('teetimes', $teetimes)->with('date',$date)->with('prices',$prices);
 		}
 		else {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
@@ -131,6 +144,21 @@ class GolfClubsController extends BaseController {
 			$url = public_path().'/'.$picture->url;
 			File::delete($url);
 			return Redirect::to('golfclubs/gallery')->with('message', 'The picture has been deleted.');
+		}
+		else {
+			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
+		}
+	}
+
+	public function getDeleteprice($id) {
+
+		if (Auth::golfclub()->check()) {
+			// deleting the db record
+			$price = Price::find($id);
+			$price->delete();
+
+			// deleting the actual file
+			return Redirect::to('golfclubs/prices')->with('message', 'The price has been deleted.');
 		}
 		else {
 			return Redirect::to('golfclubs/index')->with('message', 'Your are not authorized to see this page!');
@@ -217,6 +245,25 @@ class GolfClubsController extends BaseController {
 			return Redirect::to('golfclubs/gallery')->with('message', 'The image has been successfully saved!');
 		else
 			return Redirect::to('golfclubs/gallery')->with('message', 'There was an error. Please try again.');
+
+	}
+
+	public function postNewprice() {
+
+		$price = new Price;
+
+		$validator = Validator::make(Input::all(), Price::$rules);
+
+		if ($validator->passes()) {
+			$price->description = Input::get('description');
+			$price->amount = Input::get('amount');
+			$price->golf_club_id = Auth::golfclub()->get()->id;
+		}
+		else
+			return Redirect::to('golfclubs/prices')->with('message', 'There was an error with the values you inserted.');
+
+		if($price->save())
+			return Redirect::to('golfclubs/prices')->with('message', 'Your price has been successfully added!');
 
 	}
 

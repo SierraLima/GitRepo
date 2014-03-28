@@ -9,7 +9,28 @@ img { max-width: 200px; height: auto; }
 
 <script type="text/javascript">
 
-var myJSONObject, mode = "manage";
+var myJSONObject, mode = "liberate";
+
+function initMyJSONObject() {
+
+	myJSONObject = 
+		{
+		    "date": "{{ $date }}",
+		    "updates": [
+			// {
+			//     "hour": "07",
+			//     "minutes": "10",
+			//     "course": "1",
+			//     "action": "liberate",
+			//     "price": "120"
+			// },
+			// {
+			//     "id": "7",
+			//     "action": "delete"
+			// }
+		    ]
+		};
+}
 
 $(document).ready(function () {
 
@@ -30,7 +51,7 @@ $(document).ready(function () {
 		var d = new Date();
 		d.setDate(requestedDate.getDate() + i);
 
-		var month = d.getMonth() + 1;
+		var month = (d.getMonth() + 1);
 		var day = d.getDate();
 		var year = d.getFullYear();
 
@@ -48,23 +69,7 @@ $(document).ready(function () {
 		window.location = url+'/'+$(this).val();
 	});
 		
-	myJSONObject = 
-		{
-		    "date": "{{ $date }}",
-		    "updates": [
-			// {
-			//     "hour": "07",
-			//     "minutes": "10",
-			//     "course": "1",
-			//     "action": "liberate",
-			//     "price": "120"
-			// },
-			// {
-			//     "id": "7",
-			//     "action": "delete"
-			// }
-		    ]
-		};
+	initMyJSONObject();
 
 
 	$("td a").click(function(e) {
@@ -77,12 +82,19 @@ $(document).ready(function () {
 	});
 	
 	$(".btn-circle").click(function(e) {
+		var row = $(this).closest("tr").index();
+		var col = $(this).closest("td").index()+6;
 		if(mode=="delete") {
 			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
 		}
 		else if(mode=="liberate") {
-			console.debug(this);
-			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
+			myJSONObject.updates[myJSONObject.updates.length] = {
+				"hour": "0"+col,
+				"minutes": row*10+"",
+				"course": "1",
+				"action": "liberate",
+				"price": $("input[type=checkbox]:checked").val()+""
+			};
 		}
 	});
 
@@ -177,38 +189,21 @@ $(document).ready(function () {
 </style>
 
 <ul id="links" class="nav nav-pills nav-stacked">
-	<li class="active" id="manage"><a href="#">Manage price categories</a></li>
-	<li id="liberate"><a href="#">Liberate tee-times</a></li>
+	<li id="liberate" class="active"><a href="#">Liberate tee-times</a></li>
 	<li id="delete"><a href="#">Delete tee-times</a></li>
 </ul>
 <div id="content">
 	<div class="content">
-		<table class="table">
-			<tr>
-				<td>Range X</td>
-				<td>120.-</td>
-				<td><a href="#">Delete</a></td>
-			</tr>
-			<tr>
-				<td>Range Y</td>
-				<td>80.-</td>
-				<td><a href="#">Delete</a></td>
-			</tr>
-		</table>
-	</div>
-	<div class="content">
 		<p>Select the tee-times you want to liberate, the price range that you want to apply and click on Confirmation.</p>
 		<table class="table">
+
+			<?php for ($k = 0; $k < count($prices); $k++) { ?>
 			<tr>
-				<td>Range X</td>
-				<td>120.-</td>
-				<td><input type="checkbox" name="option1" value="Milk"></td>
+				<td>{{ $prices[$k]->description }}</td>
+				<td>{{ $prices[$k]->amount }}</td>
+				<td><input type="checkbox" value="{{ $prices[$k]->amount }}"></td>
 			</tr>
-			<tr>
-				<td>Range Y</td>
-				<td>80.-</td>
-				<td><input type="checkbox" name="option1" value="Milk"></td>
-			</tr>
+			<?php } ?>
 		</table>
 	</div>
 	<div class="content"><p>Select the tee-times you want to delete and click on Confirmation.</p></div>
@@ -216,11 +211,11 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 $(document).ready(function () {
-	// hiding non active panes
+	// hiding non active pane
 	$(".content").eq(1).hide();
-	$(".content").eq(2).hide();
 
-	$("#manage, #liberate, #delete").click(function(e) {
+	$("#liberate, #delete").click(function(e) {
+		initMyJSONObject();
 		e.preventDefault();
 
 		// active class
