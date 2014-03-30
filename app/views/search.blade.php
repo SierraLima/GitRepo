@@ -41,7 +41,9 @@
     var buttontd;
     var button;
     var tablebox;
-    
+        
+    var clickeddate = "0000-00-00";
+            
     function filter($number){
         
         if($number == 9){
@@ -173,6 +175,22 @@
         
 	function checkclick($datum){
         
+        if($datum != clickeddate){
+            if(clickeddate == "0000-00-00"){
+                clickeddate = $datum;
+            }
+            else{
+                var li = document.getElementById(clickeddate);
+                if(li != null){
+                li.removeAttribute("style");
+                }
+                clickeddate = $datum;
+                }  
+        }
+        
+        var li = document.getElementById(clickeddate);
+        li.setAttribute("style", "background:#C1FFC1");
+        
         //Set the actual date
         selecteddate = $datum;
         
@@ -184,7 +202,7 @@
             tablebox.deleteRow(0);
         }
         
-        
+                
         for (var i in jsonData) {
             
         //alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
@@ -440,15 +458,19 @@
             var a = document.createElement("a");
             
             if(month < 10 && day < 10){
+                li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-0" + month + "-0" + day);
             }  
             else if(month < 10){
+                li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-0" + month + "-" + day);
                 }
                 else if(day < 10){
+                li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-" + month + "-0" + day);
                 }
                 else{
+                li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-" + month + "-" + day);
                 }
             a.href = "#";
@@ -463,7 +485,7 @@
         
         var nextli = document.createElement("li");
         var nextlia = document.createElement("a");
-            
+                    
         nextlia.href = "#";
         nextlia.appendChild(document.createTextNode(">>"));
         nextlia.setAttribute("onclick","javascript:next();");
