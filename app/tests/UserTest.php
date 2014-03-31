@@ -158,6 +158,7 @@ class UserTest extends TestCase {
 	// ACTUAL VERSION
     public function testUpdateProfileIsWorking()
 	{
+        
 		// Create a user
 		$user = new User;
 		
@@ -167,7 +168,7 @@ class UserTest extends TestCase {
 		$user->birthday = "1900-11-26";
         $user->country = "CH";
 		$user->password = Hash::make("password"); // crypt password
-		$user->licence = "45-5";
+		$user->licence = "455";
 		$user->save();
 
 		// Perform user login.
@@ -193,7 +194,7 @@ class UserTest extends TestCase {
 			'password' => 'password',
 			'password_confirmation'    => 'password'
 		));
-
+    
 		$crawler = $this->client->submit($form);
 		$crawler = $this->client->followRedirect(true);
 		
@@ -205,5 +206,6 @@ class UserTest extends TestCase {
 		// Tests Equalities
 		$this->assertEquals($userDB->email, 'test@test.ch');
 		$this->assertEquals($userDB->firstname, 'Timo');
+        
 	}
 }

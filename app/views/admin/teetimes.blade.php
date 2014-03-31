@@ -11,6 +11,13 @@ img { max-width: 200px; height: auto; }
 
 var myJSONObject, mode = "liberate";
 
+/* TODO
+1) lorsqu'il y a 4 tee-times, si l'on en supprime ou libère un, un nouveau est rajouté
+3) sélectionner et déselectionner N fois un tee-time ajoute N tee-times
+4) clique sur un teetime libre et confirme en rajoute un new en plus
+5) choix de l'action avant de cliquer dans le tableau
+*/
+
 function initMyJSONObject() {
 
 	myJSONObject = 
@@ -88,19 +95,35 @@ $(document).ready(function () {
 			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
 		}
 		else if(mode=="liberate") {
-			myJSONObject.updates[myJSONObject.updates.length] = {
-				"hour": "0"+col,
-				"minutes": row*10+"",
-				"course": "1",
-				"action": "liberate",
-				"price": $("input[type=checkbox]:checked").val()+""
-			};
+			var checked = $('#content').find('input[type=checkbox]:checked').length;
+			if(checked>1) {
+				alert("You have selected more than one price.");
+				$(this).removeClass("btn-selected");
+			}
+			else if(checked==0) {
+				alert("You haven't selected a price.");
+				$(this).removeClass("btn-selected");
+			}
+			else {
+				myJSONObject.updates[myJSONObject.updates.length] = {
+					"hour": "0"+col,
+					"minutes": row*10+"",
+					"course": "1",
+					"action": "liberate",
+					"price": $("input[type=checkbox]:checked").val()+""
+				};
+			}
 		}
 	});
 
 	// before submitting, we save myJSONObject in the form
 	$("input[type=submit]").click(function(e) {
-		$("#json").val(JSON.stringify(myJSONObject));
+		if(myJSONObject.updates.length == 0) {
+			alert("You haven't done any update!");
+			return false;
+		}
+		else
+			$("#json").val(JSON.stringify(myJSONObject));
 	});
 });
 
