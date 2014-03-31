@@ -299,10 +299,13 @@ class GolfClubsController extends BaseController {
 
 			// treating the JSON
 			if($action=="delete") {
-				$teetime = Teetime::where('id', '=', $json->updates[$i]->id)->firstOrFail();
-				
-				// with firstOrFail() you have to use destroy()
-				Teetime::destroy($teetime->id);
+				if(isset($json->updates[$i]->id)) {
+					$teetime = Teetime::where('id', '=', $json->updates[$i]->id)->firstOrFail();
+					
+					// with firstOrFail() you have to use destroy()
+					Teetime::destroy($teetime->id);
+				}
+				return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Tee-times in red can\'t be deleted.');
 			}
 			elseif($action=="liberate") {
 					
