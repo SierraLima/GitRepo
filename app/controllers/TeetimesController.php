@@ -9,4 +9,9 @@ class TeetimesController extends BaseController {
 	{
 		$this->layout->content = View::make('search')->with('teetimes', Teetime::all());
 	}
+    
+    //return the reservation page
+    public function getReservation(){
+        $this->layout->content = View::make('reservation');   
+    }
 }

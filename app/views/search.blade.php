@@ -146,8 +146,8 @@
         button.setAttribute("type","submit");
         button.setAttribute("class","btn btn-success");
         button.innerHTML = "Reserver";
-        button.setAttribute("onclick", "javascript:buttonclick(this.id);");
-                        
+        //button.setAttribute("onclick", "javascript:buttonclick(this.id);");
+        button.setAttribute("onclick", "window.open('http://localhost:8888/teezy-linux/public/teetimes/reservation')");
                 
                     imagetd.appendChild(image);
                     price.appendChild(pricebold);
@@ -717,13 +717,13 @@
                 <br />
                 <p>
                     Preisminimum
-                    <input type="range" min="0" max="1000" value="0" onchange="showMinValue(this.value)">
+                    <input id="minslider" type="range" min="0" max="1000" value="0" onchange="showMinValue(this.value)">
                     <span id="range1">0</span>
                 </p>
                 <br />
                 <p>
                     Preismaximum
-                    <input type="range" min="0" max="1000" value="1000" onchange="showMaxValue(this.value)">
+                    <input id="maxslider" type="range" min="0" max="1000" value="1000" onchange="showMaxValue(this.value)">
                     <span id="range2">1000</span>
                 </p>
 			</div>
