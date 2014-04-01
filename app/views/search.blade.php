@@ -59,14 +59,10 @@
             ninefilter = false;
             eighteenfilter = false;
         }
-        
-        
         checkclick(selecteddate);
     }
         
-        
     function showdescription($name, $description, $imageurl){
-        
         
         var div = document.getElementById("descriptiondiv");
         
@@ -88,7 +84,6 @@
     }
         
     function clearleftelement($div){
-        
         $($div).empty();
     }
         
@@ -148,7 +143,7 @@
         button.innerHTML = "Reserver";
         //button.setAttribute("onclick", "javascript:buttonclick(this.id);");
         button.setAttribute("onclick", "window.open('http://localhost:8888/teezy-linux/public/teetimes/reservation')");
-                
+
                     imagetd.appendChild(image);
                     price.appendChild(pricebold);
                 
@@ -169,7 +164,6 @@
                     tr.appendChild(selecttd);
                     tr.appendChild(buttontd);
                     
-                
                     tablebox.appendChild(tr);
     }
         
@@ -181,11 +175,12 @@
             }
             else{
                 var li = document.getElementById(clickeddate);
+                
                 if(li != null){
-                li.removeAttribute("style");
+                	li.removeAttribute("style");
                 }
                 clickeddate = $datum;
-                }  
+            }  
         }
         
         var li = document.getElementById(clickeddate);
@@ -208,7 +203,7 @@
         //alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
             
             
-            // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
+        // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
         if(jsonData[i].date.substring(0,10) == $datum && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
                     
         createelements();
@@ -242,7 +237,6 @@
                         
                         if(ninefilter){
                         if(jsonGolfcourse[j].holenumber == 9){
-                        
                             
                         golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         golfclublink.setAttribute("description", jsonGolfclub[k].description);
@@ -363,7 +357,6 @@
         this.year = $year;
     }
       
-    
     //Functions to display th valu of the Slider
     function showMinValue(newValue)
     {
@@ -379,13 +372,10 @@
         checkclick(selecteddate);
     }
         
-    
-    
     function myfunction(){   
         
         var selector = document.getElementById("navigation");
         var months = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
-        
         var anzahltage;
                 
         switch(month){
@@ -413,7 +403,6 @@
         var prevli = document.createElement("li");
         var prevlia = document.createElement("a");
         
-            
         prevlia.href = "#";
         prevlia.appendChild(document.createTextNode("<<"));
         prevlia.setAttribute("onclick","javascript:prev();");
@@ -423,12 +412,10 @@
         for(var i = 0; i < 5; i++){
             
             //Previous function
-            //Set the days of the previous month
-            
+            //Set the days of the previous month    
             switch(anzahltage){
                 case 31:
                     if(day > 31){
-                        
                         if(month == 12){
                             year++;
                             month = 1;
@@ -491,7 +478,6 @@
         nextlia.setAttribute("onclick","javascript:next();");
         nextli.appendChild(nextlia);
         selector.appendChild(nextli);
-        
     }
         
     function next(){
@@ -503,7 +489,6 @@
         
     function clearlist(){
         var listitem = document.getElementById("navigation");
-        
         $(listitem).empty();
     }
         
@@ -511,7 +496,6 @@
          
          //Subtrakt twice the value of displayed tabs
          this.day = this.day - 10;
-         
          
           if(day <= 0){
                switch(month){
