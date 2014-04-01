@@ -120,12 +120,12 @@
         
         // Retrieving the data from the golfclubs
         var golfclubs = '{{ GolfClub::all() }}';
-        var gc = '{{ GolfCourse::all() }}';
+        var golfcourses = '{{ GolfCourse::all() }}';
         var media = '{{ Media::all() }}';
         
         jsonData = JSON.parse(teetimes);
         jsonGolfclub = JSON.parse(golfclubs);
-        jsonGolfcourse = JSON.parse(gc);
+        jsonGolfcourse = JSON.parse(golfcourses);
         jsonMedia = JSON.parse(media);
     } 
     
