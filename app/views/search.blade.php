@@ -96,7 +96,7 @@
    /**
     * Clear elements on left
     * 
-    * @param dic -> the div to clear 
+    * @param div -> the div to clear 
     */     
     function clearleftelement($div){
         $($div).empty();
