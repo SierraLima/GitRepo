@@ -6,8 +6,6 @@ class UsersController extends BaseController {
 
 	/**
 	 * The database table used by the model.
-	 *
-	 * @var string
 	 */
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on'=>'post'));
