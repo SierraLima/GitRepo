@@ -119,13 +119,13 @@
         var teetimes = '{{ $teetimes }}';
         
         // Retrieving the data from the golfclubs
-        var golfclubs = '{{ GolfClub::all() }}';   // SYNTAX MAJ
-        var golfcourses = '{{ GolfCourse::all() }}'; // SYNTAX MAJ
+        var golfclubs = '{{ GolfClub::all() }}';
+        var golfcourses = '{{ GolfCourse::all() }}';
         var media = '{{ Media::all() }}';
         
         jsonData = JSON.parse(teetimes);
         jsonGolfclub = JSON.parse(golfclubs);
-        jsonGolfcourse = JSON.parse(golfcourses); // SYNTAX (o et s ?)
+        jsonGolfcourse = JSON.parse(golfcourses);
         jsonMedia = JSON.parse(media);
     } 
     
