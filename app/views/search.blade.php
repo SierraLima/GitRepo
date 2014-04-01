@@ -120,7 +120,7 @@
         
         // Retrieving the data from the golfclubs
         var golfclubs = '{{ GolfClub::all() }}';   // SYNTAX MAJ
-        var golfcurse = '{{ GolfCourse::all() }}'; // SYNTAX MAJ
+        var golfcourses = '{{ GolfCourse::all() }}'; // SYNTAX MAJ
         var media = '{{ Media::all() }}';
         
         jsonData = JSON.parse(teetimes);
