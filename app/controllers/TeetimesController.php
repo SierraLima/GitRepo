@@ -16,7 +16,7 @@ class TeetimesController extends BaseController {
 	 * return search tee-time page
 	 */
 	public function getSearch(){
-		$this->layout->content = View::make('search');//->with('teetimes', Teetime::all());
+		$this->layout->content = View::make('search')->with('teetimes', Teetime::all());
 	}
     
     /**
