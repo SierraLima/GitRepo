@@ -21,8 +21,10 @@ class TeetimesController extends BaseController {
     
     /**
 	 * return reservation page
-	 */
+	 *
     public function getReservation(){
         $this->layout->content = View::make('reservation');   
     }
+	
+	*/
 }
