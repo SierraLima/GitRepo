@@ -11,7 +11,7 @@
 |
 */
 
-Route::controller('teetimes', 'TeetimesController');
 Route::controller('users', 'UsersController');
 Route::controller('golfclubs', 'GolfClubsController');
+Route::controller('teetimes', 'TeetimesController');
 Route::controller('/', 'HomeController'); // must be last
