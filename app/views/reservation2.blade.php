@@ -47,59 +47,35 @@ $('#date').datepicker();
 					</table>
 				</div>
 			</div>
-            <div style="border-style:solid; border-width:1px;">
-                <h4>                    &nbsp;&nbsp;&nbsp;
-                    Sélection de la carte de crédit</h4>
                 <br />
-                <p>
-                <fieldset>
-                    &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="feeling" id="feelingSad" value="sad" />
-                    <label for="feelingSad">
-                    <img src="http://icons.iconarchive.com/icons/designbolts/credit-card-payment/64/Master-Card-Blue-icon.png" /></label>
-                    <label for="feelingHappy">
-                    &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="feeling" id="feelingHappy" value="happy" />
-                    <img src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-3/64/payment-card-icon.png" /> 
-                    </label>
-                </fieldset>
-                </p>
-                <p>
-                &nbsp;&nbsp;&nbsp;
-                <b>Name</b>
-                <small style="color:grey">(as it appears on your card)</small>
-                </p>
-                <p>
-                                    &nbsp;&nbsp;&nbsp;
-                <input type="textfield" style="width:300px">
-                </p>
-                <p>
-                                        &nbsp;&nbsp;&nbsp;
-                <b>Card number</b>
-                <small style="color:grey">(no dashes or spaces)</small>
-                </p>
-                <p>
-                                        &nbsp;&nbsp;&nbsp;
-                <input type="textfield" style="width:300px" placeholder="xxxx-xxxxx-xxxxx-xxxx">
-                </p>
-                <p>
-                                        &nbsp;&nbsp;&nbsp;
-                <b>Expiration date</b>
-                </p>
-                <p>
-                                        &nbsp;&nbsp;&nbsp;
-                <input type="date" name="date" id="date" value="" />
-                </p>
-                <p>
-                                        &nbsp;&nbsp;&nbsp;
-                    <b>Security code</b>
-                    <small style="color:grey">(3 on back, Amex; 4 on front)</small>
-                </p>
-                <p>
-                                        &nbsp;&nbsp;&nbsp;
-                    <input type="textfield" style="width:300px">
-                </p>
-            </div>
+                <table style="width:350px;">
+                    <tr>
+                        <td style="background-color: #CEE3F6;">
+                        <b>Credit Card information</b>
+                        </td>
+                        <td style="background-color: #CEE3F6"></td>
+                    </tr>
+                    <tr>
+                        <td>Firstname</td>
+                        <td>Test</td>
+                    </tr>
+                    <tr>
+                        <td>Lastname</td>
+                        <td>Test</td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td>Switzerland</td>
+                    </tr>
+                    <tr>
+                        <td>Startdatum</td>
+                        <td>21.04.2014</td>
+                    </tr>
+                    <tr>
+                        <td>Enddatum</td>
+                        <td>21.04.2015</td>
+                    </tr>
+                </table>
 		</div>
 
 		<div class="col-md-4">
