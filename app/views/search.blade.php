@@ -45,7 +45,6 @@
     var clickeddate = "0000-00-00";
             
     function filter($number){
-        
         if($number == 9){
             ninefilter = true; 
             eighteenfilter = false;
@@ -54,8 +53,7 @@
             ninefilter = false;
             eighteenfilter = true;
         }
-        else
-        {
+        else{
             ninefilter = false;
             eighteenfilter = false;
         }
@@ -96,13 +94,13 @@
         var teetimes = '{{ $teetimes }}';
         
         // Retrieving the data from the golfclubs
-        var golfclubs = '{{ Golfclub::all() }}';   // SYNTAX MAJ
-        var golfcurse = '{{ Golfcourse::all() }}'; // SYNTAX MAJ
+        var golfclubs = '{{ GolfClub::all() }}';   // SYNTAX MAJ
+        var golfcurse = '{{ GolfCourse::all() }}'; // SYNTAX MAJ
         var media = '{{ Media::all() }}';
         
         jsonData = JSON.parse(teetimes);
         jsonGolfclub = JSON.parse(golfclubs);
-        jsonGolfcourse = JSON.parse(golfcurse); // SYNTAX (o et s ?)
+        jsonGolfcourse = JSON.parse(golfcourses); // SYNTAX (o et s ?)
         jsonMedia = JSON.parse(media);
     } 
         
@@ -718,8 +716,8 @@
 		</div>
 	</div>
 	
- <!-- Use JQuery to get the actual date and call the javascript funciton -->
- <script>
+ 	<!-- Use JQuery to get the actual date and call the javascript funciton -->
+ 	<script>
         readdata();
      
         var dt = new Date($.now());
@@ -745,4 +743,5 @@
         initialisedate(year, month, day);
         myfunction();
         checkclick(passvalue);
- </script>
+        
+ 	</script>
