@@ -1,13 +1,13 @@
 <style type="text/css">
-.left-table {
-	border: 1px solid #ddd;
-	margin-bottom:10px;
-	padding:10px;
-}
+	.left-table {
+		border: 1px solid #ddd;
+		margin-bottom:10px;
+		padding:10px;
+	}
 </style>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript">
+   	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   	<script type="text/javascript">
     
     var counter = 0;
     var day;
@@ -43,7 +43,12 @@
     var tablebox;
         
     var clickeddate = "0000-00-00";
-            
+         
+   /**
+    * Set the filter of holes
+    * 
+    * @param number -> number of hols 
+    */        
     function filter($number){
         if($number == 9){
             ninefilter = true; 
@@ -60,6 +65,13 @@
         checkclick(selecteddate);
     }
         
+   /**
+    * Show the description about a club on right top 
+    * 
+    * @param name -> the name of the club
+    * @param description -> the description of the club
+    * @param imageurl -> the image of the club
+    */ 
     function showdescription($name, $description, $imageurl){
         
         var div = document.getElementById("descriptiondiv");
@@ -80,15 +92,28 @@
         p.innerHTML += $description;
         div.appendChild(p);
     }
-        
+    
+   /**
+    * Clear elements on left
+    * 
+    * @param dic -> the div to clear 
+    */     
     function clearleftelement($div){
         $($div).empty();
     }
-        
+    
+   /**
+    * Alert on click
+    * 
+    * @param id -> the id of the button 
+    */    
     function buttonclick($id){
         alert("Teetime with id " + $id + " clicked");   
     }
-        
+    
+   /**
+    * Function to read data on the teezydb database 
+    */      
     function readdata(){
         
         var teetimes = '{{ $teetimes }}';
@@ -103,11 +128,17 @@
         jsonGolfcourse = JSON.parse(golfcourses); // SYNTAX (o et s ?)
         jsonMedia = JSON.parse(media);
     } 
-        
+    
+   /**
+    * Function to create a table box on the view 
+    */      
     function createtablebox(){
         tablebox = document.getElementById("tablebody"); 
     }
-        
+    
+   /**
+    * Function to create a the elements on the view
+    */    
     function createelements(){
         tr = document.createElement("tr");
         golfclub = document.createElement("td");
@@ -122,7 +153,10 @@
         buttontd  = document.createElement("td");
         button = document.createElement("button");
     }
-        
+    
+   /**
+    * Function to add elements on the view 
+    */  
     function addelements(){
         
         if(image.hasAttribute("src") == false){
@@ -141,34 +175,37 @@
         // button.setAttribute("onclick", "javascript:buttonclick(this.id);");
         button.setAttribute("onclick", "window.open('http://localhost:8888/teezy-linux/public/teetimes/reservation')");
 
-                    imagetd.appendChild(image);
-                    price.appendChild(pricebold);
+        imagetd.appendChild(image);
+        price.appendChild(pricebold);
                 
-                    for(var i = 0; i<4; i++){
-                        var option = document.createElement("option");
-                        option.innerHTML = i+1;
-                        selector.appendChild(option); 
-                    }
+        for(var i = 0; i<4; i++){
+        	var option = document.createElement("option");
+            option.innerHTML = i+1;
+            selector.appendChild(option); 
+        }
                     
-                    selecttd.appendChild(selector);
-                    selecttd.innerHTML += "  jouer(s)";
-                    buttontd.appendChild(button);
+        selecttd.appendChild(selector);
+        selecttd.innerHTML += "  joueur(s)";
+        buttontd.appendChild(button);
                 
-                    tr.appendChild(timetd);
-                    tr.appendChild(imagetd);
-                    tr.appendChild(golfclub);
-                    tr.appendChild(price);
-                    tr.appendChild(selecttd);
-                    tr.appendChild(buttontd);
+        tr.appendChild(timetd);
+        tr.appendChild(imagetd);
+        tr.appendChild(golfclub);
+        tr.appendChild(price);
+        tr.appendChild(selecttd);
+        tr.appendChild(buttontd);
                     
-                    tablebox.appendChild(tr);
+        tablebox.appendChild(tr);
     }
+    
+   /**
+    * Action on clicked date  
+    */    
+	function checkclick($date){
         
-	function checkclick($datum){
-        
-        if($datum != clickeddate){
+        if($date != clickeddate){
             if(clickeddate == "0000-00-00"){
-                clickeddate = $datum;
+                clickeddate = $date;
             }
             else{
                 var li = document.getElementById(clickeddate);
@@ -176,7 +213,7 @@
                 if(li != null){
                 	li.removeAttribute("style");
                 }
-                clickeddate = $datum;
+                clickeddate = $date;
             }  
         }
         
@@ -184,7 +221,7 @@
         li.setAttribute("style", "background:#C1FFC1");
         
         // Set the actual date
-        selecteddate = $datum;
+        selecteddate = $date;
         
         createtablebox();
         // var tablebox = document.getElementById("tablebody"); 
@@ -192,13 +229,12 @@
         while ( tablebox.rows.length > 0 ){
             tablebox.deleteRow(0);
         }
-        
-                
+                     
         for (var i in jsonData) {
             
         // alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
         // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
-        if(jsonData[i].date.substring(0,10) == $datum && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
+        if(jsonData[i].date.substring(0,10) == $date && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
                     
         createelements();
 
@@ -287,7 +323,7 @@
                 	}
             	}
         	}
-        }// End for var j
+        } // End for var j
             
         /*
         if(image.hasAttribute("src") == false){
@@ -343,32 +379,50 @@
         @endforeach
         </ul>
         */
-        
-    // Function to initialise the day, month and year variable with today's date
+    
+   /**
+    * Function to initialise the day, month and year variable with today's date
+    * 
+    * @param year -> year of the date
+    * @param month -> month of the date
+    * @param day ->day of the date
+    */      
     function initialisedate($year, $month, $day){
         this.day = $day;
         this.month = $month;
         this.year = $year;
     }
       
-    // Functions to display th valu of the Slider
-    function showMinValue(newValue){
-        document.getElementById("range1").innerHTML=newValue;
-        minprice = newValue;
+   /**
+    * Functions to display the value of the Slider minimum price
+    * 
+    * @param newValue -> The present value on the filter
+    */ 
+    function showMinValue($newValue){
+        document.getElementById("range1").innerHTML=$newValue;
+        minprice = $newValue;
         checkclick(selecteddate);
     }
-        
-    function showMaxValue(newValue){
-        document.getElementById("range2").innerHTML=newValue;
-        maxprice = newValue;
+    
+   /**
+    * Functions to display the value of the Slider maximum price
+    * 
+    * @param newValue -> The present value on the filter
+    */    
+    function showMaxValue($newValue){
+        document.getElementById("range2").innerHTML=$newValue;
+        maxprice = $newValue;
         checkclick(selecteddate);
     }
-        
-    function myfunction(){   
+    
+   /**
+    * Function to change the date of researchs about tee-times
+    */     
+    function changedate(){   
         
         var selector = document.getElementById("navigation");
         var months = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
-        var anzahltage;
+        var numberDay;
                 
         switch(month){
             case 1:
@@ -378,20 +432,20 @@
             case 8:
             case 10:
             case 12:
-                anzahltage = 31;
+                numberDay = 31;
             break;
             case 4:
             case 6:
             case 9:
             case 11:
-                anzahltage = 30;
+                numberDay = 30;
             break;
             case 2:
-                anzahltage = 28;
+                numberDay = 28;
             break;
         }
         
-        // Create the previouse buttonclick
+        // Create the previews buttonclick
         var prevli = document.createElement("li");
         var prevlia = document.createElement("a");
         
@@ -403,9 +457,9 @@
         
         for(var i = 0; i < 5; i++){
             
-            // Previous function
-            // Set the days of the previous month    
-            switch(anzahltage){
+            // Previews function
+            // Set the days of the previews months    
+            switch(numberDay){
                 case 31:
                     if(day > 31){
                         if(month == 12){
@@ -471,17 +525,25 @@
         selector.appendChild(nextli);
     }
         
-    //day++
+   /**
+    * Function to pass on another date after
+    */ 
     function next(){
         clearlist();
-        myfunction();
+        changedate();
     }
-        
+   
+   /**
+    * Function to clear the list o date
+    */     
     function clearlist(){
         var listitem = document.getElementById("navigation");
         $(listitem).empty();
     }
-        
+    
+   /**
+    * Function to pass on another date before
+    */     
     function prev(){
          
          //Subtract twice the value of displayed tabs
@@ -516,8 +578,8 @@
                 break;
                }
           }         
-         clearlist();
-         myfunction();
+          clearlist();
+          changedate();
     }
     
     </script>
@@ -690,19 +752,19 @@
                 <br />
                 <br />
                 <p>
-                    Minimum price :
+                    Prix minimum :
                     <input id="minslider" type="range" min="0" max="1000" value="0" onchange="showMinValue(this.value)">
                     <span id="range1">0</span>
                 </p>
                 <br />
                 <p>
-                    Maximum price :
+                    Prix maximum :
                     <input id="maxslider" type="range" min="0" max="1000" value="1000" onchange="showMaxValue(this.value)">
                     <span id="range2">1000</span>
                 </p>
 			</div>
 			
-			<!-- FIELDS ABOUT A CLUB ON DB-->
+			<!-- FIELDS ABOUT A CLUB ON DB ?-->
 			<div class="left-table">
 				<h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
@@ -710,7 +772,8 @@
 				<p>3 tee-times<br />
 				Golf Club de Sierre<br />
 				30.03.2014</p>
-
+				
+				<!-- NO ACTION ?-->	
 				<button type="submit" class="btn btn-primary">Continuer</button>
 			</div>
 		</div>
@@ -741,7 +804,7 @@
         }
         
         initialisedate(year, month, day);
-        myfunction();
+        changedate();
         checkclick(passvalue);
         
  	</script>
