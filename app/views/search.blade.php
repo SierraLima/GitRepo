@@ -14,20 +14,20 @@
     var month;
     var year;
         
-    //Global variables for the jsonData
+    // Global variables for the jsonData
     var jsonData;
     var jsonGolfclub;
     var jsonGolfcourse;
     var jsonMedia;
         
-    //Variables used for the filter function
+    // Variables used for the filter function
     var selecteddate;
     var ninefilter;
     var eighteenfilter;
     var minprice = 0.00;
     var maxprice = 1000.00;
         
-    //Variables to display the teetimes
+    // Variables to display the teetimes
     var tr;
     var golfclub;
     var golfclublink;
@@ -95,15 +95,14 @@
         
         var teetimes = '{{ $teetimes }}';
         
-        //Retrieving the data from the golfclubs
-        var golfclubs = '{{ Golfclub::all() }}';   
-        var golfcurse = '{{ Golfcourse::all() }}';
+        // Retrieving the data from the golfclubs
+        var golfclubs = '{{ Golfclub::all() }}';   // SYNTAX MAJ
+        var golfcurse = '{{ Golfcourse::all() }}'; // SYNTAX MAJ
         var media = '{{ Media::all() }}';
-        
         
         jsonData = JSON.parse(teetimes);
         jsonGolfclub = JSON.parse(golfclubs);
-        jsonGolfcourse = JSON.parse(golfcurse);
+        jsonGolfcourse = JSON.parse(golfcurse); // SYNTAX (o et s ?)
         jsonMedia = JSON.parse(media);
     } 
         
@@ -141,7 +140,7 @@
         button.setAttribute("type","submit");
         button.setAttribute("class","btn btn-success");
         button.innerHTML = "Reserver";
-        //button.setAttribute("onclick", "javascript:buttonclick(this.id);");
+        // button.setAttribute("onclick", "javascript:buttonclick(this.id);");
         button.setAttribute("onclick", "window.open('http://localhost:8888/teezy-linux/public/teetimes/reservation')");
 
                     imagetd.appendChild(image);
@@ -186,23 +185,20 @@
         var li = document.getElementById(clickeddate);
         li.setAttribute("style", "background:#C1FFC1");
         
-        //Set the actual date
+        // Set the actual date
         selecteddate = $datum;
         
         createtablebox();
-        //var tablebox = document.getElementById("tablebody"); 
+        // var tablebox = document.getElementById("tablebody"); 
        
-        while ( tablebox.rows.length > 0 )
-        {
+        while ( tablebox.rows.length > 0 ){
             tablebox.deleteRow(0);
         }
         
                 
         for (var i in jsonData) {
             
-        //alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
-            
-            
+        // alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
         // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
         if(jsonData[i].date.substring(0,10) == $datum && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
                     
@@ -227,73 +223,73 @@
         
                 
         timetd.innerHTML = "12:40";
-        //golfclub.innerHTML = "GolfClub de Sierre";
+        // golfclub.innerHTML = "GolfClub de Sierre";
                 
-        //Getting the wright Golfclub
+        // Getting the right Golfclub
         for(var j in jsonGolfcourse){
             if(jsonGolfcourse[j].id == jsonData[i].golf_course_id){
                 for(var k in jsonGolfclub){
                     if(jsonGolfclub[k].id == jsonGolfcourse[j].golf_club_id){
                         
                         if(ninefilter){
-                        if(jsonGolfcourse[j].holenumber == 9){
-                            
-                        golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
-                        golfclublink.setAttribute("description", jsonGolfclub[k].description);
-                        golfclublink.setAttribute("name", jsonGolfclub[k].name);
-                        golfclub.appendChild(golfclublink);
+                        	if(jsonGolfcourse[j].holenumber == 9){
+                 
+                        		golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
+                        		golfclublink.setAttribute("description", jsonGolfclub[k].description);
+                        		golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                        		golfclub.appendChild(golfclublink);
                         
-                        for(var l in jsonMedia){
-                        if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    image.setAttribute("src", jsonMedia[l].url);
-                                    golfclublink.setAttribute("imageurl", jsonMedia[k].url);
-                                }
-                            }
-                        button.setAttribute("id", jsonData[i].id);
-                        pricebold.innerHTML = jsonData[i].price;
-                        addelements();
-                        }
+                        		for(var l in jsonMedia){
+                        			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
+                                    	image.setAttribute("src", jsonMedia[l].url);
+                                    	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                	}
+                            	}	
+                        		button.setAttribute("id", jsonData[i].id);
+                        		pricebold.innerHTML = jsonData[i].price;
+                        		addelements();
+                        	}
                         }
                         else if(eighteenfilter){
                             if(jsonGolfcourse[j].holenumber == 18){
                                                 
-                        golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
-                        golfclublink.setAttribute("description", jsonGolfclub[k].description);
-                        golfclublink.setAttribute("name", jsonGolfclub[k].name);
-                        golfclub.appendChild(golfclublink);
+                        		golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
+                        		golfclublink.setAttribute("description", jsonGolfclub[k].description);
+                        		golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                        		golfclub.appendChild(golfclublink);
                         
-                        for(var l in jsonMedia){
-                        if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    image.setAttribute("src", jsonMedia[l].url);
-                                    golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                        		for(var l in jsonMedia){
+                        			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
+                                    	image.setAttribute("src", jsonMedia[l].url);
+                                    	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
                                     }      
                                 }
-                            button.setAttribute("id", jsonData[i].id);
-                            pricebold.innerHTML = jsonData[i].price;
-                            addelements();
+                            	button.setAttribute("id", jsonData[i].id);
+                            	pricebold.innerHTML = jsonData[i].price;
+                            	addelements();
                             }
                         }
                         else{
                                                 
-                        golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
-                        golfclublink.setAttribute("description", jsonGolfclub[k].description);
-                        golfclublink.setAttribute("name", jsonGolfclub[k].name);
-                        golfclub.appendChild(golfclublink);
+                        	golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
+                        	golfclublink.setAttribute("description", jsonGolfclub[k].description);
+                        	golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                        	golfclub.appendChild(golfclublink);
                         
-                        for(var l in jsonMedia){
-                        if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
+                        	for(var l in jsonMedia){
+                        		if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     image.setAttribute("src", jsonMedia[l].url);
                                     golfclublink.setAttribute("imageurl", jsonMedia[k].url);
-                            }
-                        }
-                        button.setAttribute("id", jsonData[i].id);
-                        pricebold.innerHTML = jsonData[i].price;
-                        addelements();
-                    }
-                }
-            }
-        }
-        }//End for var j
+                            	}
+                        	}
+                        	button.setAttribute("id", jsonData[i].id);
+                        	pricebold.innerHTML = jsonData[i].price;
+                        	addelements();
+                    	}
+                	}
+            	}
+        	}
+        }// End for var j
             
         /*
         if(image.hasAttribute("src") == false){
@@ -340,7 +336,7 @@
                     */
                 }
         }
-    }
+    } // End of the method checkclick
         
             /*
         <ul>
@@ -350,23 +346,21 @@
         </ul>
         */
         
-    //Function to initialise the day, month and year variable with today's date
+    // Function to initialise the day, month and year variable with today's date
     function initialisedate($year, $month, $day){
         this.day = $day;
         this.month = $month;
         this.year = $year;
     }
       
-    //Functions to display th valu of the Slider
-    function showMinValue(newValue)
-    {
+    // Functions to display th valu of the Slider
+    function showMinValue(newValue){
         document.getElementById("range1").innerHTML=newValue;
         minprice = newValue;
         checkclick(selecteddate);
     }
         
-    function showMaxValue(newValue)
-    {
+    function showMaxValue(newValue){
         document.getElementById("range2").innerHTML=newValue;
         maxprice = newValue;
         checkclick(selecteddate);
@@ -399,7 +393,7 @@
             break;
         }
         
-        //Create the previouse buttonclick
+        // Create the previouse buttonclick
         var prevli = document.createElement("li");
         var prevlia = document.createElement("a");
         
@@ -411,8 +405,8 @@
         
         for(var i = 0; i < 5; i++){
             
-            //Previous function
-            //Set the days of the previous month    
+            // Previous function
+            // Set the days of the previous month    
             switch(anzahltage){
                 case 31:
                     if(day > 31){
@@ -420,8 +414,7 @@
                             year++;
                             month = 1;
                         }
-                        else
-                        {
+                        else{
                             month++;
                         }
                         day = day-31;                        
@@ -451,15 +444,15 @@
             else if(month < 10){
                 li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-0" + month + "-" + day);
-                }
-                else if(day < 10){
+            }
+            else if(day < 10){
                 li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-" + month + "-0" + day);
-                }
-                else{
+            }
+            else{
                 li.setAttribute("id", year + "-0" + month + "-0" + day);
                 a.setAttribute("id", year + "-" + month + "-" + day);
-                }
+            }
             a.href = "#";
             a.setAttribute("onclick","javascript:checkclick(this.id);");
             
@@ -480,9 +473,8 @@
         selector.appendChild(nextli);
     }
         
+    //day++
     function next(){
-        
-        //day++;
         clearlist();
         myfunction();
     }
@@ -492,9 +484,9 @@
         $(listitem).empty();
     }
         
-     function prev(){
+    function prev(){
          
-         //Subtrakt twice the value of displayed tabs
+         //Subtract twice the value of displayed tabs
          this.day = this.day - 10;
          
           if(day <= 0){
@@ -700,18 +692,19 @@
                 <br />
                 <br />
                 <p>
-                    Preisminimum
+                    Minimum price :
                     <input id="minslider" type="range" min="0" max="1000" value="0" onchange="showMinValue(this.value)">
                     <span id="range1">0</span>
                 </p>
                 <br />
                 <p>
-                    Preismaximum
+                    Maximum price :
                     <input id="maxslider" type="range" min="0" max="1000" value="1000" onchange="showMaxValue(this.value)">
                     <span id="range2">1000</span>
                 </p>
 			</div>
-
+			
+			<!-- FIELDS ABOUT A CLUB ON DB-->
 			<div class="left-table">
 				<h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
@@ -722,11 +715,10 @@
 
 				<button type="submit" class="btn btn-primary">Continuer</button>
 			</div>
-			
 		</div>
-
 	</div>
-<!-- Use JQuery to get the actual date and call the javascript funciton -->
+	
+ <!-- Use JQuery to get the actual date and call the javascript funciton -->
  <script>
         readdata();
      
@@ -738,18 +730,19 @@
         var passvalue;   
      
         if(month < 10 && day < 10){
-                passvalue = year + "-0" + month + "-0" + day;
-            }  
-            else if(month < 10){
-                passvalue = year + "-0" + month + "-" + day;
-                }
-                else if(day < 10){
-                passvalue = year + "-" + month + "-0" + day;
-                }
-                else{
-                passvalue = year + "-" + month + "-" + day;
-                }
+        	passvalue = year + "-0" + month + "-0" + day;
+        }  
+        else if(month < 10){
+        	passvalue = year + "-0" + month + "-" + day;
+        }
+        else if(day < 10){
+            passvalue = year + "-" + month + "-0" + day;
+        }
+        else{
+            passvalue = year + "-" + month + "-" + day;
+        }
+        
         initialisedate(year, month, day);
         myfunction();
         checkclick(passvalue);
-</script>
+ </script>
