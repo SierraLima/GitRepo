@@ -1,11 +1,10 @@
+<link href="{{ URL::asset('js/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css') }}">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="{{ URL::asset('js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js') }}"></script>
 
 <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
+$('#date').datepicker(); 
 </script>
 
 <div class="container" style="padding-top:48px;">
@@ -81,8 +80,7 @@
                 <b>Expiration date</b>
                 </p>
                 <p>
-                <input type="text" id="datepicker">
-                <input type="textfield" style="width:100px">
+                <input type="date" name="date" id="date" value="" />
                 <img src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/32/Calendar-icon.png">
                 </p>
             </div>
