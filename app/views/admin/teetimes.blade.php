@@ -14,8 +14,6 @@ var myJSONObject, mode = "liberate";
 /* TODO
 1) lorsqu'il y a 4 tee-times, si l'on en supprime ou libère un, un nouveau est rajouté
 3) sélectionner et déselectionner N fois un tee-time ajoute N tee-times
-4) clique sur un teetime libre et confirme en rajoute un new en plus
-5) choix de l'action avant de cliquer dans le tableau
 */
 
 function initMyJSONObject() {
@@ -39,6 +37,15 @@ function initMyJSONObject() {
 		};
 }
 
+// function needed to delete by value
+Array.prototype.removeValue = function(name, value){
+	var array = $.map(this, function(v,i){
+		return v[name] === value ? null : v;
+	});
+	this.length = 0; //clear original array
+	this.push.apply(this, array); //push all elements except the one we want to delete
+}
+
 $(document).ready(function () {
 
 	// getting the date from laravel
@@ -50,19 +57,13 @@ $(document).ready(function () {
 	var month = parts[1];
 	var day = parts[2];
 
-	// creating an actual date
-	var requestedDate = new Date(year, month - 1, day);
-
 	// generating dates around the requested date
 	for(var i=-5; i<=5; i++) {
-		var d = new Date();
-		d.setDate(requestedDate.getDate() + i);
 
-		var month = (d.getMonth() + 1);
-		var day = d.getDate();
-		var year = d.getFullYear();
+		var d = new Date(year, month - 1, day);
+		d.setDate(d.getDate()+i);
 
-		var outputDate = year+"-"+month+"-"+day;
+		var outputDate = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 
 		$("#date").append(new Option(outputDate, outputDate));
 		
@@ -77,41 +78,60 @@ $(document).ready(function () {
 	});
 		
 	initMyJSONObject();
+	var row, col;
 
 	$("td a").click(function(e) {
 		e.preventDefault();
 		
-		if($(this).hasClass("btn-selected"))
+		if($(this).hasClass("btn-selected")) {
 			$(this).removeClass("btn-selected");
+
+			if($(this).attr('id')===undefined) {
+				// deleting by column and row
+				console.debug("deleting by row and col");
+				console.debug(""+col+row);
+				myJSONObject.updates.removeValue('id', ""+col+row);
+				
+			
+			}
+			else {
+				// deleting by id
+				myJSONObject.updates.removeValue('id', $(this).attr('id'));
+			}
+
+		}
 		else
 			$(this).addClass("btn-selected");
 	});
 	
 	$(".btn-circle").click(function(e) {
-		var row = $(this).closest("tr").index();
-		var col = $(this).closest("td").index()+6;
-		
-		if(mode=="delete") {
-			myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
-		}
-		else if(mode=="liberate") {
-			var checked = $('#content').find('input[type=checkbox]:checked').length;
-			if(checked>1) {
-				alert("You have selected more than one price.");
-				$(this).removeClass("btn-selected");
+		if($(this).hasClass("btn-selected")) {
+			row = $(this).closest("tr").index();
+			col = $(this).closest("td").index()+6;
+
+			if(mode=="delete") {
+				myJSONObject.updates[myJSONObject.updates.length] = {"id": $(this).attr('id'), "action":"delete"};
 			}
-			else if(checked==0) {
-				alert("You haven't selected a price.");
-				$(this).removeClass("btn-selected");
-			}
-			else {
-				myJSONObject.updates[myJSONObject.updates.length] = {
-					"hour": "0"+col,
-					"minutes": row*10+"",
-					"course": "1",
-					"action": "liberate",
-					"price": $("input[type=checkbox]:checked").val()+""
-				};
+			else if(mode=="liberate") {
+				var checked = $('#content').find('input[type=checkbox]:checked').length;
+				if(checked>1) {
+					alert("You have selected more than one price.");
+					$(this).removeClass("btn-selected");
+				}
+				else if(checked==0) {
+					alert("You haven't selected a price.");
+					$(this).removeClass("btn-selected");
+				}
+				else {
+					myJSONObject.updates[myJSONObject.updates.length] = {
+						"hour": "0"+col,
+						"minutes": row*10+"",
+						"id": ""+col+row,
+						"course": "1",
+						"action": "liberate",
+						"price": $("input[type=checkbox]:checked").val()+""
+					};
+				}
 			}
 		}
 	});
