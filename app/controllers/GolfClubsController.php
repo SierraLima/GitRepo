@@ -199,6 +199,7 @@ class GolfClubsController extends BaseController {
 			$golfclub->password = Hash::make(Input::get('password'));
 			$golfclub->save();
 			
+			// Set a default golfcourse
 			$golfcourse = new GolfCourse;
 			
 			$golfcourse->holenumber = 0;
