@@ -41,8 +41,10 @@
     var buttontd;
     var button;
     var tablebox;
+    var teetimetime;
         
     var clickeddate = "0000-00-00";
+    var currenthour = 300;
          
    /**
     * Set the filter of holes
@@ -91,6 +93,10 @@
         p.appendChild(descriptionimage);
         p.innerHTML += $description;
         div.appendChild(p);
+        
+        //Fill the sous-total div
+        
+        //var totaldiv = document.getElementById("total");
     }
     
    /**
@@ -237,7 +243,23 @@
         if(jsonData[i].date.substring(0,10) == $date && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
                     
         createelements();
-
+            
+        //Set the current hour to the hour from the db
+        //Function to display the h3 titles
+        
+        teetimetime = jsonData[i].date.substring(11,16);
+            
+        if(currenthour != jsonData[i].date.substring(11,13)){
+            currenthour = (jsonData[i].date.substring(11,13));
+            var titlerow = document.createElement("tr");
+            var h3 = document.createElement("h3");
+            h3.innerHTML = currenthour + ":00 - " + currenthour + ":59";
+            titlerow.appendChild(h3);
+            tablebox.appendChild(titlerow);
+        }
+        
+        
+            
         /*
         var tr = document.createElement("tr");
         var golfclub = document.createElement("td");
@@ -256,7 +278,7 @@
         /**********************************************/
         
                 
-        timetd.innerHTML = "12:40";
+        timetd.innerHTML = teetimetime;
         // golfclub.innerHTML = "GolfClub de Sierre";
                 
         // Getting the right Golfclub
@@ -308,6 +330,10 @@
                         	golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         	golfclublink.setAttribute("description", jsonGolfclub[k].description);
                         	golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                            
+                            //Section for the sous-total
+                            
+                            
                         	golfclub.appendChild(golfclublink);
                         
                         	for(var l in jsonMedia){
@@ -614,7 +640,6 @@
 				<div class="table-responsive">
 					<table class="table table-hover">
 						<tbody id="tablebody">
-							<h3>12:00 PM - 12:59 PM</h3>
                             <!--
 							<tr>
 								<td>12:40</td>
@@ -764,8 +789,13 @@
                 </p>
 			</div>
 			
-			<!--TODO FIELDS ABOUT A CLUB ON DB ?-->
+<<<<<<< HEAD
+			<!--FIELDS ABOUT A CLUB ON DB ?-->
 			<div class="left-table">
+=======
+			<!-- FIELDS ABOUT A CLUB ON DB ?-->
+			<div id="total" class="left-table">
+>>>>>>> e721c55800432d8e0df57fceec33f3e034d042c0
 				<h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
 				<h5>pour 3 participants : 300 CHF</h5>
@@ -773,7 +803,7 @@
 				Golf Club de Sierre<br />
 				30.03.2014</p>
 				
-				<!--TODO NO ACTION ?-->	
+				<!--NO ACTION ?-->	
 				<button type="submit" class="btn btn-primary">Continuer</button>
 			</div>
 		</div>
