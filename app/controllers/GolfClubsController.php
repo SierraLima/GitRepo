@@ -198,6 +198,11 @@ class GolfClubsController extends BaseController {
 			$golfclub->phonenumber = Input::get('phonenumber');
 			$golfclub->password = Hash::make(Input::get('password'));
 			$golfclub->save();
+			
+			$golfcourse = new GolfCourse;
+			
+			$golfcourse->holenumber = 0;
+			$golfcourse->golf_club_id = $golfclub->id;
 
 			return Redirect::to('golfclubs')->with('message', 'Thanks for registering!');
 

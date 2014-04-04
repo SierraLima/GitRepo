@@ -764,7 +764,7 @@
                 </p>
 			</div>
 			
-			<!-- FIELDS ABOUT A CLUB ON DB ?-->
+			<!--TODO FIELDS ABOUT A CLUB ON DB ?-->
 			<div class="left-table">
 				<h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
@@ -773,7 +773,7 @@
 				Golf Club de Sierre<br />
 				30.03.2014</p>
 				
-				<!-- NO ACTION ?-->	
+				<!--TODO NO ACTION ?-->	
 				<button type="submit" class="btn btn-primary">Continuer</button>
 			</div>
 		</div>
