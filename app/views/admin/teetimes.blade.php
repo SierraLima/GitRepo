@@ -11,11 +11,6 @@ img { max-width: 200px; height: auto; }
 
 var myJSONObject, mode = "liberate";
 
-/* TODO
-1) lorsqu'il y a 4 tee-times, si l'on en supprime ou libère un, un nouveau est rajouté
-3) sélectionner et déselectionner N fois un tee-time ajoute N tee-times
-*/
-
 function initMyJSONObject() {
 
 	myJSONObject = 

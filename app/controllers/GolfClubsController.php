@@ -310,7 +310,9 @@ class GolfClubsController extends BaseController {
 					// with firstOrFail() you have to use destroy()
 					Teetime::destroy($teetime->id);
 				}
-				return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Tee-times in red can\'t be deleted.');
+				else {
+					return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Tee-times in red can\'t be deleted. Please do the modifications once again.');
+				}
 			}
 			elseif($action=="liberate") {
 					
