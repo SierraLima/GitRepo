@@ -203,6 +203,7 @@ class GolfClubsController extends BaseController {
 			
 			$golfcourse->holenumber = 0;
 			$golfcourse->golf_club_id = $golfclub->id;
+			$golfcourse->save();
 
 			return Redirect::to('golfclubs')->with('message', 'Thanks for registering!');
 
