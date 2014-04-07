@@ -87,27 +87,10 @@
         div.appendChild(h4);
         div.appendChild(oneperson);
         div.appendChild(numberofpersons);
-        div.appendChild(continuebutton);
-<<<<<<< HEAD
-        
-        /*
-        <h4>Sous-total</h4>
-				<h5>par personne : 100 CHF</h5>
-				<h5>pour 3 participants : 300 CHF</h5>
-				<p>3 tee-times<br />
-				Golf Club de Sierre<br />
-				30.03.2014</p>  
-                
-              	<button type="submit" class="btn btn-primary">Continuer</button>
-
-        */
-        
+        div.appendChild(continuebutton);        
     }
-          
-=======
-    }
-        
->>>>>>> 3ad69bc93c5d5bf3f0f0f0b8f16b0d84ff1130ba
+    //}
+           
    /**
     * Set the filter of holes
     * @param number -> number of hols 
@@ -154,13 +137,6 @@
         p.appendChild(descriptionimage);
         p.innerHTML += $description;
         div.appendChild(p);
-<<<<<<< HEAD
-        
-        //Fill the sous-total div
-        //Price is working
-        //var totaldiv = document.getElementById("total");
-=======
->>>>>>> 3ad69bc93c5d5bf3f0f0f0b8f16b0d84ff1130ba
     }
     
    /**
@@ -233,7 +209,6 @@
             image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             button.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
-
         }
                 
         golfclublink.href = "#";        
@@ -326,7 +301,6 @@
             titlerow.appendChild(h3);
             tablebox.appendChild(titlerow);
         }
-<<<<<<< HEAD
             
         /*
         var tr = document.createElement("tr");
@@ -342,10 +316,7 @@
         var buttontd  = document.createElement("td");
         var button = document.createElement("button");
         */    
-                
-=======
-        
->>>>>>> 3ad69bc93c5d5bf3f0f0f0b8f16b0d84ff1130ba
+    
         timetd.innerHTML = teetimetime;
                 
         // Getting the right Golfclub
@@ -431,7 +402,6 @@
 }
 } // End of the method checkclick
         
-<<<<<<< HEAD
         pricebold.innerHTML = jsonData[i].price;
         imagetd.appendChild(image);
        	price.appendChild(pricebold);
@@ -454,21 +424,10 @@
         tr.appendChild(buttontd);            
                 
        	tablebox.appendChild(tr);
-        */
                 }
         }
     } // End of the method checkclick
         
-        /*
-        <ul>
-        @foreach($teetimes as $teetime)
-        <li> {{ $teetime->date }}</li>
-        @endforeach
-        </ul>
-        */
-    
-=======
->>>>>>> 3ad69bc93c5d5bf3f0f0f0b8f16b0d84ff1130ba
    /**
     * Function to initialise the day, month and year variable with today's date
     * 
