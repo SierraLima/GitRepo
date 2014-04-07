@@ -118,8 +118,7 @@ $('#date').datepicker();
 				<h5>pour 3 participants : 300 CHF</h5>
 				<p>3 tee-times<br />
 				Golf Club de Sierre<br />
-				30.03.2014</p>
-
+				30.03.2014</p>                
 				<button type="submit" class="btn btn-primary">Continuer</button>
 			</div>
 			
