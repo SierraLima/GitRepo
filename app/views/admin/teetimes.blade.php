@@ -122,7 +122,7 @@ $(document).ready(function () {
 						"hour": "0"+col,
 						"minutes": row*10+"",
 						"id": ""+col+row,
-						"course": "1",
+						"course": "0",
 						"action": "liberate",
 						"price": $("input[type=checkbox]:checked").val()+""
 					};
