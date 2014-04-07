@@ -19,18 +19,25 @@ class TeetimesController extends BaseController {
 		$this->layout->content = View::make('search')->with('teetimes', Teetime::orderBy('date')->get());
 	}
     
-    //return reservation page
+    /**
+	 * return reservation page
+	 */
     public function getReservation(){
         $this->layout->content = View::make('reservation');   
     }
     
-    //return reservation page 2
+   	/**
+	 * return reservation page 2
+	 */
     public function getReservation2(){
         $this->layout->content = View::make('reservation2');   
     }
     
-    //return the end of reservation process page
+    /**
+	 * return end of reservation page
+	 */
     public function getEndreservation(){
         $this->layout->content = View::make('endreservation');
     }
+	
 }

@@ -4,7 +4,7 @@
 <script src="{{ URL::asset('js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js') }}"></script>
 
 <script>
-$('#date').datepicker(); 
+	$('#date').datepicker(); 
 </script>
 
 <div class="container" style="padding-top:48px;">
@@ -122,7 +122,5 @@ $('#date').datepicker();
 
 				<button type="submit" class="btn btn-primary">Continuer</button>
 			</div>
-			
 		</div>
-
 	</div>

@@ -1,20 +1,25 @@
+<!--TODO Correct the bug when the club liberate a tee-time alredy liberate (create a tee-time unwanted) -->
+<!--TODO Correct the bug when the club select and deselect a teetime and confirm (create a tee-time unwanted) -->
+
 <div class="container" style="padding-top:48px;">
+
 <legend>Tee-times</legend>
 
 <style type="text/css">
-
-img { max-width: 200px; height: auto; }
-
+	img { max-width: 200px; height: auto; }
 </style>
 
 <script type="text/javascript">
 
-var myJSONObject, mode = "liberate";
+	var myJSONObject, mode = "liberate";
 
-function initMyJSONObject() {
+   /**
+    * Initiate JSON on the page 
+    */
+	function initMyJSONObject() {
 
-	myJSONObject = 
-		{
+		myJSONObject = 
+			{
 		    "date": "{{ $date }}",
 		    "updates": [
 			// {
@@ -29,52 +34,53 @@ function initMyJSONObject() {
 			//     "action": "delete"
 			// }
 		    ]
-		};
-}
-
-// function needed to delete by value
-Array.prototype.removeValue = function(name, value){
-	var array = $.map(this, function(v,i){
-		return v[name] === value ? null : v;
-	});
-	this.length = 0; //clear original array
-	this.push.apply(this, array); //push all elements except the one we want to delete
-}
-
-$(document).ready(function () {
-
-	// getting the date from laravel
-	var requestedDate = '{{ $date }}';
-
-	// splitting
-	var parts = requestedDate.split('-');
-	var year = parts[0];
-	var month = parts[1];
-	var day = parts[2];
-
-	// generating dates around the requested date
-	for(var i=-5; i<=5; i++) {
-
-		var d = new Date(year, month - 1, day);
-		d.setDate(d.getDate()+i);
-
-		var outputDate = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-
-		$("#date").append(new Option(outputDate, outputDate));
-		
-		// default value
-		if(i==0)
-			$('#date option[value="'+outputDate+'"]').attr("selected",true);
+			};
 	}
 
-	var url = "{{ URL::action('GolfClubsController@getTeetimes') }}";
-	$("#date").change(function(e) {
-		window.location = url+'/'+$(this).val();
-	});
+	// function needed to delete by value
+	Array.prototype.removeValue = function(name, value){
+		var array = $.map(this, function(v,i){
+			return v[name] === value ? null : v;
+		});
 		
-	initMyJSONObject();
-	var row, col;
+		this.length = 0; // clear original array
+		this.push.apply(this, array); // push all elements except the one we want to delete
+	}
 
+	$(document).ready(function () {
+
+		// getting the date from laravel
+		var requestedDate = '{{ $date }}';
+
+		// splitting
+		var parts = requestedDate.split('-');
+		var year = parts[0];
+		var month = parts[1];
+		var day = parts[2];
+
+		// generating dates around the requested date
+		for(var i=-5; i<=5; i++) {
+			var d = new Date(year, month - 1, day);
+			d.setDate(d.getDate()+i);
+
+			var outputDate = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+
+			$("#date").append(new Option(outputDate, outputDate));
+		
+			// default value
+			if(i==0)
+				$('#date option[value="'+outputDate+'"]').attr("selected",true);
+		}
+
+		var url = "{{ URL::action('GolfClubsController@getTeetimes') }}";
+		$("#date").change(function(e) {
+			window.location = url+'/'+$(this).val();
+		});
+		
+		initMyJSONObject();
+		var row, col;
+
+	// Deleting selectin items
 	$("td a").click(function(e) {
 		e.preventDefault();
 		
@@ -86,19 +92,17 @@ $(document).ready(function () {
 				console.debug("deleting by row and col");
 				console.debug(""+col+row);
 				myJSONObject.updates.removeValue('id', ""+col+row);
-				
-			
 			}
 			else {
 				// deleting by id
 				myJSONObject.updates.removeValue('id', $(this).attr('id'));
 			}
-
 		}
 		else
 			$(this).addClass("btn-selected");
 	});
 	
+	// Liberate a tee-time
 	$(".btn-circle").click(function(e) {
 		if($(this).hasClass("btn-selected")) {
 			row = $(this).closest("tr").index();
@@ -109,6 +113,7 @@ $(document).ready(function () {
 			}
 			else if(mode=="liberate") {
 				var checked = $('#content').find('input[type=checkbox]:checked').length;
+					
 				if(checked>1) {
 					alert("You have selected more than one price.");
 					$(this).removeClass("btn-selected");
@@ -131,16 +136,16 @@ $(document).ready(function () {
 		}
 	});
 
-	// before submitting, we save myJSONObject in the form
-	$("input[type=submit]").click(function(e) {
-		if(myJSONObject.updates.length == 0) {
-			alert("You haven't done any update!");
-			return false;
-		}
-		else
-			$("#json").val(JSON.stringify(myJSONObject));
+		// before submitting, we save myJSONObject in the form
+		$("input[type=submit]").click(function(e) {
+			if(myJSONObject.updates.length == 0) {
+				alert("You haven't done any update!");
+				return false;
+			}
+			else
+				$("#json").val(JSON.stringify(myJSONObject));
+		});
 	});
-});
 
 </script>
 
@@ -148,6 +153,7 @@ $(document).ready(function () {
 	<select id="date" class="form-control" style="width:250px;">
 	</select>
 
+	<!--TODO Find a way to M^manage the parcours --> 
 	<select id="date" class="form-control" style="width:250px;">
 		<option>Parcours 1</option>
 	</select>
@@ -170,7 +176,6 @@ $(document).ready(function () {
 	</thead>
 
 	<tbody>
-
 		@for ($i = 0; $i <= 5; $i++)
 			<tr>
 				<th>{{ str_pad($i, 2, "0"); }}</th>
@@ -182,6 +187,7 @@ $(document).ready(function () {
 							// i = minutes && j = hour
 							// we just need to format them correctly
 							for ($k = 0; $k < count($teetimes); $k++) {
+									
 								// handling the date
 								$dt = DateTime::CreateFromFormat("Y-m-d H:i:s", $teetimes[$k]->date);
 								$hour = $dt->format('H');
@@ -219,9 +225,9 @@ $(document).ready(function () {
 </table>
 
 <style type="text/css">
-.content {float: right; width:80%; padding-left: 10px;}
-#links {float: left; width:20%;margin-bottom:10px;}
-.invisible{style:display:none;}
+	.content {float: right; width:80%; padding-left: 10px;}
+	#links {float: left; width:20%;margin-bottom:10px;}
+	.invisible{style:display:none;}
 </style>
 
 <ul id="links" class="nav nav-pills nav-stacked">
@@ -247,33 +253,33 @@ $(document).ready(function () {
 </div>
 
 <script type="text/javascript">
-$(document).ready(function () {
 	
-	// hiding non active pane
-	$(".content").eq(1).hide();
+	$(document).ready(function () {
+	
+		// hiding non active pane
+		$(".content").eq(1).hide();
 
-	$("#liberate, #delete").click(function(e) {
-		initMyJSONObject();
-		e.preventDefault();
+		$("#liberate, #delete").click(function(e) {
+			initMyJSONObject();
+			e.preventDefault();
 
-		// active class
-		$("#links li.active").removeClass("active");
-		if($(this).hasClass("active"))
-			$(this).removeClass("active");
-		else
-			$(this).addClass("active");
+			// active class
+			$("#links li.active").removeClass("active");
+			if($(this).hasClass("active"))
+				$(this).removeClass("active");
+			else
+				$(this).addClass("active");
 
-		mode = $(this).attr('id');
+			mode = $(this).attr('id');
 
-		// hiding everything but the menu
-		$(".content").not(this).hide();
+			// hiding everything but the menu
+			$(".content").not(this).hide();
 
-		// showing the pane
-		var index = $(this).index();
-		$(".content").eq(index).show();
+			// showing the pane
+			var index = $(this).index();
+			$(".content").eq(index).show();
+		});
 	});
-});
-
 </script>
 
 <br style="clear:both;" />

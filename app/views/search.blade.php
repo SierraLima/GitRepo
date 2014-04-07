@@ -1,3 +1,5 @@
+<!--TODO delete some useless comments -->
+
 <style type="text/css">
 	.left-table {
 		border: 1px solid #ddd;
@@ -47,9 +49,15 @@
         
     var selectcounter = 1;
     
-        
-    //Method for the subtotal
-        
+   /**
+    * Set the content of the panel subtotal
+    * 
+    * @param selectorid -> the id of the tee-time
+    * @param price-> the price of the tee-time
+    * @param name -> the name of the club
+    * @param description -> the description of the club
+    * @param imageurl -> the image of the club
+    */ 
     function showtotal($selectorid, $price, $name, $description, $imageurl){
         
         showdescription($name, $description, $imageurl);
@@ -59,7 +67,6 @@
         //alert(selector.options[selector.selectedIndex].text + " Price: " + $price);
         
         //Price and number of players working
-        
         var div = document.getElementById("total");
         var h4 = document.createElement("h4");
         var oneperson = document.createElement("h5");
@@ -84,7 +91,6 @@
         div.appendChild(numberofpersons);
         div.appendChild(continuebutton);
         
-        
         /*
         <h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
@@ -93,14 +99,12 @@
 				Golf Club de Sierre<br />
 				30.03.2014</p>  
                 
-                				<button type="submit" class="btn btn-primary">Continuer</button>
+              	<button type="submit" class="btn btn-primary">Continuer</button>
 
         */
         
     }
-        
-        
-        
+          
    /**
     * Set the filter of holes
     * 
@@ -131,8 +135,6 @@
     */ 
     function showdescription($name, $description, $imageurl){
         
-        
-        
         var div = document.getElementById("descriptiondiv");
         
         clearleftelement(div);
@@ -152,9 +154,7 @@
         div.appendChild(p);
         
         //Fill the sous-total div
-        
         //Price is working
-        
         //var totaldiv = document.getElementById("total");
     }
     
@@ -324,8 +324,6 @@
             titlerow.appendChild(h3);
             tablebox.appendChild(titlerow);
         }
-        
-        
             
         /*
         var tr = document.createElement("tr");
@@ -340,10 +338,7 @@
         var selector = document.createElement("select");
         var buttontd  = document.createElement("td");
         var button = document.createElement("button");
-        */
-  
-        /**********************************************/
-        
+        */    
                 
         timetd.innerHTML = teetimetime;
         // golfclub.innerHTML = "GolfClub de Sierre";
@@ -402,8 +397,7 @@
                             	addelements();
                             }
                         }
-                        else{
-                                                
+                        else{                                      
                         	golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         	golfclublink.setAttribute("description", jsonGolfclub[k].description);
                         	golfclublink.setAttribute("name", jsonGolfclub[k].name);                            
@@ -446,37 +440,34 @@
         button.innerHTML = "Reserver";
         button.setAttribute("onclick", "javascript:buttonclick(this.id);");
         
-                    pricebold.innerHTML = jsonData[i].price;
+        pricebold.innerHTML = jsonData[i].price;
+        imagetd.appendChild(image);
+       	price.appendChild(pricebold);
                 
-                
-                    imagetd.appendChild(image);
-                    price.appendChild(pricebold);
-                
-                    for(var i = 0; i<4; i++){
-                        var option = document.createElement("option");
-                        option.innerHTML = i+1;
-                        selector.appendChild(option); 
-                    }
+        for(var i = 0; i<4; i++){
+        	var option = document.createElement("option");
+            option.innerHTML = i+1;
+            selector.appendChild(option); 
+        }
                     
-                    selecttd.appendChild(selector);
-                    selecttd.innerHTML += "  jouer(s)";
-                    buttontd.appendChild(button);
+        selecttd.appendChild(selector);
+        selecttd.innerHTML += "  jouer(s)";
+        buttontd.appendChild(button);
                 
-                    tr.appendChild(timetd);
-                    tr.appendChild(imagetd);
-                    tr.appendChild(golfclub);
-                    tr.appendChild(price);
-                    tr.appendChild(selecttd);
-                    tr.appendChild(buttontd);
-                    
+       	tr.appendChild(timetd);
+        tr.appendChild(imagetd);
+       	tr.appendChild(golfclub);
+        tr.appendChild(price);
+        tr.appendChild(selecttd);
+        tr.appendChild(buttontd);            
                 
-                    tablebox.appendChild(tr);
-                    */
+       	tablebox.appendChild(tr);
+        */
                 }
         }
     } // End of the method checkclick
         
-            /*
+        /*
         <ul>
         @foreach($teetimes as $teetime)
         <li> {{ $teetime->date }}</li>
