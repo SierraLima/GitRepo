@@ -37,7 +37,6 @@
     var price;
     var pricebold;
     var selecttd;
-    var selector;
     var buttontd;
     var button;
     var tablebox;
@@ -45,7 +44,63 @@
         
     var clickeddate = "0000-00-00";
     var currenthour = 300;
-         
+        
+    var selectcounter = 1;
+    
+        
+    //Method for the subtotal
+        
+    function showtotal($selectorid, $price, $name, $description, $imageurl){
+        
+        showdescription($name, $description, $imageurl);
+        
+        var selector = document.getElementById("select" + $selectorid);
+        
+        //alert(selector.options[selector.selectedIndex].text + " Price: " + $price);
+        
+        //Price and number of players working
+        
+        var div = document.getElementById("total");
+        var h4 = document.createElement("h4");
+        var oneperson = document.createElement("h5");
+        var numberofpersons = document.createElement("h5");
+        var continuebutton = document.createElement("button");
+        
+        $(div).empty();
+        
+        //Set the attributes for the button
+        continuebutton.setAttribute("type", "submit");
+        continuebutton.setAttribute("class","btn btn-primary");
+        continuebutton.innerHTML = "Continue";
+        
+        //Set the innerHTML of the variables
+        h4.innerHTML = "Sous-total";
+        oneperson.innerHTML = "Par personne : " + $price + " CHF";
+        numberofpersons.innerHTML = "Pour " + selector.options[selector.selectedIndex].text + " participants : " + 
+            (parseInt(selector.options[selector.selectedIndex].text) * parseInt($price)) + " CHF";
+        
+        div.appendChild(h4);
+        div.appendChild(oneperson);
+        div.appendChild(numberofpersons);
+        div.appendChild(continuebutton);
+        
+        
+        /*
+        <h4>Sous-total</h4>
+				<h5>par personne : 100 CHF</h5>
+				<h5>pour 3 participants : 300 CHF</h5>
+				<p>3 tee-times<br />
+				Golf Club de Sierre<br />
+				30.03.2014</p>  
+                
+                				<button type="submit" class="btn btn-primary">Continuer</button>
+
+        */
+        
+    }
+        
+        
+        
    /**
     * Set the filter of holes
     * 
@@ -76,6 +131,8 @@
     */ 
     function showdescription($name, $description, $imageurl){
         
+        
+        
         var div = document.getElementById("descriptiondiv");
         
         clearleftelement(div);
@@ -95,6 +152,8 @@
         div.appendChild(p);
         
         //Fill the sous-total div
+        
+        //Price is working
         
         //var totaldiv = document.getElementById("total");
     }
@@ -155,7 +214,7 @@
         price = document.createElement("td");
         pricebold = document.createElement("b");
         selecttd = document.createElement("td");
-        selector = document.createElement("select");
+        //selectplayers = document.createElement("select");
         buttontd  = document.createElement("td");
         button = document.createElement("button");
     }
@@ -168,6 +227,8 @@
         if(image.hasAttribute("src") == false){
             image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+            button.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+
         }
                 
         golfclublink.href = "#";        
@@ -177,20 +238,26 @@
         image.setAttribute("width","28");
         button.setAttribute("type","submit");
         button.setAttribute("class","btn btn-success");
+        button.setAttribute("selectcounter", selectcounter);
         button.innerHTML = "Reserver";
         // button.setAttribute("onclick", "javascript:buttonclick(this.id);");
-        button.setAttribute("onclick", "window.open('http://localhost:8888/teezy-linux/public/teetimes/reservation')");
-
+        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'),$(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'));");
+        
         imagetd.appendChild(image);
         price.appendChild(pricebold);
-                
+        
+        var selectplayers = document.createElement("select");
+        selectplayers.setAttribute("id", "select" + selectcounter);
+        
+        selectcounter++;
+        
         for(var i = 0; i<4; i++){
         	var option = document.createElement("option");
             option.innerHTML = i+1;
-            selector.appendChild(option); 
+            selectplayers.appendChild(option); 
         }
                     
-        selecttd.appendChild(selector);
+        selecttd.appendChild(selectplayers);
         selecttd.innerHTML += "  joueur(s)";
         buttontd.appendChild(button);
                 
@@ -293,15 +360,20 @@
                         		golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         		golfclublink.setAttribute("description", jsonGolfclub[k].description);
                         		golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                                
                         		golfclub.appendChild(golfclublink);
                         
                         		for(var l in jsonMedia){
                         			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     	image.setAttribute("src", jsonMedia[l].url);
                                     	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                        button.setAttribute("imageurl", jsonMedia[k].url);
                                 	}
-                            	}	
+                            	}
+                                button.setAttribute("description", jsonGolfclub[k].description);
+                        		button.setAttribute("name", jsonGolfclub[k].name);
                         		button.setAttribute("id", jsonData[i].id);
+                                button.setAttribute("price", jsonData[i].price);
                         		pricebold.innerHTML = jsonData[i].price;
                         		addelements();
                         	}
@@ -312,15 +384,20 @@
                         		golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         		golfclublink.setAttribute("description", jsonGolfclub[k].description);
                         		golfclublink.setAttribute("name", jsonGolfclub[k].name);
+                                
                         		golfclub.appendChild(golfclublink);
                         
                         		for(var l in jsonMedia){
                         			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     	image.setAttribute("src", jsonMedia[l].url);
                                     	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                        button.setAttribute("imageurl", jsonMedia[k].url);
                                     }      
                                 }
+                                button.setAttribute("description", jsonGolfclub[k].description);
+                        		button.setAttribute("name", jsonGolfclub[k].name);
                             	button.setAttribute("id", jsonData[i].id);
+                                button.setAttribute("price", jsonData[i].price);
                             	pricebold.innerHTML = jsonData[i].price;
                             	addelements();
                             }
@@ -329,10 +406,7 @@
                                                 
                         	golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         	golfclublink.setAttribute("description", jsonGolfclub[k].description);
-                        	golfclublink.setAttribute("name", jsonGolfclub[k].name);
-                            
-                            //Section for the sous-total
-                            
+                        	golfclublink.setAttribute("name", jsonGolfclub[k].name);                            
                             
                         	golfclub.appendChild(golfclublink);
                         
@@ -340,9 +414,13 @@
                         		if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     image.setAttribute("src", jsonMedia[l].url);
                                     golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                    button.setAttribute("imageurl", jsonMedia[k].url);
                             	}
                         	}
+                            button.setAttribute("description", jsonGolfclub[k].description);
+                            button.setAttribute("name", jsonGolfclub[k].name);
                         	button.setAttribute("id", jsonData[i].id);
+                            button.setAttribute("price", jsonData[i].price);
                         	pricebold.innerHTML = jsonData[i].price;
                         	addelements();
                     	}
@@ -789,22 +867,28 @@
                 </p>
 			</div>
 			
-<<<<<<< HEAD
 			<!--FIELDS ABOUT A CLUB ON DB ?-->
 			<div class="left-table">
-=======
 			<!-- FIELDS ABOUT A CLUB ON DB ?-->
 			<div id="total" class="left-table">
+
+                <!--
+=======
 >>>>>>> e721c55800432d8e0df57fceec33f3e034d042c0
+>>>>>>> 26daff5e7c3d21c0889a2c42d12278fc5fd6d6ec
 				<h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
 				<h5>pour 3 participants : 300 CHF</h5>
 				<p>3 tee-times<br />
 				Golf Club de Sierre<br />
 				30.03.2014</p>
+                -->
 				
-				<!--NO ACTION ?-->	
+				<!-- NO ACTION ?
+=======
+				<!--NO ACTION ?
 				<button type="submit" class="btn btn-primary">Continuer</button>
+                -->	
 			</div>
 		</div>
 	</div>
