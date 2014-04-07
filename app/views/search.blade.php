@@ -55,9 +55,7 @@
         showdescription($name, $description, $imageurl);
         
         var selector = document.getElementById("select" + $selectorid);
-        
-        //alert(selector.options[selector.selectedIndex].text + " Price: " + $price);
-        
+                
         //Price and number of players working
         
         var div = document.getElementById("total");
@@ -83,27 +81,10 @@
         div.appendChild(oneperson);
         div.appendChild(numberofpersons);
         div.appendChild(continuebutton);
-        
-        
-        /*
-        <h4>Sous-total</h4>
-				<h5>par personne : 100 CHF</h5>
-				<h5>pour 3 participants : 300 CHF</h5>
-				<p>3 tee-times<br />
-				Golf Club de Sierre<br />
-				30.03.2014</p>  
-                
-                				<button type="submit" class="btn btn-primary">Continuer</button>
-
-        */
-        
     }
-        
-        
         
    /**
     * Set the filter of holes
-    * 
     * @param number -> number of hols 
     */        
     function filter($number){
@@ -122,7 +103,7 @@
         checkclick(selecteddate);
     }
         
-   /**
+   /*
     * Show the description about a club on right top 
     * 
     * @param name -> the name of the club
@@ -130,8 +111,6 @@
     * @param imageurl -> the image of the club
     */ 
     function showdescription($name, $description, $imageurl){
-        
-        
         
         var div = document.getElementById("descriptiondiv");
         
@@ -150,12 +129,6 @@
         p.appendChild(descriptionimage);
         p.innerHTML += $description;
         div.appendChild(p);
-        
-        //Fill the sous-total div
-        
-        //Price is working
-        
-        //var totaldiv = document.getElementById("total");
     }
     
    /**
@@ -297,7 +270,6 @@
         selecteddate = $date;
         
         createtablebox();
-        // var tablebox = document.getElementById("tablebody"); 
        
         while ( tablebox.rows.length > 0 ){
             tablebox.deleteRow(0);
@@ -305,8 +277,6 @@
                      
         for (var i in jsonData) {
             
-        // alert("Teetimeprice " + jsonData[i].price + "Min: " + minprice + " Max: " + maxprice);
-        // alert("JSon data " + jsonData[i].date + " /// $Datum = " + $datum);
         if(jsonData[i].date.substring(0,10) == $date && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
                     
         createelements();
@@ -325,28 +295,7 @@
             tablebox.appendChild(titlerow);
         }
         
-        
-            
-        /*
-        var tr = document.createElement("tr");
-        var golfclub = document.createElement("td");
-        var golfclublink = document.createElement("a");
-        var timetd = document.createElement("td");
-        var imagetd = document.createElement("td");
-        var image = document.createElement("img");
-        var price = document.createElement("td");
-        var pricebold = document.createElement("b");
-        var selecttd = document.createElement("td");
-        var selector = document.createElement("select");
-        var buttontd  = document.createElement("td");
-        var button = document.createElement("button");
-        */
-  
-        /**********************************************/
-        
-                
         timetd.innerHTML = teetimetime;
-        // golfclub.innerHTML = "GolfClub de Sierre";
                 
         // Getting the right Golfclub
         for(var j in jsonGolfcourse){
@@ -428,62 +377,10 @@
             	}
         	}
         } // End for var j
-            
-        /*
-        if(image.hasAttribute("src") == false){
-            image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
-            golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
-        }
-                
-        golfclublink.href = "#";        
-        golfclublink.setAttribute("onclick", "javascript:showdescription($(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'));");
-                
-        image.setAttribute("height","28");
-        image.setAttribute("width","28");
-        button.setAttribute("type","submit");
-        button.setAttribute("class","btn btn-success");
-        button.setAttribute("id", jsonData[i].id);
-        button.innerHTML = "Reserver";
-        button.setAttribute("onclick", "javascript:buttonclick(this.id);");
+    }
+}
+} // End of the method checkclick
         
-                    pricebold.innerHTML = jsonData[i].price;
-                
-                
-                    imagetd.appendChild(image);
-                    price.appendChild(pricebold);
-                
-                    for(var i = 0; i<4; i++){
-                        var option = document.createElement("option");
-                        option.innerHTML = i+1;
-                        selector.appendChild(option); 
-                    }
-                    
-                    selecttd.appendChild(selector);
-                    selecttd.innerHTML += "  jouer(s)";
-                    buttontd.appendChild(button);
-                
-                    tr.appendChild(timetd);
-                    tr.appendChild(imagetd);
-                    tr.appendChild(golfclub);
-                    tr.appendChild(price);
-                    tr.appendChild(selecttd);
-                    tr.appendChild(buttontd);
-                    
-                
-                    tablebox.appendChild(tr);
-                    */
-                }
-        }
-    } // End of the method checkclick
-        
-            /*
-        <ul>
-        @foreach($teetimes as $teetime)
-        <li> {{ $teetime->date }}</li>
-        @endforeach
-        </ul>
-        */
-    
    /**
     * Function to initialise the day, month and year variable with today's date
     * 
@@ -688,15 +585,6 @@
     
     </script>
 
-<!--
- <ul>
-        @foreach($teetimes as $teetime)
-        <li> {{ $teetime->date }}</li>
-        @endforeach
-     
-</ul>
--->
-
 <div class="container" style="padding-top:48px;">
     
 	<legend>Recherche d'un tee-time</legend>
@@ -704,129 +592,13 @@
 
 		<div class="col-md-8">
 			<ul id="navigation" class="nav nav-tabs">
-				<!--
-                <li><a href="#">« prev</a></li>
-				<li><a href="#">26 mars</a></li>
-				<li><a href="#">27 mars</a></li>
-				<li class="active"><a href="#">28 mars</a></li>
-				<li><a href="#">29 mars</a></li>
-				<li><a href="#">30 mars</a></li>
-				<li><a href="#">next »</a></li>
-                -->
+				
 			</ul>
 			<div class="tab-content">
 				<div class="table-responsive">
 					<table class="table table-hover">
 						<tbody id="tablebody">
-                            <!--
-							<tr>
-								<td>12:40</td>
-								<td><img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="28" width="28" /> Golf Club de Sierre</td>
-								<td><b>50 CHF</b></td>
-								<td>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-									 joueur(s)
-								</td>
-								<td>
-									<button type="submit" class="btn btn-success">Réserver</button>
-								</td>
-							</tr>
-							<tr>
-								<td>12:40</td>
-								<td><img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="28" width="28" /> Golf Club de Sierre</td>
-								<td><b>50 CHF</b></td>
-								<td>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-									 joueur(s)
-								</td>
-								<td>
-									<button type="submit" class="btn btn-success">Réserver</button>
-								</td>
-							</tr>
-							<tr>
-								<td>12:40</td>
-								<td><img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="28" width="28" /> Golf Club de Sierre</td>
-								<td><b>50 CHF</b></td>
-								<td>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-									 joueur(s)
-								</td>
-								<td>
-									<button type="submit" class="btn btn-success">Réserver</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="table table-hover">
-						<tbody>
-							<h3>12:00 PM - 12:59 PM</h3>
-							<tr>
-								<td>12:40</td>
-								<td><img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="28" width="28" /> Golf Club de Sierre</td>
-								<td><b>50 CHF</b></td>
-								<td>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-									 joueur(s)
-								</td>
-								<td>
-									<button type="submit" class="btn btn-success">Réserver</button>
-								</td>
-							</tr>
-							<tr>
-								<td>12:40</td>
-								<td><img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="28" width="28" /> Golf Club de Sierre</td>
-								<td><b>50 CHF</b></td>
-								<td>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-									 joueur(s)
-								</td>
-								<td>
-									<button type="submit" class="btn btn-success">Réserver</button>
-								</td>
-							</tr>
-							<tr>
-								<td>12:40</td>
-								<td><img src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="28" width="28" /> Golf Club de Sierre</td>
-								<td><b>50 CHF</b></td>
-								<td>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-									 joueur(s)
-								</td>
-								<td>
-									<button type="submit" class="btn btn-success">Réserver</button>
-								</td>
-							</tr>
-                            -->
+                            
 						</tbody>
 					</table>
 				</div>
@@ -837,9 +609,7 @@
 			<div id="descriptiondiv" class="left-table">
 				<h4 id="golfclubtitle"></h4>
 				<p id="descriptionp">
-                    <!--
-					<img id="descriptionimage" src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="56" width="56" style="float:left;margin:0 5px 0 0;" />
-                    -->
+           
 				</p>
 			</div>
 
@@ -872,23 +642,6 @@
 			<!-- FIELDS ABOUT A CLUB ON DB ?-->
 			<div id="total" class="left-table">
 
-                <!--
-=======
->>>>>>> e721c55800432d8e0df57fceec33f3e034d042c0
->>>>>>> 26daff5e7c3d21c0889a2c42d12278fc5fd6d6ec
-				<h4>Sous-total</h4>
-				<h5>par personne : 100 CHF</h5>
-				<h5>pour 3 participants : 300 CHF</h5>
-				<p>3 tee-times<br />
-				Golf Club de Sierre<br />
-				30.03.2014</p>
-                -->
-				
-				<!-- NO ACTION ?
-=======
-				<!--NO ACTION ?
-				<button type="submit" class="btn btn-primary">Continuer</button>
-                -->	
 			</div>
 		</div>
 	</div>
