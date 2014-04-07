@@ -854,9 +854,17 @@
                 </p>
 			</div>
 			
+<<<<<<< HEAD
+			<!--FIELDS ABOUT A CLUB ON DB ?-->
+			<div class="left-table">
+=======
 			<!-- FIELDS ABOUT A CLUB ON DB ?-->
 			<div id="total" class="left-table">
+<<<<<<< HEAD
                 <!--
+=======
+>>>>>>> e721c55800432d8e0df57fceec33f3e034d042c0
+>>>>>>> 26daff5e7c3d21c0889a2c42d12278fc5fd6d6ec
 				<h4>Sous-total</h4>
 				<h5>par personne : 100 CHF</h5>
 				<h5>pour 3 participants : 300 CHF</h5>
@@ -865,7 +873,11 @@
 				30.03.2014</p>
                 -->
 				
+<<<<<<< HEAD
 				<!-- NO ACTION ?
+=======
+				<!--NO ACTION ?-->	
+>>>>>>> 26daff5e7c3d21c0889a2c42d12278fc5fd6d6ec
 				<button type="submit" class="btn btn-primary">Continuer</button>
                 -->	
 			</div>

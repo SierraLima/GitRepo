@@ -198,6 +198,13 @@ class GolfClubsController extends BaseController {
 			$golfclub->phonenumber = Input::get('phonenumber');
 			$golfclub->password = Hash::make(Input::get('password'));
 			$golfclub->save();
+			
+			// Set a default golfcourse
+			$golfcourse = new GolfCourse;
+			
+			$golfcourse->holenumber = 0;
+			$golfcourse->golf_club_id = $golfclub->id;
+			$golfcourse->save();
 
 			return Redirect::to('golfclubs')->with('message', 'Thanks for registering!');
 
@@ -305,7 +312,9 @@ class GolfClubsController extends BaseController {
 					// with firstOrFail() you have to use destroy()
 					Teetime::destroy($teetime->id);
 				}
-				return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Tee-times in red can\'t be deleted.');
+				else {
+					return Redirect::to("golfclubs/teetimes/$date")->with('message', 'Tee-times in red can\'t be deleted. Please do the modifications once again.');
+				}
 			}
 			elseif($action=="liberate") {
 					
