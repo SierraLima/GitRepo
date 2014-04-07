@@ -95,8 +95,17 @@ $('#date').datepicker();
 				<p>3 tee-times<br />
 				Golf Club de Sierre<br />
 				30.03.2014</p>
+                
+                
+	           {{ Form::open(array('url'=>'reservations/create')) }}
 
-				<button type="submit" class="btn btn-primary">Continuer</button>
+                {{ Form::hidden('numberplayer', "2", array('class'=>'form-control')) }}
+                {{ Form::hidden('fk_idgolfer', 1, array('class'=>'form-control')) }}
+                {{ Form::hidden('fk_idteetime', 6, array('class'=>'form-control')) }}
+                
+                {{ Form::submit('Finish reservation', array('class'=>'btn btn-block btn-primary btn-default'))}}
+
+	           {{ Form::close() }}
 			</div>
 			
 		</div>
