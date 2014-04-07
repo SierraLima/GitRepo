@@ -402,6 +402,7 @@
 }
 } // End of the method checkclick
         
+        /*
         pricebold.innerHTML = jsonData[i].price;
         imagetd.appendChild(image);
        	price.appendChild(pricebold);
@@ -424,9 +425,7 @@
         tr.appendChild(buttontd);            
                 
        	tablebox.appendChild(tr);
-                }
-        }
-    } // End of the method checkclick
+       	*/
         
    /**
     * Function to initialise the day, month and year variable with today's date
