@@ -50,7 +50,9 @@
         
     //Method for the subtotal
         
-    function showtotal($selectorid, $price){
+    function showtotal($selectorid, $price, $name, $description, $imageurl){
+        
+        showdescription($name, $description, $imageurl);
         
         var selector = document.getElementById("select" + $selectorid);
         
@@ -225,6 +227,8 @@
         if(image.hasAttribute("src") == false){
             image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+            button.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+
         }
                 
         golfclublink.href = "#";        
@@ -237,7 +241,7 @@
         button.setAttribute("selectcounter", selectcounter);
         button.innerHTML = "Reserver";
         // button.setAttribute("onclick", "javascript:buttonclick(this.id);");
-        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'))");
+        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'),$(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'));");
         
         imagetd.appendChild(image);
         price.appendChild(pricebold);
@@ -363,8 +367,11 @@
                         			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     	image.setAttribute("src", jsonMedia[l].url);
                                     	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                        button.setAttribute("imageurl", jsonMedia[k].url);
                                 	}
-                            	}	
+                            	}
+                                button.setAttribute("description", jsonGolfclub[k].description);
+                        		button.setAttribute("name", jsonGolfclub[k].name);
                         		button.setAttribute("id", jsonData[i].id);
                                 button.setAttribute("price", jsonData[i].price);
                         		pricebold.innerHTML = jsonData[i].price;
@@ -384,8 +391,11 @@
                         			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     	image.setAttribute("src", jsonMedia[l].url);
                                     	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                        button.setAttribute("imageurl", jsonMedia[k].url);
                                     }      
                                 }
+                                button.setAttribute("description", jsonGolfclub[k].description);
+                        		button.setAttribute("name", jsonGolfclub[k].name);
                             	button.setAttribute("id", jsonData[i].id);
                                 button.setAttribute("price", jsonData[i].price);
                             	pricebold.innerHTML = jsonData[i].price;
@@ -404,8 +414,11 @@
                         		if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
                                     image.setAttribute("src", jsonMedia[l].url);
                                     golfclublink.setAttribute("imageurl", jsonMedia[k].url);
+                                    button.setAttribute("imageurl", jsonMedia[k].url);
                             	}
                         	}
+                            button.setAttribute("description", jsonGolfclub[k].description);
+                            button.setAttribute("name", jsonGolfclub[k].name);
                         	button.setAttribute("id", jsonData[i].id);
                             button.setAttribute("price", jsonData[i].price);
                         	pricebold.innerHTML = jsonData[i].price;
@@ -854,13 +867,11 @@
                 </p>
 			</div>
 			
-<<<<<<< HEAD
 			<!--FIELDS ABOUT A CLUB ON DB ?-->
 			<div class="left-table">
-=======
 			<!-- FIELDS ABOUT A CLUB ON DB ?-->
 			<div id="total" class="left-table">
-<<<<<<< HEAD
+
                 <!--
 =======
 >>>>>>> e721c55800432d8e0df57fceec33f3e034d042c0
@@ -873,11 +884,9 @@
 				30.03.2014</p>
                 -->
 				
-<<<<<<< HEAD
 				<!-- NO ACTION ?
 =======
-				<!--NO ACTION ?-->	
->>>>>>> 26daff5e7c3d21c0889a2c42d12278fc5fd6d6ec
+				<!--NO ACTION ?
 				<button type="submit" class="btn btn-primary">Continuer</button>
                 -->	
 			</div>
