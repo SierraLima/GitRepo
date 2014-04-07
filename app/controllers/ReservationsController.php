@@ -13,11 +13,6 @@ class ReservationsController extends Controller{
 
 			$reservation->save();
 
-			//return Redirect::to('users/login')->with('message', 'Thanks for registering!');
-
-        
-            // validation has failed, display error messages    
-			//return Redirect::to('users/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+			return Redirect::to('teetimes/endreservation')->with('message', 'Thanks for your reservation!');
 		}
-
 }
