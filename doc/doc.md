@@ -121,6 +121,9 @@ for instance) and change `app/config/auth.php`. Further modifications need to
 be done to Laravel to allow password reminders. For more information see Ollie 
 Read's page on GitHub.
 
+The password need at least a lower letter, a upper letter and a number otherwise
+is not possible to login or to make an inscription.
+
 ![Use cases](img/use-cases.png)
 
 ## Sprint 1
