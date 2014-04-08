@@ -164,6 +164,11 @@ suppression contains an id. Then the `action` field tells the controller what
 to do with that tee-time and saves it in the database. The JSON object also 
 contains a date which concerns all the updates done for this time.
 
+## SSL
+
+During the creation of the SSL certificate, a "challenge 
+password" was asked. It is: PFpZXpWBMy12CU
+
 ## Sources
 
 - https://github.com/ollieread/multiauth
