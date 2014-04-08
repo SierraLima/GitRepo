@@ -5,7 +5,18 @@
 
 <script>
 	$('#date').datepicker(); 
+    
+    function showvalues(){
+        var id = '{{ $id }}';
+        var numberofplayers = '{{ $numberofplayers }}';
+        var golfclubid = '{{ $golfclubid }}';
+        
+        alert("Id " + id + " numberofplayers " + numberofplayers + " Golfclubid " + golfclubid);
+
+    }
 </script>
+
+
 
 <div class="container" style="padding-top:48px;">
     
@@ -119,7 +130,8 @@
 				<p>3 tee-times<br />
 				Golf Club de Sierre<br />
 				30.03.2014</p>                
-				<button type="submit" class="btn btn-primary">Continuer</button>
+				<button type="submit" class="btn btn-primary" onClick="location.href = 'http://localhost:8888/teezy-linux/public/teetimes/reservation2'">Continuer</button>
 			</div>
 		</div>
 	</div>
+<script>showvalues();</script>

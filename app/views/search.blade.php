@@ -58,7 +58,7 @@
     * @param description -> the description of the club
     * @param imageurl -> the image of the club
     */ 
-    function showtotal($selectorid, $price, $name, $description, $imageurl){
+    function showtotal($selectorid, $price, $name, $description, $imageurl, $teetimeid, $golfclubid){
         
         showdescription($name, $description, $imageurl);
         
@@ -73,10 +73,13 @@
         
         $(div).empty();
         
+        
+        var url = "{{ URL::action('TeetimesController@getReservation') }}";
+        
         //Set the attributes for the button
         continuebutton.setAttribute("type", "submit");
         continuebutton.setAttribute("class","btn btn-primary");
-        continuebutton.setAttribute("onClick",  "location.href = 'http://localhost:8888/teezy-linux/public/teetimes/reservation'");
+        continuebutton.setAttribute("onClick",  "location.href = '" + url + "/" + $teetimeid + "/" + selector.options[selector.selectedIndex].text + "/" + $golfclubid + "'");
 
         continuebutton.innerHTML = "Continue";
         
@@ -223,7 +226,7 @@
         button.setAttribute("selectcounter", selectcounter);
         button.innerHTML = "Reserver";
         // button.setAttribute("onclick", "javascript:buttonclick(this.id);");
-        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'),$(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'));");
+        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'),$(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'), $(this).attr('id'), $(this).attr('golfclubid'));");
         
         imagetd.appendChild(image);
         price.appendChild(pricebold);
@@ -331,6 +334,7 @@
                 for(var k in jsonGolfclub){
                     if(jsonGolfclub[k].id == jsonGolfcourse[j].golf_club_id){
                         
+                        
                         if(ninefilter){
                         	if(jsonGolfcourse[j].holenumber == 9){
                  
@@ -348,6 +352,7 @@
                                 	}
                             	}
                                 button.setAttribute("description", jsonGolfclub[k].description);
+                                button.setAttribute("golfclubid", jsonGolfclub[k].id);
                         		button.setAttribute("name", jsonGolfclub[k].name);
                         		button.setAttribute("id", jsonData[i].id);
                                 button.setAttribute("price", jsonData[i].price);
@@ -372,6 +377,7 @@
                                     }      
                                 }
                                 button.setAttribute("description", jsonGolfclub[k].description);
+                                button.setAttribute("golfclubid", jsonGolfclub[k].id);
                         		button.setAttribute("name", jsonGolfclub[k].name);
                             	button.setAttribute("id", jsonData[i].id);
                                 button.setAttribute("price", jsonData[i].price);
@@ -395,6 +401,7 @@
                         	}
                             button.setAttribute("description", jsonGolfclub[k].description);
                             button.setAttribute("name", jsonGolfclub[k].name);
+                            button.setAttribute("golfclubid", jsonGolfclub[k].id);
                         	button.setAttribute("id", jsonData[i].id);
                             button.setAttribute("price", jsonData[i].price);
                         	pricebold.innerHTML = jsonData[i].price;
