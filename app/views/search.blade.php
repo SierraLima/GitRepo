@@ -45,7 +45,7 @@
     var teetimetime;
         
     var clickeddate = "0000-00-00";
-    var currenthour = 300;
+    var currenthour;
         
     var selectcounter = 1;
     
@@ -76,6 +76,8 @@
         //Set the attributes for the button
         continuebutton.setAttribute("type", "submit");
         continuebutton.setAttribute("class","btn btn-primary");
+        continuebutton.setAttribute("onClick",  "location.href = 'http://localhost:8888/teezy-linux/public/teetimes/reservation'");
+
         continuebutton.innerHTML = "Continue";
         
         //Set the innerHTML of the variables
@@ -255,6 +257,10 @@
     * Action on clicked date  
     */    
 	function checkclick($date){
+        
+        //Reset the current hour
+        currenthour = 300;
+        
         
         if($date != clickeddate){
             if(clickeddate == "0000-00-00"){
