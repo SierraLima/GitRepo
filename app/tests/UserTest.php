@@ -40,7 +40,7 @@ class UserTest extends TestCase {
 		$user->email = "test@test.ch";
 		$user->licence = "Blabla";
 		$user->birthday = "2012-12-12";
-		$user->password = Hash::make("password");
+		$user->password = Hash::make("Password1");
 		$user->country = "CH";
 
 		// User should save
@@ -58,8 +58,8 @@ class UserTest extends TestCase {
 				'day' => '12',
 				'month' => '12',
 				'year' => '2012',
-				'password' => 'password',
-				'password_confirmation' => 'password',
+				'password' => 'Password1',
+				'password_confirmation' => 'Password1',
 				'country' => 'CH'
 			),
 			User::$rules
@@ -83,8 +83,8 @@ class UserTest extends TestCase {
 				'day' => '12',
 				'month' => '12',
 				'year' => '2012',
-				'password' => 'password',
-				'password_confirmation' => 'password',
+				'password' => 'Password1',
+				'password_confirmation' => 'Password1',
 				'country' => 'CH'
 			),
 			User::$rules
@@ -104,7 +104,7 @@ class UserTest extends TestCase {
 		$user->email = "test2@test.ch";
 		$user->licence = "Blabla";
 		$user->birthday = "2012-12-12";
-		$user->password = Hash::make("password"); // crypt password
+		$user->password = Hash::make("Password1"); // crypt password
 		$user->country = "CH";
 
 		// User should save
@@ -113,7 +113,7 @@ class UserTest extends TestCase {
 		// should login
 		$credentials = array(
 			'email' => 'test2@test.ch',
-			'password' => 'password',
+			'password' => 'Password1',
 		);
 
 		$this->assertTrue(Auth::user()->attempt($credentials));
@@ -123,7 +123,7 @@ class UserTest extends TestCase {
 	{
 		$credentials = array(
 			'email' => 'test@test.ch',
-			'password' => 'password',
+			'password' => 'Password1',
 		);
 
 		// we try to login with a user we did not create
@@ -139,7 +139,7 @@ class UserTest extends TestCase {
 		$user->email = "test2@test.ch";
 		$user->licence = "Blabla";
 		$user->birthday = "2012-12-12";
-		$user->password = Hash::make("password"); // crypt password
+		$user->password = Hash::make("Password1"); // crypt password
 		$user->country = "CH";
 
 		// User should save
@@ -148,7 +148,7 @@ class UserTest extends TestCase {
 		// should login
 		$credentials = array(
 			'email' => 'test2@test.ch',
-			'password' => 'password2',
+			'password' => 'Password2',
 		);
 
 		$this->assertFalse(Auth::user()->attempt($credentials));
@@ -167,7 +167,7 @@ class UserTest extends TestCase {
 		$user->email = "harald@schultze.ch";
 		$user->birthday = "1900-11-26";
         $user->country = "CH";
-		$user->password = Hash::make("password"); // crypt password
+		$user->password = Hash::make("Password1"); // crypt password
 		$user->licence = "455";
 		$user->save();
 
@@ -175,7 +175,7 @@ class UserTest extends TestCase {
 		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
 		$crawler = $this->client->request('GET', '/users/login');
 		$form = $crawler->selectButton('Login')->form();
-		$this->client->submit($form, array('email' => 'harald@schultze.ch', 'password' => 'password'));
+		$this->client->submit($form, array('email' => 'harald@schultze.ch', 'password' => 'Password1'));
 		$crawler = $this->client->followRedirect(true);
 		
 		// Test that one div: contains logged in
@@ -191,8 +191,8 @@ class UserTest extends TestCase {
 			'email'    => 'test@test.ch',
 			'birthday'    => '1900-10-23',
 			'country'    => 'Netherlands',
-			'password' => 'password',
-			'password_confirmation'    => 'password'
+			'password' => 'Password1',
+			'password_confirmation'    => 'Password1'
 		));
     
 		$crawler = $this->client->submit($form);
@@ -206,6 +206,6 @@ class UserTest extends TestCase {
 		// Tests Equalities
 		$this->assertEquals($userDB->email, 'test@test.ch');
 		$this->assertEquals($userDB->firstname, 'Timo');
-        
+
 	}
 }

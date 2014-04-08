@@ -39,7 +39,7 @@ class GolfClubTest extends TestCase {
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "golf@club.ch";
-		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->password = Hash::make("Password1"); // crypt password
 		$golfclub->place = "Sion";
 		$golfclub->description = "Le meilleur club du Valais";
 		$golfclub->phonenumber = "0790000000";
@@ -55,8 +55,8 @@ class GolfClubTest extends TestCase {
 				'name' => 'Golf Club de Sion',
 				'address' => 'Rue du golf 1',
 				'email' => 'golf@club.ch',
-				'password' => 'password',
-				'password_confirmation' => 'password',
+				'password' => 'Password1',
+				'password_confirmation' => 'Password1',
 				'place' => 'Sion',
 				'description' => 'Le meilleur club du Valais',
 				'phonenumber' => '0790000000'
@@ -77,8 +77,8 @@ class GolfClubTest extends TestCase {
 				'name' => 'Golf Club de Sion',
 				'address' => 'Rue du golf 1',
 				'email' => '',
-				'password' => 'password',
-				'password_confirmation' => 'password',
+				'password' => 'Password1',
+				'password_confirmation' => 'Password1',
 				'place' => 'Sion',
 				'description' => 'Le meilleur club du Valais',
 				'phonenumber' => '0790000000'
@@ -97,7 +97,7 @@ class GolfClubTest extends TestCase {
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "golf@club.ch";
-		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->password = Hash::make("Password1"); // crypt password
 		$golfclub->place = "Sion";
 		$golfclub->description = "Le meilleur club du Valais";
 		$golfclub->phonenumber = "0790000000";
@@ -108,7 +108,7 @@ class GolfClubTest extends TestCase {
 		// should login
 		$credentials = array(
 			'email' => 'golf@club.ch',
-			'password' => 'password',
+			'password' => 'Password1',
 		);
 
 		$this->assertTrue(Auth::golfclub()->attempt($credentials));
@@ -118,7 +118,7 @@ class GolfClubTest extends TestCase {
 	{
 		$credentials = array(
 			'email' => 'golf@club.ch',
-			'password' => 'password',
+			'password' => 'Password1',
 		);
 
 		// we try to login with a golf club we did not create
@@ -133,7 +133,7 @@ class GolfClubTest extends TestCase {
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "golf2@club.ch";
-		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->password = Hash::make("Password1"); // crypt password
 		$golfclub->place = "Sion";
 		$golfclub->description = "Le meilleur club du Valais";
 		$golfclub->phonenumber = "0790000000";
@@ -144,7 +144,7 @@ class GolfClubTest extends TestCase {
 		// should login
 		$credentials = array(
 			'email' => 'golf2@club.ch',
-			'password' => 'password2',
+			'password' => 'Password2',
 		);
 
 		$this->assertFalse(Auth::golfclub()->attempt($credentials));
@@ -156,7 +156,7 @@ class GolfClubTest extends TestCase {
 		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
 		$crawler = $this->client->request('GET', '/golfclubs/login');
 		$form = $crawler->selectButton('Login')->form();
-		$this->client->submit($form, array('email' => 'test@test2.ch', 'password' => 'password'));
+		$this->client->submit($form, array('email' => 'test@test2.ch', 'password' => 'Password1'));
 		$crawler = $this->client->followRedirect(true);
 		
 		// Test that one div: contains incorrect
@@ -171,7 +171,7 @@ class GolfClubTest extends TestCase {
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "test@test.ch";
-		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->password = Hash::make("Password1"); // crypt password
 		$golfclub->place = "Sion";
 		$golfclub->description = "Le meilleur club du Valais";
 		$golfclub->phonenumber = "0790000000";
@@ -181,7 +181,7 @@ class GolfClubTest extends TestCase {
 		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
 		$crawler = $this->client->request('GET', '/golfclubs/login');
 		$form = $crawler->selectButton('Login')->form();
-		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'password'));
+		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'Password1'));
 		$crawler = $this->client->followRedirect(true);
 		
 		// Test that one div: contains logged in
@@ -196,7 +196,7 @@ class GolfClubTest extends TestCase {
 		$golfclub->name = "Golf Club de Sion";
 		$golfclub->address = "Rue du golf 1";
 		$golfclub->email = "test@test.ch";
-		$golfclub->password = Hash::make("password"); // crypt password
+		$golfclub->password = Hash::make("Password1"); // crypt password
 		$golfclub->place = "Sion";
 		$golfclub->description = "Le meilleur club du Valais";
 		$golfclub->phonenumber = "0790000000";
@@ -206,7 +206,7 @@ class GolfClubTest extends TestCase {
 		$this->client = $this->createClient(array(), array('HTTP_HOST' => 'scire.test'));
 		$crawler = $this->client->request('GET', '/golfclubs/login');
 		$form = $crawler->selectButton('Login')->form();
-		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'password'));
+		$this->client->submit($form, array('email' => 'test@test.ch', 'password' => 'Password1'));
 		$crawler = $this->client->followRedirect(true);
 		
 		// Test that one div: contains logged in
@@ -222,8 +222,8 @@ class GolfClubTest extends TestCase {
 			'address'    => 'Someren',
 			'place'    => 'Netherlands',
 			'phonenumber'    => 'Netherlands',
-			'password' => 'password',
-			'password_confirmation'    => 'password',
+			'password' => 'Password1',
+			'password_confirmation'    => 'Password1',
 			'description'    => 'Netherlands'
 		));
 

@@ -1,3 +1,5 @@
+<!--TODO delete some useless comments -->
+
 <style type="text/css">
 	.left-table {
 		border: 1px solid #ddd;
@@ -47,9 +49,15 @@
         
     var selectcounter = 1;
     
-        
-    //Method for the subtotal
-        
+   /**
+    * Set the content of the panel subtotal
+    * 
+    * @param selectorid -> the id of the tee-time
+    * @param price-> the price of the tee-time
+    * @param name -> the name of the club
+    * @param description -> the description of the club
+    * @param imageurl -> the image of the club
+    */ 
     function showtotal($selectorid, $price, $name, $description, $imageurl){
         
         showdescription($name, $description, $imageurl);
@@ -57,7 +65,6 @@
         var selector = document.getElementById("select" + $selectorid);
                 
         //Price and number of players working
-        
         var div = document.getElementById("total");
         var h4 = document.createElement("h4");
         var oneperson = document.createElement("h5");
@@ -82,9 +89,10 @@
         div.appendChild(h4);
         div.appendChild(oneperson);
         div.appendChild(numberofpersons);
-        div.appendChild(continuebutton);
+        div.appendChild(continuebutton);        
     }
-        
+    //}
+           
    /**
     * Set the filter of holes
     * @param number -> number of hols 
@@ -203,7 +211,6 @@
             image.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             golfclublink.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
             button.setAttribute("imageurl", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
-
         }
                 
         golfclublink.href = "#";        
@@ -300,7 +307,22 @@
             titlerow.appendChild(h3);
             tablebox.appendChild(titlerow);
         }
-        
+            
+        /*
+        var tr = document.createElement("tr");
+        var golfclub = document.createElement("td");
+        var golfclublink = document.createElement("a");
+        var timetd = document.createElement("td");
+        var imagetd = document.createElement("td");
+        var image = document.createElement("img");
+        var price = document.createElement("td");
+        var pricebold = document.createElement("b");
+        var selecttd = document.createElement("td");
+        var selector = document.createElement("select");
+        var buttontd  = document.createElement("td");
+        var button = document.createElement("button");
+        */    
+    
         timetd.innerHTML = teetimetime;
                 
         // Getting the right Golfclub
@@ -357,8 +379,7 @@
                             	addelements();
                             }
                         }
-                        else{
-                                                
+                        else{                                      
                         	golfclublink.appendChild(document.createTextNode(jsonGolfclub[k].name));
                         	golfclublink.setAttribute("description", jsonGolfclub[k].description);
                         	golfclublink.setAttribute("name", jsonGolfclub[k].name);                            
@@ -386,6 +407,31 @@
     }
 }
 } // End of the method checkclick
+        
+        /*
+        pricebold.innerHTML = jsonData[i].price;
+        imagetd.appendChild(image);
+       	price.appendChild(pricebold);
+                
+        for(var i = 0; i<4; i++){
+        	var option = document.createElement("option");
+            option.innerHTML = i+1;
+            selector.appendChild(option); 
+        }
+                    
+        selecttd.appendChild(selector);
+        selecttd.innerHTML += "  jouer(s)";
+        buttontd.appendChild(button);
+                
+       	tr.appendChild(timetd);
+        tr.appendChild(imagetd);
+       	tr.appendChild(golfclub);
+        tr.appendChild(price);
+        tr.appendChild(selecttd);
+        tr.appendChild(buttontd);            
+                
+       	tablebox.appendChild(tr);
+       	*/
         
    /**
     * Function to initialise the day, month and year variable with today's date
