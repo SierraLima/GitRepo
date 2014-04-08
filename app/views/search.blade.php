@@ -58,7 +58,7 @@
     * @param description -> the description of the club
     * @param imageurl -> the image of the club
     */ 
-    function showtotal($selectorid, $price, $name, $description, $imageurl, $teetimeid, $golfclubid){
+    function showtotal($selectorid, $price, $name, $description, $imageurl, $teetimeid, $golfclubid, $date){
         
         showdescription($name, $description, $imageurl);
         
@@ -79,7 +79,7 @@
         //Set the attributes for the button
         continuebutton.setAttribute("type", "submit");
         continuebutton.setAttribute("class","btn btn-primary");
-        continuebutton.setAttribute("onClick",  "location.href = '" + url + "/" + $teetimeid + "/" + selector.options[selector.selectedIndex].text + "/" + $golfclubid + "'");
+        continuebutton.setAttribute("onClick",  "location.href = '" + url + "/" + $teetimeid + "/" + selector.options[selector.selectedIndex].text + "/" + $golfclubid + "/" + $date + "'");
 
         continuebutton.innerHTML = "Continue";
         
@@ -164,7 +164,9 @@
     
    /**
     * Function to read data on the teezydb database 
-    */      
+    */  
+        
+    
     function readdata(){
         
         var teetimes = '{{ $teetimes }}';
@@ -226,7 +228,7 @@
         button.setAttribute("selectcounter", selectcounter);
         button.innerHTML = "Reserver";
         // button.setAttribute("onclick", "javascript:buttonclick(this.id);");
-        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'),$(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'), $(this).attr('id'), $(this).attr('golfclubid'));");
+        button.setAttribute("onclick", "javascript:showtotal($(this).attr('selectcounter'), $(this).attr('price'),$(this).attr('name'), $(this).attr('description'), $(this).attr('imageurl'), $(this).attr('id'), $(this).attr('golfclubid'), $(this).attr('date'));");
         
         imagetd.appendChild(image);
         price.appendChild(pricebold);
@@ -353,6 +355,7 @@
                             	}
                                 button.setAttribute("description", jsonGolfclub[k].description);
                                 button.setAttribute("golfclubid", jsonGolfclub[k].id);
+                                button.setAttribute("date", $date);
                         		button.setAttribute("name", jsonGolfclub[k].name);
                         		button.setAttribute("id", jsonData[i].id);
                                 button.setAttribute("price", jsonData[i].price);
@@ -378,6 +381,7 @@
                                 }
                                 button.setAttribute("description", jsonGolfclub[k].description);
                                 button.setAttribute("golfclubid", jsonGolfclub[k].id);
+                                button.setAttribute("date", $date);
                         		button.setAttribute("name", jsonGolfclub[k].name);
                             	button.setAttribute("id", jsonData[i].id);
                                 button.setAttribute("price", jsonData[i].price);
@@ -402,6 +406,7 @@
                             button.setAttribute("description", jsonGolfclub[k].description);
                             button.setAttribute("name", jsonGolfclub[k].name);
                             button.setAttribute("golfclubid", jsonGolfclub[k].id);
+                            button.setAttribute("date", $date);
                         	button.setAttribute("id", jsonData[i].id);
                             button.setAttribute("price", jsonData[i].price);
                         	pricebold.innerHTML = jsonData[i].price;

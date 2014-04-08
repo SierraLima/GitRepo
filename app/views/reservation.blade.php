@@ -6,14 +6,109 @@
 <script>
 	$('#date').datepicker(); 
     
+    var teetimedata;
+    var golfclubdata;
+    var mediadata;
+    
+    //Variables retrieved from the submit form
+    var id;
+    var numberofplayers;
+    var golfclubid;
+    var date;
+    
     function showvalues(){
-        var id = '{{ $id }}';
-        var numberofplayers = '{{ $numberofplayers }}';
-        var golfclubid = '{{ $golfclubid }}';
+        id = '{{ $id }}';
+        numberofplayers = '{{ $numberofplayers }}';
+        golfclubid = '{{ $golfclubid }}';
+        date = '{{ $date }}';
         
-        alert("Id " + id + " numberofplayers " + numberofplayers + " Golfclubid " + golfclubid);
-
+        readdata();
+        createpage();
     }
+    
+    function readdata(){
+        
+        
+        var teetimes = '{{ Teetime::all() }}';
+        
+        // Retrieving the data from the golfclubs
+        var golfclubs = '{{ GolfClub::all() }}';
+        var golfcourses = '{{ GolfCourse::all() }}';
+        var media = '{{ Media::all() }}';
+        
+        var jsonDataTeetime = JSON.parse(teetimes);
+        var jsonGolfclub = JSON.parse(golfclubs);
+        var jsonMedia = JSON.parse(media);
+        
+        for(var i in jsonDataTeetime){
+            if(jsonDataTeetime[i].id = golfclubid){
+                teetimedata = jsonDataTeetime[i];
+                break;
+            }
+        }
+        
+        for(var i in jsonGolfclub){
+            if(jsonGolfclub[i].id = golfclubid){
+                golfclubdata = jsonGolfclub[i];
+                break;
+            }
+        }
+        
+        for(var i in jsonMedia){
+            if(jsonMedia[i].fk_idgolfclub = golfclubid){
+                mediadata = jsonMedia[i];
+                break;
+            }
+        }
+    } 
+    
+    function createpage(){
+        
+        //Get the elements
+        var overview = document.getElementById("overview");
+        var h4 = document.getElementById("overviewtitle");
+        var tablebody = document.getElementById("tablebody");
+        
+        
+        h4.innerHTML = golfclubdata.name + ", " + date + " , " + numberofplayers + " participants";
+        
+        for (var i = 0; i < parseInt(numberofplayers); i++){
+            var tr = document.createElement("tr");
+            var tdplayer = document.createElement("td");
+            var tdprice = document.createElement("td");
+            
+            tdplayer.innerHTML = "Joueur " + (i+1);
+            tdprice.innerHTML = teetimedata.price;
+            
+            tr.appendChild(tdplayer);
+            tr.appendChild(tdprice);
+            
+            tablebody.appendChild(tr);
+        }
+        
+        
+        //Create the golfclub description section
+        var golfclubtitle = document.getElementById("golfclubtitle");
+        var descriptionimage = document.getElementById("descriptionimage");
+        var descriptionp = document.getElementById("descriptionp");
+        
+        golfclubtitle.innerHTML = golfclubdata.name;
+        descriptionimage.setAttribute("src", mediadata.url);
+        descriptionp.innerHTML += golfclubdata.description;
+        
+        //Create the sous total section
+        var totalperson = document.getElementById("totalperson");
+        var totalall = document.getElementById("totalall");
+        var totalp = document.getElementById("totalp");
+        
+        totalperson.innerHTML = "Par personne : " + teetimedata.price + " CHF";
+        totalall.innerHTML = "Pour " + numberofplayers + " participants: " + (parseInt(numberofplayers) * parseInt(teetimedata.price)) + " CHF"; 
+        totalp.innerHTML = numberofplayers + " tee-times <br />" + golfclubdata.name + "<br />" + date;
+        
+    }
+    
+    
+    
 </script>
 
 
@@ -39,9 +134,10 @@
 				<div class="table-responsive">
 					<table class="table table-hover">
 						<tbody id="tablebody">
-                            <div style="background:#D8D8D8; border-style:solid; border-width:1px;">
-							<h4 >Golf Club Sierre, 30.03.14, matin, 3 participants</h4>
+                            <div id="overview" style="background:#D8D8D8; border-style:solid; border-width:1px;">
+							<h4 id="overviewtitle">Oberwald Sierre, 30.03.14, matin, 3 participants</h4>
                             </div>
+                            <!--
                                     <tr>
                                         <td>Joueur 1</td>
                                         <td>100 CHF</td>
@@ -54,6 +150,7 @@
                                         <td>Joueur 3</td>
                                         <td>100 CHF</td>
                                     </tr>
+                            -->
 						</tbody>
 					</table>
 				</div>
@@ -118,16 +215,16 @@
 				<h4 id="golfclubtitle">Golf Club de Sierre</h4>
 				<p id="descriptionp">
 					<img id="descriptionimage" src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="56" width="56" style="float:left;margin:0 5px 0 0;" />
-                Golf ist eine Ballsportart mit jahrhundertealter Tradition. Es gilt, einen Ball mit möglichst wenigen Schlägen in ein Loch zu spielen, wobei verschiedene Golfschläger zum Einsatz kommen. Eine Golfrunde besteht in der Regel aus 9 oder 18 Spielbahnen, die nacheinander auf einem Golfplatz absolviert werden.f
+               
 				</p>
 			</div>
             <br />
 
 			<div class="left-table">
-				<h4>Sous-total</h4>
-				<h5>par personne : 100 CHF</h5>
-				<h5>pour 3 participants : 300 CHF</h5>
-				<p>3 tee-times<br />
+				<h4 >Sous-total</h4>
+				<h5 id="totalperson">par personne : 100 CHF</h5>
+				<h5 id="totalall">pour 3 participants : 300 CHF</h5>
+				<p id="totalp">3 tee-times<br />
 				Golf Club de Sierre<br />
 				30.03.2014</p>                
 				<button type="submit" class="btn btn-primary" onClick="location.href = 'http://localhost:8888/teezy-linux/public/teetimes/reservation2'">Continuer</button>
