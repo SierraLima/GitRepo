@@ -154,11 +154,8 @@ class UserTest extends TestCase {
 		$this->assertFalse(Auth::user()->attempt($credentials));
 	}
     
-	
-	// ACTUAL VERSION
     public function testUpdateProfileIsWorking()
-	{
-        
+	{        
 		// Create a user
 		$user = new User;
 		
@@ -206,6 +203,5 @@ class UserTest extends TestCase {
 		// Tests Equalities
 		$this->assertEquals($userDB->email, 'test@test.ch');
 		$this->assertEquals($userDB->firstname, 'Timo');
-
 	}
 }
