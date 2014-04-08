@@ -121,6 +121,9 @@ for instance) and change `app/config/auth.php`. Further modifications need to
 be done to Laravel to allow password reminders. For more information see Ollie 
 Read's page on GitHub.
 
+The password need at least a lower letter, a upper letter and a number otherwise
+is not possible to login or to make an inscription.
+
 ![Use cases](img/use-cases.png)
 
 ## Sprint 1
@@ -163,6 +166,11 @@ updates array. Every liberation contains an hour, minutes and a course and each
 suppression contains an id. Then the `action` field tells the controller what 
 to do with that tee-time and saves it in the database. The JSON object also 
 contains a date which concerns all the updates done for this time.
+
+## SSL
+
+During the creation of the SSL certificate, a "challenge 
+password" was asked. It is: PFpZXpWBMy12CU
 
 ## Sources
 

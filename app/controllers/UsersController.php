@@ -104,8 +104,8 @@ class UsersController extends BaseController {
 			'email'=>'required|email|unique:users,email',
 			'birthday'=>'required',
 			'country'=>'required|alpha_num',
-			'password'=>'required|alpha_num|between:6,12|confirmed',
-			'password_confirmation'=>'required|alpha_num|between:6,12'
+			'password'=> 'required|AlphaDash|regex:/\p{Lu}/|regex:/\p{Ll}/|regex:/\pN/|between:6,12|confirmed',
+			'password_confirmation'=>'required|AlphaDash|between:6,12'
 	    );
         
         $rules['email'] = $rules['email'].','.$id;
