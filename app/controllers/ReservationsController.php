@@ -8,8 +8,8 @@ class ReservationsController extends Controller{
 			// validation has passed, save user in DB
 			$reservation = new Reservation;
 			$reservation->numberplayer = Input::get('numberplayer');
-			$reservation->user_id = Input::get('fk_idgolfer');
-			$reservation->teetime_id = Input::get('fk_idteetime');
+			$reservation->user_id = Input::get('user_id');
+			$reservation->teetime_id = Input::get('teetime_id');
 
 			$reservation->save();
 

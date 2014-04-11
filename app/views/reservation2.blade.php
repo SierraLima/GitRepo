@@ -19,6 +19,8 @@ $('#date').datepicker();
     var numberofplayers;
     var golfclubid;
     var date;
+    var userid;
+    
     
     function showvalues(){
         id = '{{ $teetimeid }}';
@@ -39,7 +41,7 @@ $('#date').datepicker();
         
         
         
-        var userid = '{{ $userid }}';
+        userid = '{{ $userid }}';
         
         
         
@@ -116,6 +118,7 @@ $('#date').datepicker();
             descriptionimage.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
         }
         
+        
         descriptionp.innerHTML += golfclubdata.description;
         
         //Create the sous total section
@@ -131,16 +134,9 @@ $('#date').datepicker();
         var hiddengolfer = document.getElementById("hiddengolfer");
         var hiddenteetime = document.getElementById("hiddenteetime");
         
-        hiddennumberofplayers.value = numberofplayers;
-        hiddengolfer.value = userid;
-        hiddenteetime.value = teetimeid;
-        
-        
-        /*
-        hiddenform.appendChild( '{{ Form::hidden("numberplayer", ' + numberofplayers + ', array("class"=>"form-control")) }}' )
-                    {{ Form::hidden('fk_idgolfer', 1, array('class'=>'form-control')) }}
-                    {{ Form::hidden('fk_idteetime', 6, array('class'=>'form-control')) }}
-          */      
+        hiddennumberofplayers.setAttribute("value", numberofplayers);
+        hiddengolfer.setAttribute("value", userid);
+        hiddenteetime.setAttriubte("value", teetimeid);    
         
     }
     
@@ -241,8 +237,8 @@ $('#date').datepicker();
 	           {{ Form::open(array('url'=>'reservations/create', 'id' => 'hiddenform')) }}
                               
                     {{ Form::hidden('numberplayer', 1, array('class'=>'form-control', 'id' => 'hiddennumberofplayers')) }}
-                    {{ Form::hidden('fk_idgolfer', 1, array('class'=>'form-control', 'id' => 'hiddengolfer')) }}
-                    {{ Form::hidden('fk_idteetime', 6, array('class'=>'form-control', 'id' => 'hiddenteetime')) }}
+                    {{ Form::hidden('user_id', 1, array('class'=>'form-control', 'id' => 'hiddengolfer')) }}
+                    {{ Form::hidden('teetime_id', 6, array('class'=>'form-control', 'id' => 'hiddenteetime')) }}
                 
                 
                 {{ Form::submit('Finish reservation', array('class'=>'btn btn-block btn-primary btn-default'))}}
