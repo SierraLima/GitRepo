@@ -39,9 +39,8 @@ $('#date').datepicker();
         
         
         
-        var user = '{{ $userid }}';
+        var userid = '{{ $userid }}';
         
-        //Userid is working
         
         
         var teetimes = '{{ Teetime::all() }}';
