@@ -28,7 +28,7 @@
     
     function readdata(){
         
-        
+      
         var teetimes = '{{ Teetime::all() }}';
         
         // Retrieving the data from the golfclubs
