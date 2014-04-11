@@ -28,8 +28,11 @@ class TeetimesController extends BaseController {
    	/**
 	 * return reservation page 2
 	 */
-    public function getReservation2(){
-        $this->layout->content = View::make('reservation2');   
+    public function getReservation2($golfclubid, $teetimeid, $numberofplayers, $date){
+        
+        if (Auth::user()->check()) { $userid = Auth::user()->get()->id; } else { $userid = 0; }
+        
+        $this->layout->content = View::make('reservation2')->with('golfclubid', $golfclubid)->with('teetimeid', $teetimeid)->with('numberofplayers', $numberofplayers)->with('date', $date)->with('userid',$userid);   
     }
     
     /**

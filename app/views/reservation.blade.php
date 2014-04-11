@@ -103,11 +103,23 @@
         
         totalperson.innerHTML = "Par personne : " + teetimedata.price + " CHF";
         totalall.innerHTML = "Pour " + numberofplayers + " participants: " + (parseInt(numberofplayers) * parseInt(teetimedata.price)) + " CHF"; 
-        totalp.innerHTML = numberofplayers + " tee-times <br />" + golfclubdata.name + "<br />" + date;
-        
+        totalp.innerHTML = numberofplayers + " tee-times <br />" + golfclubdata.name + "<br />" + date;    
     }
     
-    
+    function buttonclicked(){
+        
+        //Get the fields from the credit card
+        var name = document.getElementById("name");
+        var cardnumber = document.getElementById("cardnumber");
+        //var date = document.getElementById("date");
+        
+        //To do - read the input fields 
+        
+        var url = "{{ URL::action('TeetimesController@getReservation2') }}";
+        
+        window.location = url + "/" + golfclubid + "/" + id + "/" + numberofplayers + "/" + date;
+
+    }
     
 </script>
 
@@ -179,7 +191,7 @@
                 </p>
                 <p>
                                     &nbsp;&nbsp;&nbsp;
-                <input type="textfield" style="width:300px">
+                <input id="name" type="textfield" style="width:300px">
                 </p>
                 <p>
                                         &nbsp;&nbsp;&nbsp;
@@ -188,7 +200,7 @@
                 </p>
                 <p>
                                         &nbsp;&nbsp;&nbsp;
-                <input type="textfield" style="width:300px" placeholder="xxxx-xxxxx-xxxxx-xxxx">
+                <input id="cardnumber" type="textfield" style="width:300px" placeholder="xxxx-xxxxx-xxxxx-xxxx">
                 </p>
                 <p>
                                         &nbsp;&nbsp;&nbsp;
@@ -227,7 +239,7 @@
 				<p id="totalp">3 tee-times<br />
 				Golf Club de Sierre<br />
 				30.03.2014</p>                
-				<button type="submit" class="btn btn-primary" onClick="location.href = 'http://localhost:8888/teezy-linux/public/teetimes/reservation2'">Continuer</button>
+				<button type="submit" class="btn btn-primary" onClick="buttonclicked()">Continuer</button>
 			</div>
 		</div>
 	</div>
