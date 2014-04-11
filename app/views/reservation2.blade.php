@@ -108,7 +108,15 @@ $('#date').datepicker();
         var descriptionp = document.getElementById("descriptionp");
         
         golfclubtitle.innerHTML = golfclubdata.name;
-        descriptionimage.setAttribute("src", mediadata.url);
+        
+        if(mediadata != null){
+            descriptionimage.setAttribute("src", mediadata.url);
+        }
+        else
+        {
+            descriptionimage.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
+        }
+        
         descriptionp.innerHTML += golfclubdata.description;
         
         //Create the sous total section
