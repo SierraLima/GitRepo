@@ -224,7 +224,7 @@ $('#date').datepicker();
 				<h4 id="golfclubtitle">Golf Club de Sierre</h4>
 				<p id="descriptionp">
 					<img id="descriptionimage" src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="56" width="56" style="float:left;margin:0 5px 0 0;" />
-                Golf ist eine Ballsportart mit jahrhundertealter Tradition. Es gilt, einen Ball mit möglichst wenigen Schlägen in ein Loch zu spielen, wobei verschiedene Golfschläger zum Einsatz kommen. Eine Golfrunde besteht in der Regel aus 9 oder 18 Spielbahnen, die nacheinander auf einem Golfplatz absolviert werden.f
+               
 				</p>
 			</div>
             <br />
