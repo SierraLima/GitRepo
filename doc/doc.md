@@ -129,14 +129,13 @@ is not possible to login or to make an inscription.
 ## Sprint 1
 
 For this Sprint we have validate the US1, 2 and 3 and the US 4 added at the
-middle of the sprint will finish on Sprint 2. Some tasks was a little too
+middle of the sprint will finish on Sprint 2. Some tasks were a little too
 high evaluated we will try to better evaluate tasks for next sprints. We must 
-also corrected some little things on the golfclub registration page.
+also correct some little things on the golfclub registration page.
 
-On sprint retrospective we decide to take more story point for the sprint 
-2(21). And we have a new ressouve for the developement team (Kevin Kreuzer). We 
-have revaluated the US5 to 13 story point. We took US4, 5 and 6 for the Sprint 
-2.
+On the sprint retrospective we decided to take more story point for the sprint 
+2 (21) since we have a new ressource for the development team. We have 
+reevaluated the US5 to 13 story points. We took US4, 5 and 6 for the Sprint 2.
 
 ## Tee-times "API"
 
@@ -169,8 +168,8 @@ contains a date which concerns all the updates done for this time.
 
 ## SSL
 
-During the creation of the SSL certificate, a "challenge 
-password" was asked. It is: PFpZXpWBMy12CU
+During the creation of the SSL certificate, a "challenge password" was asked. 
+It is: kQTSGeqW93LWWm
 
 ## Sources
 
@@ -181,5 +180,4 @@ password" was asked. It is: PFpZXpWBMy12CU
 - http://getbootstrap.com
 - http://laravel.com
 - http://www.windowsazure.com/
-- 
-http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/
+- http://jasonfunk.net/2013/08/21/troubleshooting-unit-testing-laravel-file-upload-with-mockery/
