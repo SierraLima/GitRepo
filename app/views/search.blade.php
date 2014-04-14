@@ -174,7 +174,7 @@
         // Retrieving the data from the golfclubs
         var golfclubs = '{{ GolfClub::all() }}';
         var golfcourses = '{{ GolfCourse::all() }}';
-        var media = '{{ Media::all() }}';
+        var media = '{{ Auth::golfclub->get()->media[0] }}';
         
         jsonData = JSON.parse(teetimes);
         jsonGolfclub = JSON.parse(golfclubs);
@@ -346,13 +346,12 @@
                                 
                         		golfclub.appendChild(golfclublink);
                         
-                        		for(var l in jsonMedia){
-                        			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    	image.setAttribute("src", jsonMedia[l].url);
-                                    	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
-                                        button.setAttribute("imageurl", jsonMedia[k].url);
-                                	}
-                            	}
+                        		
+                                    	image.setAttribute("src", jsonMedia[0].url);
+                                    	golfclublink.setAttribute("imageurl", jsonMedia[0].url);
+                                        button.setAttribute("imageurl", jsonMedia[0].url);
+                                	
+                                	
                                 button.setAttribute("description", jsonGolfclub[k].description);
                                 button.setAttribute("golfclubid", jsonGolfclub[k].id);
                                 button.setAttribute("date", $date);
@@ -372,13 +371,13 @@
                                 
                         		golfclub.appendChild(golfclublink);
                         
-                        		for(var l in jsonMedia){
-                        			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    	image.setAttribute("src", jsonMedia[l].url);
-                                    	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
-                                        button.setAttribute("imageurl", jsonMedia[k].url);
-                                    }      
-                                }
+                        		image.setAttribute("src", jsonMedia[0].url);
+                                    	golfclublink.setAttribute("imageurl", jsonMedia[0].url);
+                                        button.setAttribute("imageurl", jsonMedia[0].url);
+                                        
+                                        
+                                        
+                                        
                                 button.setAttribute("description", jsonGolfclub[k].description);
                                 button.setAttribute("golfclubid", jsonGolfclub[k].id);
                                 button.setAttribute("date", $date);
@@ -395,14 +394,14 @@
                         	golfclublink.setAttribute("name", jsonGolfclub[k].name);                            
                             
                         	golfclub.appendChild(golfclublink);
-                        
-                        	for(var l in jsonMedia){
-                        		if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    image.setAttribute("src", '{{ asset('') }}'+jsonMedia[l].url);
-                                    golfclublink.setAttribute("imageurl", jsonMedia[k].url);
-                                    button.setAttribute("imageurl", jsonMedia[k].url);
-                            	}
-                        	}
+                       
+                       
+                       					image.setAttribute("src", jsonMedia[0].url);
+                                    	golfclublink.setAttribute("imageurl", jsonMedia[0].url);
+                                        button.setAttribute("imageurl", jsonMedia[0].url);
+                       
+                       
+                       
                             button.setAttribute("description", jsonGolfclub[k].description);
                             button.setAttribute("name", jsonGolfclub[k].name);
                             button.setAttribute("golfclubid", jsonGolfclub[k].id);
