@@ -348,7 +348,7 @@
                         
                         		for(var l in jsonMedia){
                         			if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    	image.setAttribute("src", '{{ asset('') }}'+jsonMedia[l].url);
+                                    	image.setAttribute("src", jsonMedia[l].url);
                                     	golfclublink.setAttribute("imageurl", jsonMedia[k].url);
                                         button.setAttribute("imageurl", jsonMedia[k].url);
                                 	}
@@ -398,7 +398,7 @@
                         
                         	for(var l in jsonMedia){
                         		if(jsonGolfclub[k].id == jsonMedia[l].golf_club_id){
-                                    image.setAttribute("src", jsonMedia[l].url);
+                                    image.setAttribute("src", '{{ asset('') }}'+jsonMedia[l].url);
                                     golfclublink.setAttribute("imageurl", jsonMedia[k].url);
                                     button.setAttribute("imageurl", jsonMedia[k].url);
                             	}
