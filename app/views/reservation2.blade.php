@@ -23,7 +23,7 @@ $('#date').datepicker();
     
     
     function showvalues(){
-        id = '{{ $teetimeid }}';
+        teetimeid = '{{ $teetimeid }}';
         numberofplayers = '{{ $numberofplayers }}';
         golfclubid = '{{ $golfclubid }}';
         date = '{{ $date }}';
