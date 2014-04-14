@@ -1,5 +1,3 @@
-<!--TODO Recup the database fields and not labels -->
-
 <script>
 
     function buttonclicked(){

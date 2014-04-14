@@ -6,11 +6,9 @@
 
 <script>
     
-    //Actual version
-    
 $('#date').datepicker(); 
     
- var teetimedata;
+ 	var teetimedata;
     var golfclubdata;
     var mediadata;
     
@@ -21,7 +19,9 @@ $('#date').datepicker();
     var date;
     var userid;
     
-    
+   /**
+    * Show values of the reservation 
+    */  
     function showvalues(){
         id = '{{ $teetimeid }}';
         numberofplayers = '{{ $numberofplayers }}';
@@ -32,14 +32,12 @@ $('#date').datepicker();
         createpage();
     }
     
+   /**
+    * Take data on DB
+    */  
     function readdata(){
-        
-        
-        
-        
+             
         userid = '{{ $userid }}';
-        
-        
         
         var teetimes = '{{ Teetime::all() }}';
         
@@ -73,13 +71,15 @@ $('#date').datepicker();
         }
     }
     
+   /**
+    * Create the page reservation 2 
+    */  
     function createpage(){
         
         //Get the elements
         var overview = document.getElementById("overview");
         var h4 = document.getElementById("overviewtitle");
         var tablebody = document.getElementById("tablebody");
-        
         
         h4.innerHTML = golfclubdata.name + ", " + date + " , " + numberofplayers + " participants";
         
@@ -97,7 +97,6 @@ $('#date').datepicker();
             tablebody.appendChild(tr);
         }
         
-        
         //Create the golfclub description section
         var golfclubtitle = document.getElementById("golfclubtitle");
         var descriptionimage = document.getElementById("descriptionimage");
@@ -109,12 +108,9 @@ $('#date').datepicker();
         if(mediadata != null){
             descriptionimage.setAttribute("src", mediadata.url);
         }
-        else
-        {
+        else{
             descriptionimage.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
         }
-        
-        
         
         descriptionp.innerHTML += golfclubdata.description;
         
@@ -142,8 +138,8 @@ $('#date').datepicker();
 <div class="container" style="padding-top:48px;">
     
 	<legend>Recherche d'un tee-time</legend>
+	
 	<div class="row">
-
 		<div class="col-md-8">
 			<ul id="navigation" class="nav nav-tabs">
 				<!--
@@ -217,7 +213,6 @@ $('#date').datepicker();
 				<h4 id="golfclubtitle">Golf Club de Sierre</h4>
 				<p id="descriptionp">
 					<img id="descriptionimage" src="http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg" height="56" width="56" style="float:left;margin:0 5px 0 0;" />
-               
 				</p>
 			</div>
             <br />
@@ -230,20 +225,16 @@ $('#date').datepicker();
 				Golf Club de Sierre<br />
 				30.03.2014</p>
                 
-                
 	           {{ Form::open(array('url'=>'reservations/create', 'id' => 'hiddenform')) }}
                               
                     {{ Form::hidden('numberplayer', 1, array('class'=>'form-control', 'id' => 'hiddennumberofplayers')) }}
                     {{ Form::hidden('user_id', 1, array('class'=>'form-control', 'id' => 'hiddengolfer')) }}
                     {{ Form::hidden('teetime_id', 6, array('class'=>'form-control', 'id' => 'hiddenfieldteetime')) }}
                 
-                
                 {{ Form::submit('Finish reservation', array('class'=>'btn btn-block btn-primary btn-default'))}}
 
 	           {{ Form::close() }}
 			</div>
-			
 		</div>
-
 	</div>
     <script>showvalues()</script>

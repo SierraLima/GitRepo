@@ -10,12 +10,15 @@
     var golfclubdata;
     var mediadata;
     
-    //Variables retrieved from the submit form
+    // Variables retrieved from the submit form
     var id;
     var numberofplayers;
     var golfclubid;
     var date;
     
+   /**
+    * Show the values of the reservation 
+    */  
     function showvalues(){
         id = '{{ $id }}';
         numberofplayers = '{{ $numberofplayers }}';
@@ -26,9 +29,11 @@
         createpage();
     }
     
+   /**
+    * Take data on DB
+    */  
     function readdata(){
-        
-        
+         
         var teetimes = '{{ Teetime::all() }}';
         
         // Retrieving the data from the golfclubs
@@ -39,8 +44,7 @@
         var jsonDataTeetime = JSON.parse(teetimes);
         var jsonGolfclub = JSON.parse(golfclubs);
         var jsonMedia = JSON.parse(media);
-        
-        
+             
         for (var i in jsonDataTeetime){
                         
             if(jsonDataTeetime[i].id == id){
@@ -56,15 +60,16 @@
         }
         
         for(var i in jsonMedia){
-                        
             if(jsonMedia[i].golf_club_id == golfclubid){
                 mediadata = jsonMedia[i];
                 break;
             }
         }
-                
     } 
     
+   /**
+    * Create the page reservation 
+    */  
     function createpage(){
         
         //Get the elements
@@ -72,9 +77,7 @@
         var h4 = document.getElementById("overviewtitle");
         var tablebody = document.getElementById("tablebody");
         
-        
         h4.innerHTML = golfclubdata.name + ", " + date + " , " + numberofplayers + " participants";
-        
         
         for (var i = 0; i < parseInt(numberofplayers); i++){
             var tr = document.createElement("tr");
@@ -90,7 +93,6 @@
             tablebody.appendChild(tr);
         }
         
-        
         //Create the golfclub description section
         var golfclubtitle = document.getElementById("golfclubtitle");
         var descriptionimage = document.getElementById("descriptionimage");
@@ -100,8 +102,7 @@
         if(mediadata != null){
             descriptionimage.setAttribute("src", mediadata.url);
         }
-        else
-        {
+        else{
             descriptionimage.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
         }
             
@@ -117,6 +118,9 @@
         totalp.innerHTML = numberofplayers + " tee-times <br />" + golfclubdata.name + "<br />" + date;    
     }
     
+   /**
+    * Action of the button 
+    */  
     function buttonclicked(){
         
         //Get the fields from the credit card
@@ -129,7 +133,6 @@
         var url = "{{ URL::action('TeetimesController@getReservation2') }}";
         
         window.location = url + "/" + golfclubid + "/" + id + "/" + numberofplayers + "/" + date;
-
     }
     
 </script>
@@ -139,8 +142,8 @@
 <div class="container" style="padding-top:48px;">
     
 	<legend>Recherche d'un tee-time</legend>
+	
 	<div class="row">
-
 		<div class="col-md-8">
 			<ul id="navigation" class="nav nav-tabs">
 				<!--
