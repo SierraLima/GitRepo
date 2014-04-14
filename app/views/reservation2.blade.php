@@ -57,20 +57,20 @@ $('#date').datepicker();
         var jsonMedia = JSON.parse(media);
         
          for (var i in jsonDataTeetime){
-            if(jsonDataTeetime[i].id = id){
+            if(jsonDataTeetime[i].id == id){
                 teetimedata = jsonDataTeetime[i];
             }  
         }
         
         for(var i in jsonGolfclub){
-            if(jsonGolfclub[i].id = golfclubid){
+            if(jsonGolfclub[i].id == golfclubid){
                 golfclubdata = jsonGolfclub[i];
                 break;
             }
         }
         
         for(var i in jsonMedia){
-            if(jsonMedia[i].fk_idgolfclub = golfclubid){
+            if(jsonMedia[i].fk_idgolfclub == golfclubid){
                 mediadata = jsonMedia[i];
                 break;
             }
