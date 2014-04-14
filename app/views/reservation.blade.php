@@ -40,11 +40,12 @@
         var jsonGolfclub = JSON.parse(golfclubs);
         var jsonMedia = JSON.parse(media);
         
-        for(var i in jsonDataTeetime){
-            if(jsonDataTeetime[i].id = golfclubid){
+        
+        for (var i in jsonDataTeetime){
+                        
+            if(jsonDataTeetime[i].id == id){
                 teetimedata = jsonDataTeetime[i];
-                break;
-            }
+            }  
         }
         
         for(var i in jsonGolfclub){
@@ -71,6 +72,7 @@
         
         
         h4.innerHTML = golfclubdata.name + ", " + date + " , " + numberofplayers + " participants";
+        
         
         for (var i = 0; i < parseInt(numberofplayers); i++){
             var tr = document.createElement("tr");
