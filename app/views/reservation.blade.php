@@ -49,14 +49,14 @@
         }
         
         for(var i in jsonGolfclub){
-            if(jsonGolfclub[i].id = golfclubid){
+            if(jsonGolfclub[i].id == golfclubid){
                 golfclubdata = jsonGolfclub[i];
                 break;
             }
         }
         
         for(var i in jsonMedia){
-            if(jsonMedia[i].fk_idgolfclub = golfclubid){
+            if(jsonMedia[i].fk_idgolfclub == golfclubid){
                 mediadata = jsonMedia[i];
                 break;
             }
