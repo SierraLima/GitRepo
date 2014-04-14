@@ -42,9 +42,9 @@
         
         
         for (var i in jsonDataTeetime){
-            if(jsonDataTeetime[i].id = id){
+                        
+            if(jsonDataTeetime[i].id == id){
                 teetimedata = jsonDataTeetime[i];
-                break;
             }  
         }
         
