@@ -56,11 +56,13 @@
         }
         
         for(var i in jsonMedia){
-            if(jsonMedia[i].fk_idgolfclub == golfclubid){
+                        
+            if(jsonMedia[i].golf_club_id == golfclubid){
                 mediadata = jsonMedia[i];
                 break;
             }
         }
+                
     } 
     
     function createpage(){
