@@ -201,9 +201,12 @@
 
 								// reserved tee-time
 								if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour && $date==$year."-".$month."-".$day) {
-									if(count($teetimes[$k]->reservation)==1) {
-										$treatedTeetimes++;
-										echo "<a href='#' id='$id' class='btn-circle btn-blue'>&nbsp;</a>";
+									if(count($teetimes[$k]->reservation)>0) {
+										// displaying as many blue circles as there are reservations in the database
+										for($l = 0 ; $l < count($teetimes[$k]->reservation) ; $l++) {
+											$treatedTeetimes++;
+											echo "<a href='#' id='$id' class='btn-circle btn-blue'>&nbsp;</a>";
+										}
 									}
 									// available tee-time
 									elseif(count($teetimes[$k]->reservation)==0) {
