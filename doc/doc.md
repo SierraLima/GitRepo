@@ -127,15 +127,46 @@ is not possible to login or to make an inscription.
 ![Use cases](img/use-cases.png)
 
 ## Sprint 1
+(03.03.2014 - 17.03.2014)
 
 For this Sprint we have validate the US1, 2 and 3 and the US 4 added at the
-middle of the sprint will finish on Sprint 2. Some tasks were a little too
+middle of the sprint will finish on Sprint 2 (11 story points) . Some tasks were a little too
 high evaluated we will try to better evaluate tasks for next sprints. We must 
 also correct some little things on the golfclub registration page.
+
+## Sprint 2
+(17.03.2014 - 31.03.2014)
 
 On the sprint retrospective we decided to take more story point for the sprint 
 2 (21) since we have a new ressource for the development team. We have 
 reevaluated the US5 to 13 story points. We took US4, 5 and 6 for the Sprint 2.
+
+On the middle of the sprint we took the US8 to advanced to allow to split better 
+the work to do. 
+
+At the end of the sprint we have validated the US4,6 and 8. But the US5 have
+always some bugs we decide to work on her on sprint 3 to fix them.
+
+## Sprint 3
+(31.03.2014 - 14.04.2014)
+
+On the sprint retrospective we decide to take the US7, 9, 10, correct a little
+displaying problems on US6 and correct bugs on US5. It's make 23 story points.
+
+After few days on this sprint the Teezy team decide to change US9 to make 
+payments for reservations and not more only a caution for clubs. To achieve the 
+US9 and 10 we need a real certificate to sercure the site and payments. We have
+transmetted the informations to the Teezy team to make a certificate. We still
+wait it. And this two US are not validated on this Sprint
+
+We have correct all bugs on the US5 but the Teezy team would see on the planning
+multiple player reservation and they made the priority for the next sprint.
+The US5 is revaluated to 3 story points.
+
+## Sprint 4
+(31.03.2014 - 14.04.2014)
+
+We was mandatory to work on US5 to see on planning multiple player reservations.
 
 ## Tee-times "API"
 
