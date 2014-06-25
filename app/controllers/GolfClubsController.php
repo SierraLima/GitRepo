@@ -213,7 +213,7 @@ class GolfClubsController extends BaseController {
 			
 			$golfclub->parcours = Input::get('parcours');
 			$golfclub->interval = Input::get('interval');
-			$golfclub->openingtime = Input::get('openingtime');
+			$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
 			$golfclub->website = Input::get('website');
 			$golfclub->country = Input::get('country');
 			$golfclub->city = Input::get('city');

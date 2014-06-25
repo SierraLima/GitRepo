@@ -17,8 +17,9 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 		
 		'parcours'=>'required',
 		'interval'=>'required',
-		'hour'=>'required',
-		'minute'=>'required',
+		'hour'=>'required|integer',
+		'minute'=>'required|integer',
+		'second' =>'',
 		'website'=>'required',
 		'country'=>'required',
 		'city'=>'required',

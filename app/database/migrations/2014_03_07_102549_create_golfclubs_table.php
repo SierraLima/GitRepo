@@ -24,7 +24,7 @@ class CreateGolfclubsTable extends Migration {
 			
 			$table->integer('parcours');
 			$table->string('interval',20);
-			$table->dateTime('openingtime');
+			$table->time('openingtime');
 			$table->string('website', 30);
 			$table->string('country', 20);
 			$table->string('city', 20);

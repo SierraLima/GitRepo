@@ -47,7 +47,7 @@
 		
 		<div class="form-group form-inline">
 			{{ Form::selectRange('hour', 00, 24, null, array('class'=>'form-control', 'placeholder'=>'Hours')) }}
-			{{ Form::selectRange('minute', 00, 60, null, array('class'=>'form-control', 'placeholder'=>'minutes')) }}
+			{{ Form::selectRange('minute', 00, 59, null, array('class'=>'form-control', 'placeholder'=>'minutes')) }}
 		</div>
 		
 		<div class="form-group">
