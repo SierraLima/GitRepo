@@ -63,13 +63,26 @@ class GolfClubsController extends BaseController {
 			// validation has passed, save user in DB
 			$golfclub = GolfClub::find($id);
 
-			$golfclub->name = Input::get('name');
+			$golfclub->golfclubname = Input::get('golfclubname');
+			$golfclub->lastname = Input::get('lastname');
+			$golfclub->firstname = Input::get('firstname');
 			$golfclub->email = Input::get('email');
-			$golfclub->address = Input::get('address');
-			$golfclub->place = Input::get('place');
-			$golfclub->phonenumber = Input::get('phonenumber');
-			$golfclub->description = Input::get('description');
+			
 			$golfclub->password = Hash::make(Input::get('password'));
+			
+			$golfclub->parcours = Input::get('parcours');
+			$golfclub->interval = Input::get('interval');
+			$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
+			$golfclub->website = Input::get('website');
+			$golfclub->country = Input::get('country');
+			$golfclub->city = Input::get('city');
+			$golfclub->region = Input::get('region');
+			$golfclub->address = Input::get('address');
+			$golfclub->zipcode = Input::get('zipcode');
+			$golfclub->phonenumber = Input::get('phonenumber');
+			
+			$golfclub->services = Input::get('services');
+			
 			$golfclub->update();
 
 			return Redirect::to('golfclubs')->with('message', 'Your profile has been updated.');
@@ -191,12 +204,26 @@ class GolfClubsController extends BaseController {
 			// validation has passed, save user in DB
 			$golfclub = new GolfClub;
 
-			$golfclub->name = Input::get('name');
+			$golfclub->golfclubname = Input::get('golfclubname');
+			$golfclub->lastname = Input::get('lastname');
+			$golfclub->firstname = Input::get('firstname');
 			$golfclub->email = Input::get('email');
-			$golfclub->address = Input::get('address');
-			$golfclub->place = Input::get('place');
-			$golfclub->phonenumber = Input::get('phonenumber');
+			
 			$golfclub->password = Hash::make(Input::get('password'));
+			
+			$golfclub->parcours = Input::get('parcours');
+			$golfclub->interval = Input::get('interval');
+			$golfclub->openingtime = Input::get('openingtime');
+			$golfclub->website = Input::get('website');
+			$golfclub->country = Input::get('country');
+			$golfclub->city = Input::get('city');
+			$golfclub->region = Input::get('region');
+			$golfclub->address = Input::get('address');
+			$golfclub->zipcode = Input::get('zipcode');
+			$golfclub->phonenumber = Input::get('phonenumber');
+			
+			$golfclub->services = Input::get('services');
+			
 			$golfclub->save();
 			
 			// Set a default golfcourse
