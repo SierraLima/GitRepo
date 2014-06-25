@@ -17,7 +17,7 @@ class CreateGolfclubsTable extends Migration {
 			
 			$table->string('golfclubname',50);
 			$table->string('lastname', 30);
-			$table->string('firstname', 30)
+			$table->string('firstname', 30);
 			$table->string('email', 100)->unique();
 			
 			$table->string('password', 64);
