@@ -42,7 +42,7 @@ class CreateGolfclubsTable extends Migration {
 			$table->text('equipment');
 			$table->text('services');
 			
-			$table->file('photo');
+			$table->string('photo', 100);
 			
 			$table->timestamps();
 		});
