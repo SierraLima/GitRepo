@@ -10,7 +10,8 @@
 			@endforeach
 		</ul>
 		
-		<h2>1. Infomations of the golf club</h2>
+		
+		<h2>1. Login informations</h2>
 		<div class="form-group">
 			{{ Form::text('golfclubname', null, array('class'=>'form-control', 'placeholder'=>'Golf club name')) }}
 		</div>
@@ -35,7 +36,8 @@
 			{{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>'Confirm Password')) }}
 		</div>
 		
-	
+		
+		<br />
 		<h2>2. General</h2>
 		<div class="form-group form-inline">
 			<h5>Number of holes:
@@ -43,21 +45,21 @@
 			
 		</div>
 		
-		<div class="form-group form-inline">
-			{{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'teetime interval (minutes)')) }}
+		<div class="form-group">
+			{{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'Teetime interval (minutes)')) }}
 		</div>
 		
 		<div class="form-group form-inline">
 			<h5> Opening time:
-			{ Form::selectRange('hour', 00, 24, null, array('class'=>'form-control')) }}
+			{{ Form::selectRange('hour', 00, 24, null, array('class'=>'form-control')) }} : 
 			{{ Form::selectRange('minute', 00, 59, null, array('class'=>'form-control')) }} </h5>
 		</div>
 		
 		<div class="form-group">
 			{{ Form::text('website', null, array('class'=>'form-control', 'placeholder'=>'Website')) }}
 		</div>
-				
-		<div class="form-group">
+						
+		<div class="form-group form-inline">
 			<h5>Country:
 			{{ Form::select('country', array('CH'=>'Switzerland', 'FR'=>'France'), null, array('class'=>'form-control')) }}</h5>
 		</div>
@@ -83,15 +85,46 @@
 		</div>
 
 		
-		<h1>3. Conditions</h1>
+		<br />
+		<h2>3. Conditions</h2>
+		<div class="form-group form-inline">
+			<h5>I read and accept the conditionss of uses:</h5>
+			{{ Form::radio('conditions', true, false, array('class'=>'form-control')) }} YES, I aggree ! <br />
+			{{ Form::radio('conditions', false, true, array('class'=>'form-control')) }} NO, I don't agree...
+		</div>
 		
 		
-		<h1>4. Services</h1>
+		<br />		
+		<h2>4. Club</h2>
 		<div class="form-group">
-			{{ Form::textarea('services', null, array('class'=>'form-control', 'placeholder'=>'Please enter services offer by your club')) }}
+			{{ Form::text('par', null, array('class'=>'form-control', 'placeholder'=>'Par')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::text('drivingrange', null, array('class'=>'form-control', 'placeholder'=>'Driving range')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::text('sloperating', null, array('class'=>'form-control', 'placeholder'=>'Slope rating')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::text('courserating', null, array('class'=>'form-control', 'placeholder'=>'Course rating')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::textarea('equipment', null, array('class'=>'form-control', 'placeholder'=>'Please describe your equipment')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::textarea('services', null, array('class'=>'form-control', 'placeholder'=>'Please describe your services')) }}
+		</div>
+		
+		
+		<br />
+		<h2>5. Photo </h2>
+		<h5>Please enter a photo about your club (max. 2 Mo):</h5>
+		<div class="form-group">
+			{{ Form::file('photo', null, array('class'=>'form-control', 'placeholder'=>'Photo of your club')) }}
 		</div>
 
-		
+		<br />
+		<br />
 		{{ Form::submit('Register', array('class'=>'btn btn-block btn-primary btn-default'))}}
 
 	{{ Form::close() }}

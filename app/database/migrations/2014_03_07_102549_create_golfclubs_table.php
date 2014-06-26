@@ -33,7 +33,16 @@ class CreateGolfclubsTable extends Migration {
 			$table->string('zipcode', 20);
 			$table->string('phonenumber', 20);
 			
+			$table->boolean('conditions');
+			
+			$table->integer('par');
+			$table->string('drivingrange');
+			$table->string('sloperating');
+			$table->string('courserating');
+			$table->text('equipment');
 			$table->text('services');
+			
+			$table->file('photo');
 			
 			$table->timestamps();
 		});

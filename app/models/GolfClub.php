@@ -11,7 +11,6 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 		'lastname'=>'required',
 		'firstname'=>'required',
 		'email'=>'required|email|unique:golfclubs,email',
-		
 		'password'=> 'required|AlphaDash|regex:/\p{Lu}/|regex:/\p{Ll}/|regex:/\pN/|between:6,12|confirmed',
 		'password_confirmation'=>'required|AlphaDash|between:6,12',
 		
@@ -28,7 +27,16 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 		'zipcode'=>'required',
 		'phonenumber' => 'required',
 		
-		'services' => 'required'
+		'conditions' => 'required|true',
+		
+		'par' => 'required',
+		'drivingrange' => 'required',
+		'sloperating' => 'required',
+		'courserating' => 'required',
+		'equipment' => 'required',
+		'services' => 'required',
+		
+		'photo' => 'required'
 	);
 
 	/**

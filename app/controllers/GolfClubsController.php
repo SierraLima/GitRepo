@@ -81,7 +81,16 @@ class GolfClubsController extends BaseController {
 			$golfclub->zipcode = Input::get('zipcode');
 			$golfclub->phonenumber = Input::get('phonenumber');
 			
+			$golfclub->conditions = Input::get('conditions');
+			
+			$golfclub->par = Input::get('par');
+			$golfclub->drivingrange = Input::get('drivingrange');
+			$golfclub->sloperating = Input::get('sloperating');
+			$golfclub->courserating = Input::get('courserating');
+			$golfclub->equipment = Input::get('equipment');
 			$golfclub->services = Input::get('services');
+			
+			$golfclub->photo = Input::get('photo');
 			
 			$golfclub->update();
 
@@ -222,7 +231,16 @@ class GolfClubsController extends BaseController {
 			$golfclub->zipcode = Input::get('zipcode');
 			$golfclub->phonenumber = Input::get('phonenumber');
 			
+			$golfclub->conditions = Input::get('conditions');
+			
+			$golfclub->par = Input::get('par');
+			$golfclub->drivingrange = Input::get('drivingrange');
+			$golfclub->sloperating = Input::get('sloperating');
+			$golfclub->courserating = Input::get('courserating');
+			$golfclub->equipment = Input::get('equipment');
 			$golfclub->services = Input::get('services');
+			
+			$golfclub->photo = Input::get('photo');
 			
 			$golfclub->save();
 			
