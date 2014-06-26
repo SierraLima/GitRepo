@@ -10,7 +10,7 @@
 			@endforeach
 		</ul>
 		
-		<h1>1. Infomations of the golf club</h1>
+		<h2>1. Infomations of the golf club</h2>
 		<div class="form-group">
 			{{ Form::text('golfclubname', null, array('class'=>'form-control', 'placeholder'=>'Golf club name')) }}
 		</div>
@@ -36,14 +36,14 @@
 		</div>
 		
 	
-		<h1>2. General</h1>
+		<h2>2. General</h2>
 		<div class="form-group form-inline">
-			<h3>Number of holes:</h3>
+			<h5>Number of holes:</h5>
 			{{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control')) }}
 		</div>
 		
 		<div class="form-group form-inline">
-			<h3>New teetime intervial (minutes):</h3>
+			<h5>New teetime intervial (minutes):</h5>
 			{{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'New teetime interval')) }}
 		</div>
 		
