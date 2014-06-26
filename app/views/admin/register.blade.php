@@ -38,16 +38,18 @@
 	
 		<h1>2. General</h1>
 		<div class="form-group form-inline">
-			{{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control', 'placeholder'=>'Number of holes')) }}
+			<h3>Number of holes:</h3>
+			{{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control')) }}
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group form-inline">
+			<h3>New teetime intervial (minutes):</h3>
 			{{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'New teetime interval')) }}
 		</div>
 		
 		<div class="form-group form-inline">
-			{{ Form::selectRange('hour', 00, 24, null, array('class'=>'form-control', 'placeholder'=>'Hours')) }}
-			{{ Form::selectRange('minute', 00, 59, null, array('class'=>'form-control', 'placeholder'=>'minutes')) }}
+			{{ Form::selectRange('hour', 00, 24, null, array('class'=>'form-control')) }}
+			{{ Form::selectRange('minute', 00, 59, null, array('class'=>'form-control')) }}
 		</div>
 		
 		<div class="form-group">
@@ -55,7 +57,8 @@
 		</div>
 				
 		<div class="form-group">
-			{{ Form::select('country', array('CH'=>'Switzerland', 'FR'=>'France'), null, array('class'=>'form-control', 'placeholder'=>'Country')) }}
+			<h3>Country:</h3>
+			{{ Form::select('country', array('CH'=>'Switzerland', 'FR'=>'France'), null, array('class'=>'form-control')) }}
 		</div>
 		
 		<div class="form-group">
@@ -84,7 +87,7 @@
 		
 		<h1>4. Services</h1>
 		<div class="form-group">
-			{{ Form::textarea('services', null, array('class'=>'form-control', 'placeholder'=>'Please')) }}
+			{{ Form::textarea('services', null, array('class'=>'form-control', 'placeholder'=>'Please enter services offer by your club')) }}
 		</div>
 
 		
