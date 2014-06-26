@@ -37,14 +37,13 @@
 		
 	
 		<h2>2. General</h2>
-		<h5>Number of holes:</h5>
 		<div class="form-group form-inline">
-			 {{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control')) }}
+			<h5>Number of holes:  {{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control')) }} </h5> 
+			
 		</div>
 		
-		<h5>New teetime intervial (minutes):</h5>
 		<div class="form-group form-inline">
-			 {{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'New teetime interval')) }}
+			{{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'New teetime interval (minutes)')) }}
 		</div>
 		
 		<div class="form-group form-inline">
