@@ -37,7 +37,7 @@
 		
 	
 		<h1>2. General</h1>
-		<div class="form-group">
+		<div class="form-group form-inline">
 			{{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control', 'placeholder'=>'Number of holes')) }}
 		</div>
 		
