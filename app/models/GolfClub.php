@@ -27,7 +27,7 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 		'zipcode'=>'required',
 		'phonenumber' => 'required',
 		
-		'conditions' => 'required|true',
+		'conditions' => 'required',
 		
 		'par' => 'required',
 		'drivingrange' => 'required',

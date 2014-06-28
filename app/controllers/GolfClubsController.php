@@ -53,7 +53,42 @@ class GolfClubsController extends BaseController {
 	public function postUpdate($id) {
 
 		// fixing laravel unique issue
-		$rules = GolfClub::$rules;
+		// $rules = GolfClub::$rules;
+		
+		//Creating some new rules for the validation of this page
+        $rules = array(
+			'golfclubname'=>'required',
+			'lastname'=>'required',
+			'firstname'=>'required',
+			'email'=>'required|email|unique:golfclubs,email',
+			'password'=> 'required|AlphaDash|regex:/\p{Lu}/|regex:/\p{Ll}/|regex:/\pN/|between:6,12|confirmed',
+			'password_confirmation'=>'required|AlphaDash|between:6,12',
+		
+			'parcours'=>'required',
+			'interval'=>'required',
+			'openingtime'=>'required',
+			'hour'=>'',
+			'minute'=>'',
+			'website'=>'required',
+			'country'=>'required',
+			'city'=>'required',
+			'region'=>'required',
+			'address'=>'required',
+			'zipcode'=>'required',
+			'phonenumber' => 'required',
+		
+			'conditions' => '',
+		
+			'par' => 'required',
+			'drivingrange' => 'required',
+			'sloperating' => 'required',
+			'courserating' => 'required',
+			'equipment' => 'required',
+			'services' => 'required',
+		
+			'photo' => 'required'
+	    );
+		
 		$rules['email'] = $rules['email'].','.$id;
 
 		$validator = Validator::make(Input::all(), $rules);
@@ -72,7 +107,7 @@ class GolfClubsController extends BaseController {
 			
 			$golfclub->parcours = Input::get('parcours');
 			$golfclub->interval = Input::get('interval');
-			$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
+			$golfclub->openingtime = Input::get('openingtime');
 			$golfclub->website = Input::get('website');
 			$golfclub->country = Input::get('country');
 			$golfclub->city = Input::get('city');
@@ -80,8 +115,6 @@ class GolfClubsController extends BaseController {
 			$golfclub->address = Input::get('address');
 			$golfclub->zipcode = Input::get('zipcode');
 			$golfclub->phonenumber = Input::get('phonenumber');
-			
-			$golfclub->conditions = Input::get('conditions');
 			
 			$golfclub->par = Input::get('par');
 			$golfclub->drivingrange = Input::get('drivingrange');
@@ -91,6 +124,11 @@ class GolfClubsController extends BaseController {
 			$golfclub->services = Input::get('services');
 			
 			$golfclub->photo = Input::get('photo');
+			
+			$media = new Media();			
+			$media->url = 'upload/'.$golfclub->photo;
+			$media->golf_club_id = Auth::golfclub()->get()->id;
+			$media->update();
 			
 			$golfclub->update();
 
@@ -210,7 +248,7 @@ class GolfClubsController extends BaseController {
 
 		if ($validator->passes()) {
 
-			// validation has passed, save user in DB
+			// validation has passed, save golf club in DB
 			$golfclub = new GolfClub;
 
 			$golfclub->golfclubname = Input::get('golfclubname');
@@ -241,6 +279,11 @@ class GolfClubsController extends BaseController {
 			$golfclub->services = Input::get('services');
 			
 			$golfclub->photo = Input::get('photo');
+			
+			$media = new Media();			
+			$media->url = 'upload/'.$golfclub->photo;
+			$media->golf_club_id = Auth::golfclub()->get()->id;
+			$media->save();
 			
 			$golfclub->save();
 			

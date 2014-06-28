@@ -20,7 +20,7 @@
 			{{ Form::text('email', null, array('class'=>'form-control', 'placeholder'=>'Email Address')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::text('birthday', null, array('class'=>'form-control', 'placeholder'=>'Place')) }}
+			{{ Form::text('birthday', null, array('class'=>'form-control', 'placeholder'=>'Birthday')) }}
 		</div>
 		<div class="form-group">
 			{{ Form::text('country', null, array('class'=>'form-control', 'placeholder'=>'Phone number')) }}

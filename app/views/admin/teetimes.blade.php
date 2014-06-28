@@ -3,17 +3,17 @@
 
 <div class="container" style="padding-top:48px;">
 
-<legend>Tee-times</legend>
+	<legend>Tee-times</legend>
 
-<style type="text/css">
-	img { max-width: 200px; height: auto; }
-</style>
+	<style type="text/css">
+		img { max-width: 200px; height: auto; }
+	</style>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 	var myJSONObject, mode = "liberate";
 
-   /**
+    /**
     * Initiate JSON on the page 
     */
 	function initMyJSONObject() {
@@ -35,7 +35,7 @@
 			// }
 		    ]
 			};
-	}
+		}
 
 	// function needed to delete by value
 	Array.prototype.removeValue = function(name, value){
@@ -80,7 +80,7 @@
 		initMyJSONObject();
 		var row, col;
 
-	// Deleting selectin items
+	// Deleting selecting items
 	$("td a").click(function(e) {
 		e.preventDefault();
 		
@@ -145,15 +145,16 @@
 			else
 				$("#json").val(JSON.stringify(myJSONObject));
 		});
+	
 	});
-
 </script>
+
 
 <div style="float: left;" class="form-inline">
 	<select id="date" class="form-control" style="width:250px;">
 	</select>
 
-	<!--TODO Find a way to M^manage the parcours --> 
+	<!--TODO Find a way to manage parcours --> 
 	<select id="date" class="form-control" style="width:250px;">
 		<option>Parcours 1</option>
 	</select>
@@ -202,11 +203,11 @@
 								// reserved tee-time
 								if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour && $date==$year."-".$month."-".$day) {
 									if(count($teetimes[$k]->reservation)>0) {
-										// displaying as many blue circles as there are players in the reservation
-										for($l = 0 ; $l < $teetimes[$k]->reservation['numberplayer'] ; $l++) {
+										// displaying a blue circles a there are players i
+										//for($l = 0 ; $l < $teetimes[$k]->reservation['numberplayer'] ; $l++) {
 											$treatedTeetimes++;
 											echo "<a href='#' id='$id' class='btn-circle btn-blue'>&nbsp;</a>";
-										}
+										//}
 									}
 									// available tee-time
 									elseif(count($teetimes[$k]->reservation)==0 && $treatedTeetimes<4) {

@@ -1,31 +1,32 @@
 <div class="container" style="padding-top:48px;">
 
-<legend>Gallerie</legend>
+	<legend>Gallerie</legend>
 
-<style type="text/css">
-img { max-width: 200px; height: auto; }
-</style>
+	<style type="text/css">
+		img { max-width: 200px; height: auto; }
+	</style>
 
-<table class="table">
-	<thead>
-		<tr>
-			<th>Image</th>
-			<th>Action</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		@foreach ($media as $picture)
+	<table class="table">
+		<thead>
 			<tr>
-				<td><img src="<?php echo URL::to('/').'/'.$picture->url ?>"/></td>
-				<td><a href="<?php echo URL::to('golfclubs').'/deletemedia/'.$picture->id ?>">Effacer</a></td>
+				<th>Image</th>
+				<th>Action</th>
 			</tr>
-		@endforeach
+		</thead>
 
-	</tbody>
-</table>
+		<tbody>
+			@foreach ($media as $picture)
+				<tr>
+					<td><img src="<?php echo URL::to('/').'/'.$picture->url ?>"/></td>
+					<td><a href="<?php echo URL::to('golfclubs').'/deletemedia/'.$picture->id ?>">Effacer</a></td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
 
-{{ Form::open(array('url'=>'golfclubs/upload', 'files'=>'true')) }}
+	{{ Form::open(array('url'=>'golfclubs/upload', 'files'=>'true')) }}
 	<p>Ajouter une image (max. 2 Mo) : <input type="file" name="image" ></p>
-	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default'))}}
-{{ Form::close() }}
+	
+	{{ Form::submit('Envoyer', array('class'=>'btn btn-primary btn-default')) }}
+
+	{{ Form::close() }}

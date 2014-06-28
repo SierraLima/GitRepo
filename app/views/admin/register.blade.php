@@ -99,18 +99,23 @@
 		<div class="form-group">
 			{{ Form::text('par', null, array('class'=>'form-control', 'placeholder'=>'Par')) }}
 		</div>
+		
 		<div class="form-group">
 			{{ Form::text('drivingrange', null, array('class'=>'form-control', 'placeholder'=>'Driving range')) }}
 		</div>
+		
 		<div class="form-group">
 			{{ Form::text('sloperating', null, array('class'=>'form-control', 'placeholder'=>'Slope rating')) }}
 		</div>
+		
 		<div class="form-group">
 			{{ Form::text('courserating', null, array('class'=>'form-control', 'placeholder'=>'Course rating')) }}
 		</div>
+		
 		<div class="form-group">
 			{{ Form::textarea('equipment', null, array('class'=>'form-control', 'placeholder'=>'Please describe your equipment')) }}
 		</div>
+		
 		<div class="form-group">
 			{{ Form::textarea('services', null, array('class'=>'form-control', 'placeholder'=>'Please describe your services')) }}
 		</div>
@@ -119,10 +124,15 @@
 		<br />
 		<h2>5. Photo </h2>
 		<h5>Please enter a photo about your club (max. 2 Mo):</h5>
-		<div class="form-group">
-			{{ Form::file('photo', null, array('class'=>'form-control', 'placeholder'=>'Photo of your club')) }}
+		<div class="form-group" >
+		
+			{{ Form::image('photo', null, array('class'=>'form-control')) }}
+			{{ Form::file('photo', null, array('class'=>'form-control')) }}
+			
 		</div>
-
+		
+		
+		
 		<br />
 		<br />
 		{{ Form::submit('Register', array('class'=>'btn btn-block btn-primary btn-default'))}}
