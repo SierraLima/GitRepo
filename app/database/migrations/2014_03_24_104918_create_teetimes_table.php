@@ -17,6 +17,7 @@ class CreateTeetimesTable extends Migration {
 			$table->increments('id');
 			$table->dateTime('date');
 			$table->float('price');
+			$table->boolean('reserved');
 			$table->unsignedInteger('golf_course_id');
 			$table->timestamps();
 		});

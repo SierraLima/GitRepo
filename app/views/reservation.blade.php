@@ -15,6 +15,7 @@
     var numberofplayers;
     var golfclubid;
     var date;
+
     
    /**
     * Show the values of the reservation 
@@ -24,7 +25,7 @@
         numberofplayers = '{{ $numberofplayers }}';
         golfclubid = '{{ $golfclubid }}';
         date = '{{ $date }}';
-        
+               
         readdata();
         createpage();
     }

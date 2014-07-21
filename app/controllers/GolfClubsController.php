@@ -280,12 +280,13 @@ class GolfClubsController extends BaseController {
 			
 			$golfclub->photo = Input::get('photo');
 			
+			$golfclub->save();
+			
+			// Set the photo of the club
 			$media = new Media();			
 			$media->url = 'upload/'.$golfclub->photo;
-			$media->golf_club_id = Auth::golfclub()->get()->id;
+			$media->golf_club_id = $golfclub->id;
 			$media->save();
-			
-			$golfclub->save();
 			
 			// Set a default golfcourse
 			$golfcourse = new GolfCourse;
@@ -413,6 +414,7 @@ class GolfClubsController extends BaseController {
 				$teetime->golf_course_id = Auth::golfclub()->get()->golfcourses[$json->updates[$i]->course]->id;
 				$teetime->price = $json->updates[$i]->price;
 				$teetime->date = $formattedDate;
+				$teetime->reserved = 1;
 				$teetime->save();
 			}
 		}

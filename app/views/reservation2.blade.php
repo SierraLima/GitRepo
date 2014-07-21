@@ -81,7 +81,7 @@ $('#date').datepicker();
         var h4 = document.getElementById("overviewtitle");
         var tablebody = document.getElementById("tablebody");
         
-        h4.innerHTML = golfclubdata.name + ", " + date + " , " + numberofplayers + " participants";
+        h4.innerHTML = golfclubdata.golfclubname + ", " + date + " , " + numberofplayers + " participants";
         
         for (var i = 0; i < parseInt(numberofplayers); i++){
             var tr = document.createElement("tr");
@@ -102,7 +102,7 @@ $('#date').datepicker();
         var descriptionimage = document.getElementById("descriptionimage");
         var descriptionp = document.getElementById("descriptionp");
         
-        golfclubtitle.innerHTML = golfclubdata.name;
+        golfclubtitle.innerHTML = golfclubdata.golfclubname;
         
         
         if(mediadata != null){
@@ -112,7 +112,8 @@ $('#date').datepicker();
             descriptionimage.setAttribute("src", "http://www.hotel-cabecinho.com/CLIENTES/www.hotel-cabecinho.com/imagenes/galeria/golf2.jpg");
         }
         
-        descriptionp.innerHTML += golfclubdata.description;
+        descriptionp.innerHTML += golfclubdata.services;
+        descriptionp.innerHTML += golfclubdata.equipment;
         
         //Create the sous total section
         var totalperson = document.getElementById("totalperson");
@@ -121,7 +122,7 @@ $('#date').datepicker();
         
         totalperson.innerHTML = "Par personne : " + teetimedata.price + " CHF";
         totalall.innerHTML = "Pour " + numberofplayers + " participants: " + (parseInt(numberofplayers) * parseInt(teetimedata.price)) + " CHF"; 
-        totalp.innerHTML = numberofplayers + " tee-times <br />" + golfclubdata.name + "<br />" + date;    
+        totalp.innerHTML = numberofplayers + " tee-times <br />" + golfclubdata.golfclubname + "<br />" + date;    
         
         var hiddennumberofplayers = document.getElementById("hiddennumberofplayers");
         var hiddengolfer = document.getElementById("hiddengolfer");
@@ -131,11 +132,19 @@ $('#date').datepicker();
         hiddengolfer.setAttribute("value", userid);
         
         hiddenfieldteetime.setAttribute("value", id);
-}
+	}
+	
+   /**
+    * Action of the button 
+    */  
+    function buttonclicked(){
+        var url = "{{ URL::action('TeetimesController@getEndreservation') }}";
+        window.location = url + "/" + id;
+    }
     
-</script>
+ </script>
 
-<div class="container" style="padding-top:48px;">
+	<div class="container" style="padding-top:48px;">
     
 	<legend>Recherche d'un tee-time</legend>
 	
@@ -231,10 +240,12 @@ $('#date').datepicker();
                     {{ Form::hidden('user_id', 1, array('class'=>'form-control', 'id' => 'hiddengolfer')) }}
                     {{ Form::hidden('teetime_id', 6, array('class'=>'form-control', 'id' => 'hiddenfieldteetime')) }}
                 
-                {{ Form::submit('Finish reservation', array('class'=>'btn btn-block btn-primary btn-default'))}}
+                <!--{{ Form::submit('Validate payment', array('class'=>'btn btn-block btn-primary btn-default'))}}-->
+                
+                <button type="submit" class="btn btn-primary" onClick="buttonclicked()">Validate payment</button>
 
 	           {{ Form::close() }}
 			</div>
 		</div>
 	</div>
-    <script>showvalues()</script>
+    <script>showvalues();</script>

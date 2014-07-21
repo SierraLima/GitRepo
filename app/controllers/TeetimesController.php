@@ -38,8 +38,40 @@ class TeetimesController extends BaseController {
     /**
 	 * return end of reservation page
 	 */
-    public function getEndreservation(){
-        $this->layout->content = View::make('endreservation');
+    public function getEndreservation($teetimeid){
+        $this->layout->content = View::make('endreservation')->with('teetimeid', $teetimeid);
     }
+	
+	
+	/**
+	 * Update a teetime reserved
+	 * 
+	 * @param id -> int to identify a teetime
+	 */
+	public function postUpdate($id) {
+
+		$rules = Teetime::$rules;
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+
+			// validation has passed, update teetime in DB
+			$reserved = 0;
+			
+			$teetime = Teetime::find($id);
+
+			$teetime->date = Input::get('date');
+			$teetime->price = Input::get('price');
+			$teetime->reserved = $reserved;
+
+			$teetime->update();
+
+		} else {
+			// validation has failed, display error messages    
+			return Redirect::to('teetimes/endreservation')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+		}
+	}
+	
 	
 }

@@ -204,10 +204,12 @@
 								if($i*10==$minutes && str_pad($j, 2, "0", STR_PAD_LEFT)==$hour && $date==$year."-".$month."-".$day) {
 									if(count($teetimes[$k]->reservation)>0) {
 										// displaying a blue circles a there are players i
+
 										//for($l = 0 ; $l < $teetimes[$k]->reservation['numberplayer'] ; $l++) {
 											$treatedTeetimes++;
 											echo "<a href='#' id='$id' class='btn-circle btn-blue'>&nbsp;</a>";
 										//}
+									
 									}
 									// available tee-time
 									elseif(count($teetimes[$k]->reservation)==0 && $treatedTeetimes<4) {

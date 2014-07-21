@@ -8,7 +8,8 @@ class Teetime extends Eloquent {
 	// define validation rules
 	public static $rules = array(
 		'date'=>'required',
-		'price'=>'required'
+		'price'=>'required',
+		'reserved'=>'required'
 	);
 
 	/**
