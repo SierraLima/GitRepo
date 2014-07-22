@@ -3,10 +3,15 @@
         Options -MultiViews
     </IfModule>
 
+	Options +FollowSymLinks
     RewriteEngine On
 
     # Redirect Trailing Slashes...
-    RewriteRule ^(.*)/$ public/$1 [L,R=301]
+    # RewriteRule ^(.*)$ /$1 [L,R=301]
+    
+    # HTTPS
+    # RewriteCond %{SERVER_PORT} 80
+	# RewriteRule ^(.*)$ https://localhost/$1 [R,L]
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

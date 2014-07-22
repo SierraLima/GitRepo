@@ -6,6 +6,7 @@ $uri = urldecode($uri);
 
 $paths = require __DIR__.'/bootstrap/paths.php';
 
+
 $requested = $paths['public'].$uri;
 
 // This file allows us to emulate Apache's "mod_rewrite" functionality from the
