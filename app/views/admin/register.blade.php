@@ -13,7 +13,7 @@
 		
 		<h2>1. Login informations</h2>
 		<div class="form-group">
-			{{ Form::text('golfclubname', null, array('class'=>'form-control', 'placeholder'=>'Golf club name')) }}
+			{{ Form::text('golfclubname', null, array('class'=>'form-control', 'placeholder'=>'Golfclub name')) }}
 		</div>
 		
 		<div class="form-group">
@@ -40,19 +40,19 @@
 		<br />
 		<h2>2. General</h2>
 		<div class="form-group form-inline">
-			<h5>Number of holes:
-			{{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control')) }} </h5> 
+			Number of holes:
+			{{ Form::select('parcours', array(9, 18), null, array('class'=>'form-control')) }} 
 			
-		</div>
-		
-		<div class="form-group">
-			{{ Form::text('interval', null, array('class'=>'form-control', 'placeholder'=>'Teetime interval (minutes)')) }}
-		</div>
-		
-		<div class="form-group form-inline">
-			<h5> Opening time:
+			&nbsp&nbsp&nbsp&nbsp&nbsp
+			
+			Teetime interval (minutes):
+			{{ Form::selectRange('interval', 1, 20, null, array('class'=>'form-control')) }} 
+
+			&nbsp&nbsp&nbsp&nbsp&nbsp
+			
+			Opening time:
 			{{ Form::selectRange('hour', 00, 24, null, array('class'=>'form-control')) }} : 
-			{{ Form::selectRange('minute', 00, 59, null, array('class'=>'form-control')) }} </h5>
+			{{ Form::selectRange('minute', 00, 59, null, array('class'=>'form-control')) }} 
 		</div>
 		
 		<div class="form-group">
@@ -101,10 +101,6 @@
 		</div>
 		
 		<div class="form-group">
-			{{ Form::text('drivingrange', null, array('class'=>'form-control', 'placeholder'=>'Driving range')) }}
-		</div>
-		
-		<div class="form-group">
 			{{ Form::text('sloperating', null, array('class'=>'form-control', 'placeholder'=>'Slope rating')) }}
 		</div>
 		
@@ -112,26 +108,71 @@
 			{{ Form::text('courserating', null, array('class'=>'form-control', 'placeholder'=>'Course rating')) }}
 		</div>
 		
+		<h4>A. Equipments</h4>
 		<div class="form-group">
-			{{ Form::textarea('equipment', null, array('class'=>'form-control', 'placeholder'=>'Please describe your equipment')) }}
+			1) Driving range {{ Form::checkbox('drivingrange', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			2) Caddies {{ Form::checkbox('caddie', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			3) Chariots {{ Form::checkbox('chariot', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			4) Chariots electrique {{ Form::checkbox('chariotelectrique', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			5) Voiturettes {{ Form::checkbox('voiturette', null, false, null, array('class'=>'form-control')) }}
 		</div>
 		
+		<h4>B. Services</h4>
 		<div class="form-group">
-			{{ Form::textarea('services', null, array('class'=>'form-control', 'placeholder'=>'Please describe your services')) }}
+			1) Location of clubs {{ Form::checkbox('locationclubs', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			2) Lessons possible {{ Form::checkbox('lecon', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			3) Chambre {{ Form::checkbox('chambre', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			4) Piscine {{ Form::checkbox('piscine', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			5) Spa {{ Form::checkbox('spa', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			6) Tennis {{ Form::checkbox('tennis', null, false, null, array('class'=>'form-control')) }}
 		</div>
 		
 		
 		<br />
-		<h2>5. Photo </h2>
-		<h5>Please enter a photo about your club (max. 2 Mo):</h5>
-		<div class="form-group" >
-		
-			{{ Form::image('photo', null, array('class'=>'form-control')) }}
-			{{ Form::file('photo', null, array('class'=>'form-control')) }}
-			
+		<h2>5. Images </h2>
+		<div class="form-group">
+			<h4>A. Please enter a logo of your club (max. 2 Mo):</h4>
+			<img src="http://placehold.it/200" id="logo" />		
+			<script type="text/javascript">
+				function readURLL(input) {
+    				if (input.files && input.files[0]) {
+        				var reader = new FileReader();
+
+        				reader.onload = function (e) {
+            				$('#logo').attr('src', e.target.result).css(
+            				{
+                			 	'width': '200',
+                				'height': '200'
+            				});
+        				};
+        				reader.readAsDataURL(input.files[0]);
+    				}
+				}
+			</script>
+			{{Form::file('logo', array('onchange' => 'readURLL(this);'))}}
 		</div>
-		
-		
+		<br />
+		<div class="form-group">		
+			<h4>B. Please enter a photo of your club (max. 2 Mo):</h4>
+			<img src="http://placehold.it/300X200" id="photo" />		
+			<script type="text/javascript">
+				function readURLP(input) {
+    				if (input.files && input.files[0]) {
+        				var reader = new FileReader();
+
+        				reader.onload = function (e) {
+            				$('#photo').attr('src', e.target.result).css(
+            				{
+                			 	'width': '300',
+                				'height': '200'
+            				});
+        				};
+        				reader.readAsDataURL(input.files[0]);
+    				}
+				}
+			</script>
+			{{Form::file('photo', array('onchange' => 'readURLP(this);'))}}
+		</div>
 		
 		<br />
 		<br />

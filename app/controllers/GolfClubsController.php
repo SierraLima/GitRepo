@@ -255,7 +255,6 @@ class GolfClubsController extends BaseController {
 			$golfclub->lastname = Input::get('lastname');
 			$golfclub->firstname = Input::get('firstname');
 			$golfclub->email = Input::get('email');
-			
 			$golfclub->password = Hash::make(Input::get('password'));
 			
 			$golfclub->parcours = Input::get('parcours');
@@ -272,12 +271,21 @@ class GolfClubsController extends BaseController {
 			$golfclub->conditions = Input::get('conditions');
 			
 			$golfclub->par = Input::get('par');
-			$golfclub->drivingrange = Input::get('drivingrange');
 			$golfclub->sloperating = Input::get('sloperating');
 			$golfclub->courserating = Input::get('courserating');
-			$golfclub->equipment = Input::get('equipment');
-			$golfclub->services = Input::get('services');
+			$golfclub->drivingrange = Input::get('drivingrange');
+			$golfclub->caddie = Input::get('caddie');
+			$golfclub->chariot = Input::get('chariot');
+			$golfclub->chariotelectrique = Input::get('chariotelectrique');
+			$golfclub->voiturette = Input::get('voiturette');
+			$golfclub->locationclubs = Input::get('locationclubs');
+			$golfclub->lecon = Input::get('lecon');
+			$golfclub->chambre = Input::get('chambre');
+			$golfclub->piscine = Input::get('piscine');
+			$golfclub->spa = Input::get('spa');
+			$golfclub->tennis = Input::get('tennis');
 			
+			$golfclub->logo = Input::get('logo');
 			$golfclub->photo = Input::get('photo');
 			
 			$golfclub->save();
@@ -357,6 +365,7 @@ class GolfClubsController extends BaseController {
 		else
 			return Redirect::to('golfclubs/gallery')->with('message', 'There was an error. Please try again.');
 	}
+
 	
 	/**
 	 * action of create a price

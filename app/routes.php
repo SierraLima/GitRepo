@@ -11,8 +11,15 @@
 |
 */
 
+
+//create foo validation rule
+Validator::extend('foo','customValidation@foo');
+
+
 Route::controller('users', 'UsersController');
 Route::controller('golfclubs', 'GolfClubsController');
 Route::controller('teetimes', 'TeetimesController');
 Route::controller('reservations', 'ReservationsController');
 Route::controller('/', 'HomeController'); // must be last
+
+

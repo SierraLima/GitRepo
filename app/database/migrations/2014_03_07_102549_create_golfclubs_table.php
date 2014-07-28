@@ -19,7 +19,6 @@ class CreateGolfclubsTable extends Migration {
 			$table->string('lastname', 30);
 			$table->string('firstname', 30);
 			$table->string('email', 100)->unique();
-			
 			$table->string('password', 64);
 			
 			$table->integer('parcours');
@@ -36,12 +35,21 @@ class CreateGolfclubsTable extends Migration {
 			$table->boolean('conditions');
 			
 			$table->integer('par');
-			$table->string('drivingrange');
-			$table->string('sloperating');
-			$table->string('courserating');
-			$table->text('equipment');
-			$table->text('services');
+			$table->integer('sloperating');
+			$table->integer('courserating');
+			$table->boolean('drivingrange');
+			$table->boolean('caddie');
+			$table->boolean('chariot');
+			$table->boolean('chariotelectrique');
+			$table->boolean('voiturette');
+			$table->boolean('locationclubs');
+			$table->boolean('lecon');
+			$table->boolean('chambre');
+			$table->boolean('piscine');
+			$table->boolean('spa');
+			$table->boolean('tennis');
 			
+			$table->string('logo', 100);
 			$table->string('photo', 100);
 			
 			$table->timestamps();
