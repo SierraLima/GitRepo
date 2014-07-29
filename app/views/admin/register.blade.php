@@ -110,21 +110,21 @@
 		
 		<h4>A. Equipments</h4>
 		<div class="form-group">
-			1) Driving range {{ Form::checkbox('drivingrange', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			2) Caddies {{ Form::checkbox('caddie', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			3) Chariots {{ Form::checkbox('chariot', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			4) Chariots electrique {{ Form::checkbox('chariotelectrique', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			5) Voiturettes {{ Form::checkbox('voiturette', null, false, null, array('class'=>'form-control')) }}
+			1) Driving range {{ Form::checkbox('drivingrange', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			2) Caddies {{ Form::checkbox('caddie', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			3) Chariots {{ Form::checkbox('chariot', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			4) Chariots electrique {{ Form::checkbox('chariotelectrique', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			5) Voiturettes {{ Form::checkbox('voiturette', 1, false, null, array('class'=>'form-control')) }}
 		</div>
 		
 		<h4>B. Services</h4>
 		<div class="form-group">
-			1) Location of clubs {{ Form::checkbox('locationclubs', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			2) Lessons possible {{ Form::checkbox('lecon', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			3) Chambre {{ Form::checkbox('chambre', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			4) Piscine {{ Form::checkbox('piscine', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			5) Spa {{ Form::checkbox('spa', null, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
-			6) Tennis {{ Form::checkbox('tennis', null, false, null, array('class'=>'form-control')) }}
+			1) Location of clubs {{ Form::checkbox('locationclubs', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			2) Lessons possible {{ Form::checkbox('lecon', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			3) Chambre {{ Form::checkbox('chambre', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			4) Piscine {{ Form::checkbox('piscine', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			5) Spa {{ Form::checkbox('spa', 1, false, null, array('class'=>'form-control')) }}&nbsp&nbsp&nbsp
+			6) Tennis {{ Form::checkbox('tennis', 1, false, null, array('class'=>'form-control')) }}
 		</div>
 		
 		

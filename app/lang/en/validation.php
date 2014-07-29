@@ -37,7 +37,7 @@ return array(
 	"exists"               => "The selected :attribute is invalid.",
 	"image"                => "The :attribute must be an image.",
 	"in"                   => "The selected :attribute is invalid.",
-	"integer"              => "The :attribute must be an integer.",
+	"integer"              => "The :attribute must be a number.",
 	"ip"                   => "The :attribute must be a valid IP address.",
 	"max"                  => array(
 		"numeric" => "The :attribute may not be greater than :max.",
@@ -54,7 +54,7 @@ return array(
 	),
 	"not_in"               => "The selected :attribute is invalid.",
 	"numeric"              => "The :attribute must be a number.",
-	"regex"                => "The :attribute format is invalid.",
+	"regex"                => "The :attribute must contain at least one uppercase, one lowercase and one number.",
 	"required"             => "The :attribute field is required.",
 	"required_if"          => "The :attribute field is required when :other is :value.",
 	"required_with"        => "The :attribute field is required when :values is present.",

@@ -27,7 +27,7 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 		'zipcode'=>'required',
 		'phonenumber' => 'required',
 		
-		'conditions' => 'required',
+		'conditions' => 'accepted',
 		
 		'par' => 'required|integer',
 		'sloperating' => 'required|integer',
@@ -44,8 +44,8 @@ class GolfClub extends Eloquent implements UserInterface, RemindableInterface {
 		'spa' => '',
 		'tennis' => '',
 		
-		'logo' => 'required',		
-		'photo' => 'required'
+		'logo' => 'required|image',		
+		'photo' => 'required|image'
 	);
 
 	/**
