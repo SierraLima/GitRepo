@@ -49,6 +49,8 @@
         
     var selectcounter = 1;
     
+    var disponibility = 1;
+    
    /**
     * Set the content of the panel subtotal
     * 
@@ -72,7 +74,6 @@
         var continuebutton = document.createElement("button");
         
         $(div).empty();
-        
         
         var url = "{{ URL::action('TeetimesController@getReservation') }}";
         
@@ -241,11 +242,18 @@
         
         selectcounter++;
         
-        for(var i = 0; i<4; i++){
+        // Configure the selector of player
+        for(var i = 0; i < disponibility; i++){
         	var option = document.createElement("option");
             option.innerHTML = i+1;
-            selectplayers.appendChild(option); 
+            selectplayers.appendChild(option);
+            
+            // Patch the bug when disponibility is upper than 4
+            if(disponibility > 4)
+            	disponibility = 4;
         }
+        
+        disponibility = 1;
                     
         selecttd.appendChild(selectplayers);
         selecttd.innerHTML += "  joueur(s)";
@@ -262,7 +270,7 @@
     }
     
    /**
-    * Action on clicked date (show teetime) 
+    * Action on clicked date (show teetimes) 
     */    
 	function checkclick($date){
         
@@ -296,17 +304,20 @@
         }
                      
         for (var i in jsonData) {
-            if (jsonData[i].reserved == 1){
+            if (jsonData[i].reserved == 0){ // Only show teetimes not reserved
         		if(jsonData[i].date.substring(0,10) == $date && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
-        			
+        		 if(jsonData[i].golf_course_id == jsonData[i-1].golf_course_id){ // Display one time a teetime with the same date and golfcouse
+        		  if(jsonData[i].date != jsonData[i-1].date){			
+        						
         			createelements();
-            
+        					
         			//Set the current hour to the hour from the db
         			//Function to display the h3 titles
         
         			teetimetime = jsonData[i].date.substring(11,16);
             
         			if(currenthour != jsonData[i].date.substring(11,13)){
+        				disponibility = 1;
             			currenthour = (jsonData[i].date.substring(11,13));
             			var titlerow = document.createElement("tr");
             			var h3 = document.createElement("h3");
@@ -330,7 +341,7 @@
                         					golfclublink.setAttribute("services", jsonGolfclub[k].services);
                         					golfclublink.setAttribute("equipment", jsonGolfclub[k].equipment);
                         					golfclublink.setAttribute("golfclubname", jsonGolfclub[k].golfclubname);
-                                
+                   
                         					golfclub.appendChild(golfclublink);
                         
                         					for(var l in jsonMedia){
@@ -350,6 +361,7 @@
                                 			button.setAttribute("price", jsonData[i].price);
                         					pricebold.innerHTML = jsonData[i].price;
                         					addelements();
+                        					disponibility++;
                         				}
                         			}
                         			else if(eighteenfilter){
@@ -379,6 +391,7 @@
                                 			button.setAttribute("price", jsonData[i].price);
                             				pricebold.innerHTML = jsonData[i].price;
                             				addelements();
+                            				disponibility++;
                             			}
                         			}
                         			else{                                      
@@ -407,14 +420,24 @@
                             			button.setAttribute("price", jsonData[i].price);
                         				pricebold.innerHTML = jsonData[i].price;
                         				addelements();
+                        				disponibility++;
+                        				
                     				}
                 				}
             				}
         				}
         			} // End for var j
         		} 
+        		else { // => date == date
+        			disponibility++;
+        		}
     		}
-		}
+    		else { // => course != course
+    			disponibility = 1;
+    		}
+		  }
+		 }
+	 	}
 	} // End of the method checkclick
         
         

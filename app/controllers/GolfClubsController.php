@@ -423,7 +423,7 @@ class GolfClubsController extends BaseController {
 				$teetime->golf_course_id = Auth::golfclub()->get()->golfcourses[$json->updates[$i]->course]->id;
 				$teetime->price = $json->updates[$i]->price;
 				$teetime->date = $formattedDate;
-				$teetime->reserved = 1;
+				$teetime->reserved = 0;
 				$teetime->save();
 			}
 		}

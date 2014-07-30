@@ -57,7 +57,7 @@ class TeetimesController extends BaseController {
 		if ($validator->passes()) {
 
 			// validation has passed, update teetime in DB
-			$reserved = 0;
+			$reserved = 1;
 			
 			$teetime = Teetime::find($id);
 
