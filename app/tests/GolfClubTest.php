@@ -42,11 +42,11 @@ class GolfClubTest extends TestCase {
 		$golfclub->email = "email@email.ch";
 		$golfclub->password = Hash::make("Password1"); //crypt password
 			
-		// $golfclub->parcours = "parcours";
+		$golfclub->parcours = "9";
 		$golfclub->interval = "10";
 		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
 		$golfclub->hour = 8;
-		$golfclub->minute = 00;
+		$golfclub->minute = 0;
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
@@ -90,10 +90,10 @@ class GolfClubTest extends TestCase {
 				'password'=> 'Password1',
 				'password_confirmation'=>'Password1',
 		
-				//'parcours'=>'required',
+				'parcours'=>'9',
 				'interval'=>'10',
 				'hour'=>'8',
-				'minute'=>'00',
+				'minute'=>'0',
 				//'second' =>'',
 				'website'=>'www.website.ch',
 				'country'=>'France',
@@ -143,10 +143,10 @@ class GolfClubTest extends TestCase {
 				'password'=> 'Password1',
 				'password_confirmation'=>'Password1',
 		
-				//'parcours'=>'required',
+				'parcours'=>'9',
 				'interval'=>'10',
 				'hour'=>'8',
-				'minute'=>'00',
+				'minute'=>'0',
 				//'second' =>'',
 				'website'=>'www.website.ch',
 				'country'=>'France',
@@ -193,11 +193,11 @@ class GolfClubTest extends TestCase {
 		$golfclub->email = "email@email2.ch";
 		$golfclub->password = Hash::make("Password1"); //crypt password
 			
-		// $golfclub->parcours = "parcours";
+		$golfclub->parcours = "9";
 		$golfclub->interval = "10";
 		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
 		$golfclub->hour = 8;
-		$golfclub->minute = 00;
+		$golfclub->minute = 0;
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
@@ -260,11 +260,11 @@ class GolfClubTest extends TestCase {
 		$golfclub->email = "email@email3.ch";
 		$golfclub->password = Hash::make("Password1"); //crypt password
 			
-		// $golfclub->parcours = "parcours";
+		$golfclub->parcours = "18";
 		$golfclub->interval = "10";
 		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
 		$golfclub->hour = 8;
-		$golfclub->minute = 00;
+		$golfclub->minute = 0;
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
@@ -329,11 +329,11 @@ class GolfClubTest extends TestCase {
 		$golfclub->email = "email@email4.ch";
 		$golfclub->password = Hash::make("Password1"); //crypt password
 			
-		// $golfclub->parcours = "parcours";
+		$golfclub->parcours = "18";
 		$golfclub->interval = "10";
 		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
 		$golfclub->hour = 8;
-		$golfclub->minute = 00;
+		$golfclub->minute = 0;
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
