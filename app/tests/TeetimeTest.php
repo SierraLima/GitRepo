@@ -38,6 +38,7 @@ class TeetimeTest extends TestCase {
 		
 		$teetime->date = "01.01.2000 0:00";
 		$teetime->price = "120";
+		$teetime->reserved = FALSE;
 		$teetime->golf_course_id = "1";
 		
 		// Teetime should save
@@ -51,6 +52,7 @@ class TeetimeTest extends TestCase {
 			array(
 				'date' => '01.01.2000 0:00',
 				'price' => '120',
+				'reserved'=>'0',
 				'golf_course_id' => '1'
 			),
 			Teetime::$rules
@@ -69,6 +71,7 @@ class TeetimeTest extends TestCase {
 			array(
 				'date' => '',
 				'price' => '',
+				'reserved'=>'',
 				'golf_course_id' => ''
 			),
 			Teetime::$rules
@@ -84,6 +87,7 @@ class TeetimeTest extends TestCase {
 			array(
 				'date' => '',
 				'price' => '120',
+				'reserved'=>'0',
 				'golf_course_id' => '1'
 			),
 			Teetime::$rules
@@ -99,12 +103,29 @@ class TeetimeTest extends TestCase {
 			array(
 				'date' => '01.01.2000 0:00',
 				'price' => '',
+				'reserved'=>'0',
 				'golf_course_id' => '1'
 			),
 			Teetime::$rules
 		);
 		
 		// Fails because no value setting on price
+		$this->assertTrue($validator->fails());
+	}
+	
+	public function testTeetimeReservedIsRequired()
+	{
+		$validator = Validator::make(
+			array(
+				'date' => '01.01.2000 0:00',
+				'price' => '120',
+				'reserved'=>'',
+				'golf_course_id' => '1'
+			),
+			Teetime::$rules
+		);
+		
+		// Fails because no value setting on reserved
 		$this->assertTrue($validator->fails());
 	}
 	
@@ -115,6 +136,7 @@ class TeetimeTest extends TestCase {
 		
 		$teetime->date = "01.01.2000 0:00";
 		$teetime->price = "120";
+		$teetime->reserved = FALSE;
 		$teetime->golf_course_id = "1";
 
 		// Teetime should save
