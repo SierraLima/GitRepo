@@ -53,6 +53,7 @@ $('#date').datepicker();
          for (var i in jsonDataTeetime){
             if(jsonDataTeetime[i].id == id){
                 teetimedata = jsonDataTeetime[i];
+                jsonDataTeetime[i].reserved = 1;
             }  
         }
         
@@ -138,8 +139,8 @@ $('#date').datepicker();
     * Action of the button 
     */  
     function buttonclicked(){
-        var url = "{{ URL::action('TeetimesController@getEndreservation') }}";
-        window.location = url + "/" + id;
+        var url = "{{ URL::action('ReservationsController@postCreate') }}";
+        window.location = url;
     }
     
  </script>
@@ -234,18 +235,18 @@ $('#date').datepicker();
 				Golf Club de Sierre<br />
 				30.03.2014</p>
                 
-	           {{ Form::open(array('url'=>'reservations/create', 'id' => 'hiddenform')) }}
-                              
-                    {{ Form::hidden('numberplayer', 1, array('class'=>'form-control', 'id' => 'hiddennumberofplayers')) }}
-                    {{ Form::hidden('user_id', 1, array('class'=>'form-control', 'id' => 'hiddengolfer')) }}
-                    {{ Form::hidden('teetime_id', 6, array('class'=>'form-control', 'id' => 'hiddenfieldteetime')) }}
                 
-                <!--{{ Form::submit('Validate payment', array('class'=>'btn btn-block btn-primary btn-default'))}}-->
+	          	{{ Form::open(array('url'=>'reservations/create', 'id' => 'hiddenform')) }}
+              	{{ Form::hidden('numberplayer', 1, array('class'=>'form-control', 'id' => 'hiddennumberofplayers')) }}
+              	{{ Form::hidden('user_id', 1, array('class'=>'form-control', 'id' => 'hiddengolfer')) }}
+                {{ Form::hidden('teetime_id', 6, array('class'=>'form-control', 'id' => 'hiddenfieldteetime')) }}
                 
-                <button type="submit" class="btn btn-primary" onClick="buttonclicked()">Validate payment</button>
+                <button type="submit" class="btn btn-primary" onClick="buttonclicked()">Validate the book</button>
 
 	           {{ Form::close() }}
+			
 			</div>
 		</div>
 	</div>
+	
     <script>showvalues();</script>

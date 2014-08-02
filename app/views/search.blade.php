@@ -242,18 +242,66 @@
         
         selectcounter++;
         
-        // Configure the selector of player
-        for(var i = 0; i < disponibility; i++){
-        	var option = document.createElement("option");
-            option.innerHTML = i+1;
-            selectplayers.appendChild(option);
-            
-            // Patch the bug when disponibility is upper than 4
-            if(disponibility > 4)
-            	disponibility = 4;
+        //disponibility = 1;
+        //jsonData[i].id = id;
+        //jsonData[i].date = date;
+        
+        
+        for (var idb in jsonData){
+        	if(jsonData[idb].date.substring(0,10) == clickeddate){
+        		if(jsonData[idb].id != 1){
+        			if(jsonData[idb].golf_course_id == jsonData[idb-1].golf_course_id){
+        				if(jsonData[idb].date == jsonData[idb-1].date){
+        					disponibility++;
+        				}
+        				else{
+        					var option = document.createElement("option");
+        					option.innerHTML = disponibility;
+        					selectplayers.appendChild(option);
+        					disponibility = 1;
+        				}
+        			}
+        			else{
+        				var option = document.createElement("option");
+        				option.innerHTML = disponibility;
+        				selectplayers.appendChild(option);
+        				disponibility = 1;
+        			}
+        		}
+        		else{
+       				var option = document.createElement("option");
+        			option.innerHTML = disponibility;
+        			selectplayers.appendChild(option);
+        			disponibility = 1;
+        		}
+        	}
         }
         
-        disponibility = 1;
+        
+        
+       // récupérer l'id du teetime en train d'être afficher
+       // avoir sa date
+       // la comparer à toute les dates dans la BD  for (var i in jsonData)
+       // Quand les deux sont égales = dispo++
+        
+        	
+        // Configure the selector of player
+        //for(var i = 0; i < disponibility; i++){
+        	//var option = document.createElement("option");
+            //option.innerHTML = disponibility;
+            //selectplayers.appendChild(option);
+
+            
+            // Patch the bug when disponibility is upper than 4
+            //if(disponibility > 4)
+            	//disponibility = 4;
+        //}
+        
+ 		
+        
+        //*/
+        
+        
                     
         selecttd.appendChild(selectplayers);
         selecttd.innerHTML += "  joueur(s)";
@@ -306,9 +354,9 @@
         for (var i in jsonData) {
             if (jsonData[i].reserved == 0){ // Only show teetimes not reserved
         		if(jsonData[i].date.substring(0,10) == $date && minprice <= jsonData[i].price && jsonData[i].price <= maxprice){
-        		 if(jsonData[i].golf_course_id == jsonData[i-1].golf_course_id){ // Display one time a teetime with the same date and golfcouse
-        		  if(jsonData[i].date != jsonData[i-1].date){			
-        						
+        		 if(jsonData[i].id == 1 || jsonData[i].golf_course_id == jsonData[i-1].golf_course_id){ // Display one time a teetime with the same date and golfcouse
+        		  if(jsonData[i].id == 1 || jsonData[i].date != jsonData[i-1].date || jsonData[i-1].reserved == 1){
+        		  				    						
         			createelements();
         					
         			//Set the current hour to the hour from the db
@@ -317,7 +365,7 @@
         			teetimetime = jsonData[i].date.substring(11,16);
             
         			if(currenthour != jsonData[i].date.substring(11,13)){
-        				disponibility = 1;
+        				
             			currenthour = (jsonData[i].date.substring(11,13));
             			var titlerow = document.createElement("tr");
             			var h3 = document.createElement("h3");
@@ -361,7 +409,7 @@
                                 			button.setAttribute("price", jsonData[i].price);
                         					pricebold.innerHTML = jsonData[i].price;
                         					addelements();
-                        					disponibility++;
+                        					
                         				}
                         			}
                         			else if(eighteenfilter){
@@ -391,7 +439,7 @@
                                 			button.setAttribute("price", jsonData[i].price);
                             				pricebold.innerHTML = jsonData[i].price;
                             				addelements();
-                            				disponibility++;
+                            			
                             			}
                         			}
                         			else{                                      
@@ -420,8 +468,8 @@
                             			button.setAttribute("price", jsonData[i].price);
                         				pricebold.innerHTML = jsonData[i].price;
                         				addelements();
-                        				disponibility++;
                         				
+                   				
                     				}
                 				}
             				}
@@ -429,14 +477,14 @@
         			} // End for var j
         		} 
         		else { // => date == date
-        			disponibility++;
+        			//disponibility++;
         		}
-    		}
-    		else { // => course != course
-    			disponibility = 1;
-    		}
-		  }
-		 }
+    		   }
+    		   else { // => course != course
+    		   		disponibility = 1;
+    		   }
+		  	  }
+		 	}
 	 	}
 	} // End of the method checkclick
         

@@ -42,12 +42,12 @@ class TeetimesController extends BaseController {
         $this->layout->content = View::make('endreservation')->with('teetimeid', $teetimeid);
     }
 	
-	
+	/*
 	/**
 	 * Update a teetime reserved
 	 * 
 	 * @param id -> int to identify a teetime
-	 */
+	 *
 	public function postUpdate($id) {
 
 		$rules = Teetime::$rules;
@@ -72,6 +72,6 @@ class TeetimesController extends BaseController {
 			return Redirect::to('teetimes/endreservation')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
 	}
-	
+	*/
 	
 }

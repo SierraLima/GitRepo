@@ -16,22 +16,30 @@ class ReservationsController extends Controller{
 	 */    
     public function postCreate() {
 			
-		// validation has passed, save reservation in DB
-		$reservation = new Reservation;
-		
-		$reservation->numberplayer = Input::get('numberplayer');
-		$reservation->user_id = Input::get('user_id');
-		$reservation->teetime_id = Input::get('teetime_id');
-		
-		// Reserved the teetime
-		/*$teetime = new Teetime;
-		$teetime->id = Input::get('teetime_id');
-		$teetime->reserved = 1;
-		
-		$teetime->update();*/
-		
-		$reservation->save();
+		$validator = Validator::make(Input::all(), Reservation::$rules);
 
-		return Redirect::to('teetimes/endreservation')->with('message', 'Thanks for your reservation!');
+		if ($validator->passes()) {	
+			
+			// validation has passed, save reservation in DB
+			$reservation = new Reservation;
+		
+			$reservation->numberplayer = Input::get('numberplayer');
+			$reservation->user_id = Input::get('user_id');
+			$reservation->teetime_id = Input::get('teetime_id');
+			
+			// Reserved the teetime
+			$teetime = Teetime::find($reservation->teetime_id);
+			$teetime->reserved = Input::get('reserved', TRUE);
+			
+			$teetime->update();
+			$reservation->save();
+			
+			return Redirect::to('teetimes/search')->with('message', 'Thanks for your reservation!');
+		
+		} else {
+			// validation has failed, display error messages    
+			return Redirect::to('teetimes/search')->with('message', 'Sorry an error appends try another teetime !')->withErrors($validator)->withInput();
+		}
 	}
+	
 }

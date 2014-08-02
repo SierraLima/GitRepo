@@ -1,3 +1,4 @@
+<!--
 <link href="{{ URL::asset('js/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css') }}">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -9,7 +10,7 @@
     	var url = "{{ URL::action('UsersController@getProfile') }}";
    	 	window.location = url;
     }
-</script> -->
+</script>
 
 <script>
 	var teetimedata;
@@ -52,7 +53,7 @@
 
 	<!-- <div align="right" margin-right="70px">
 		<button class='btn btn-block btn-primary btn-default' onClick=buttonclicked()>Validate your reservation</button>
-	</div> -->
+	</div> 
 
 
     {{ Form::submit('Validate reservation', array('class'=>'btn btn-block btn-primary btn-default'))}}
@@ -62,4 +63,4 @@
 </div>
 
 <div class="left-table"></div>
-<script>showvalues();</script>
+<script>showvalues();</script> -->
