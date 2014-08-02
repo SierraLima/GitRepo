@@ -44,9 +44,7 @@ class GolfClubTest extends TestCase {
 			
 		$golfclub->parcours = "9";
 		$golfclub->interval = "10";
-		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
-		$golfclub->hour = 8;
-		$golfclub->minute = 0;
+		$golfclub->openingtime = "8:00";
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
@@ -195,9 +193,7 @@ class GolfClubTest extends TestCase {
 			
 		$golfclub->parcours = "9";
 		$golfclub->interval = "10";
-		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
-		$golfclub->hour = 8;
-		$golfclub->minute = 0;
+		$golfclub->openingtime = "8:00";
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
@@ -262,9 +258,7 @@ class GolfClubTest extends TestCase {
 			
 		$golfclub->parcours = "18";
 		$golfclub->interval = "10";
-		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
-		$golfclub->hour = 8;
-		$golfclub->minute = 0;
+		$golfclub->openingtime = "8:00";
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
@@ -331,9 +325,7 @@ class GolfClubTest extends TestCase {
 			
 		$golfclub->parcours = "18";
 		$golfclub->interval = "10";
-		//$golfclub->openingtime = Input::get('hour') . ":" . Input::get('minute');
-		$golfclub->hour = 8;
-		$golfclub->minute = 0;
+		$golfclub->openingtime = "8:00";
 		$golfclub->website = "www.website.ch";
 		$golfclub->country = "France";
 		$golfclub->city = "TestCity";
