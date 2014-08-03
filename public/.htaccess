@@ -10,7 +10,7 @@
     #RewriteBase /
 
     # Redirect Trailing Slashes...
-    RewriteRule ^(.*)/$ /$1 [R=301]
+    #RewriteRule ^(.*)/$ /$1 [R=301]
 
     # HTTPS redirection
     #RewriteCond %{SERVER_PORT} 80
@@ -18,9 +18,9 @@
 
     # Handle Front Controller...
     # RewriteCond %{REQUEST_FILENAME} !.(jpg|jpeg|gif|png|css|js|pl|txt)$ [NC]
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteCond %{REQUEST_FILENAME} !-f
     # RewriteRule ^(.*) index.php
-    RewriteRule ^ index.php [L]
+    #RewriteRule ^ index.php [L]
 
  </IfModule>
