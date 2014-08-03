@@ -1,0 +1,40 @@
+
+.left-inner-addon {
+	position: relative;
+}
+.left-inner-addon input {
+	padding-left: 30px;    
+}
+.left-inner-addon span {
+	position: absolute;
+	padding: 10px 12px;
+	pointer-events: none;
+}
+
+
+.jumbotron {
+	background-image:url(http://www.doubs.travel/uploads/tx_templavoila/background_golf.jpg);
+	background-position: right bottom;
+	color: #FFF;
+}
+
+.btn-circle {
+	line-height: 1.42857143;
+	border: 1px solid transparent;
+	width: 30px;
+	height: 30px;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.42;
+	border-radius: 15px;
+	color: #000;
+	display: inline-block;
+	margin-bottom:2px;
+	text-align: center;
+	background-color: #F15F74;
+}
+
+.btn-selected {border: 2px solid #000000;}
+.btn-red {background-color: #F15F74; color: #FFFFFF}
+.btn-green {background-color: #98CB4A}
+.btn-blue {background-color: #5481E6; color: #FFFFFF}
