@@ -1,3 +1,4 @@
 app/config/database.php
 .project
 public/upload/
+public/.htaccess
